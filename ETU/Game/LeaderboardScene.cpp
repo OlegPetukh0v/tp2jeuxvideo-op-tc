@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "LeaderboardScene.h"
+#include "game.h"
 
 LeaderboardScene::LeaderboardScene()
     : Scene(SceneType::LEADERBOARD)
@@ -12,11 +13,18 @@ LeaderboardScene::~LeaderboardScene()
 
 SceneType LeaderboardScene::update()
 {
-	return SceneType();
+    SceneType retval = getSceneType();
+    if (sceneNeedsToChange)
+    {
+        retval = SceneType::NONE;
+    }
+
+    return retval;
 }
 
 void LeaderboardScene::draw(sf::RenderWindow& window) const
 {
+    window.draw(backgroundImage);
 }
 
 bool LeaderboardScene::init()
@@ -25,6 +33,13 @@ bool LeaderboardScene::init()
     {
         return false;
     }
+
+    backgroundImage.setTexture(contentManager.getBackgroundTexture());
+    backgroundImage.setOrigin(backgroundImage.getLocalBounds().width * 0.5f, backgroundImage.getLocalBounds().height * 0.5f);
+    backgroundImage.setPosition(Game::GAME_WIDTH * 0.5f, Game::GAME_HEIGHT * 0.5f);
+
+    sceneNeedsToChange = false;
+
 	return true;
 }
 
