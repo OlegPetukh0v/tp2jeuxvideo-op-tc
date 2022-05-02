@@ -35,7 +35,7 @@ bool TitleScene::init()
   pressKeyMessage.setFont(contentManager.getMainFont());
   pressKeyMessage.setCharacterSize(24);
   pressKeyMessage.setFillColor(sf::Color::White);
-  pressKeyMessage.setString("PRESS ANY KEY TO START"); // TODO CONST
+  pressKeyMessage.setString("PRESS ANY KEY TO START"); // TO CONST
   pressKeyMessage.setOrigin(pressKeyMessage.getLocalBounds().width / 2.0f, pressKeyMessage.getLocalBounds().height / 2.0f);
   pressKeyMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 1.25f);
 
