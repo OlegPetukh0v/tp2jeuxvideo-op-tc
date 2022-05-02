@@ -82,6 +82,12 @@
     <ClInclude Include="TitleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="TitleSceneContentManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentManager.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -121,6 +127,12 @@
       <Filter>GenericFiles</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
+      <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceneContentManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentManager.cpp">
       <Filter>GenericFiles</Filter>
     </ClCompile>
   </ItemGroup>
