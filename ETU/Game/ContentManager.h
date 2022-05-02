@@ -29,6 +29,3 @@ private:
 	sf::SoundBuffer gunBonusSoundBuffer;
 	sf::SoundBuffer enemyKilledSoundBuffer;
 };
-
-
-
