@@ -21,10 +21,6 @@ void LeaderboardScene::draw(sf::RenderWindow& window) const
 
 bool LeaderboardScene::init()
 {
-    if (contentManager.loadContent() == false)
-    {
-        return false;
-    }
 	return true;
 }
 

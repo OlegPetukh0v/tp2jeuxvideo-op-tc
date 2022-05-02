@@ -2,9 +2,11 @@
 #include "Scene.h"
 #include "TitleSceneContentManager.h"
 #include "ContentManager.h"
+
 class TitleScene :
     public Scene
 {
+    static const std::string PRESS_KEY_MESSAGE;
 public:
   // Héritées via Scene
   TitleScene();
@@ -19,5 +21,6 @@ private:
   sf::Texture menuImageTexture;
   sf::Sprite menuImage;
   sf::Text pressKeyMessage;
+  bool playGame;
 };
 

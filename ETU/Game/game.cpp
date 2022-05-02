@@ -123,8 +123,7 @@ bool Game::init()
   window.create(sf::VideoMode(Game::GAME_WIDTH, Game::GAME_HEIGHT, 32), gameName);
   window.setFramerateLimit(FRAME_RATE);
   
-  //TODO: remettre à new InitialScene() quand le dev est finit
-  return pushScene(new LeaderboardScene());
+  return pushScene(new InitialScene());
 }
 
 bool Game::uninit()
@@ -142,7 +141,14 @@ Scene* Game::getNextScene(SceneType type) const
   Scene* scene =nullptr;
   switch (type)
   {
-
+  case SceneType::LEADERBOARD:
+  {
+      return new LeaderboardScene();
+  }
+  case SceneType::GAME:
+  {
+      return new LeaderboardScene();
+  }
   default:
   {
     scene = nullptr;
