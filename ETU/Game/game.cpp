@@ -123,7 +123,8 @@ bool Game::init()
   window.create(sf::VideoMode(Game::GAME_WIDTH, Game::GAME_HEIGHT, 32), gameName);
   window.setFramerateLimit(FRAME_RATE);
   
-  return pushScene(new InitialScene());
+  //TODO: mettre a new InitialScene() lorsque dev finit
+  return pushScene(new LeaderboardScene());
 }
 
 bool Game::uninit()

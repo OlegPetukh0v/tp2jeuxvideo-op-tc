@@ -7,6 +7,9 @@ class LeaderboardScene :
     public Scene
 {
 public:
+    static const std::string GAME_OVER;
+    static const std::string TITLE;
+    static const std::string ENTER_NAME;
 
     LeaderboardScene();
     ~LeaderboardScene();
@@ -19,6 +22,10 @@ private:
     LeaderboardSceneContentManager contentManager;
 
     sf::Sprite backgroundImage;
+    sf::Text gameOverMessage;
+    sf::Text titleMessage;
+    sf::Text enterNameMessage;
+    sf::Text leaderboardMessage;
 
     bool sceneNeedsToChange;
 };

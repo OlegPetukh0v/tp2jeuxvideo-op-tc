@@ -21,6 +21,5 @@ protected:
   sf::Event event;
 private:
   SceneType sceneType;
-
 };
 
