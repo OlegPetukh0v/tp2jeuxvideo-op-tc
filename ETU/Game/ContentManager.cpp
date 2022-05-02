@@ -1,14 +1,12 @@
 #include "stdafx.h"
 #include "ContentManager.h"
 
-
 ContentManager::ContentManager()
 {
 }
 
 bool ContentManager::loadContent()
 {
-
   if (!backgroundTexture.loadFromFile("Assets\\Sprites\\Level01\\SpaceBackground.png"))
     return false;
   else
@@ -37,6 +35,7 @@ bool ContentManager::loadContent()
   
   return true;
 } 
+
 const sf::Texture& ContentManager::getEnemiesTexture() const
 {
   return enemiesTexture;
@@ -46,6 +45,7 @@ const sf::Texture& ContentManager::getBackgroundTexture() const
 {
   return backgroundTexture;
 }
+
 const sf::Texture& ContentManager::getMiscTexture() const
 {
   return miscTexture;
@@ -79,6 +79,7 @@ const sf::SoundBuffer& ContentManager::getGunBonusSoundBuffer() const
 {
   return gunBonusSoundBuffer;
 }
+
 const sf::SoundBuffer& ContentManager::getEnemyKilledSoundBuffer() const
 {
   return enemyKilledSoundBuffer;

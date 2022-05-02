@@ -165,6 +165,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputBasedAnimation.h" />
     <ClInclude Include="Inputs.h" />
+    <ClInclude Include="LeaderboardScene.h" />
     <ClInclude Include="SceneResult.h" />
     <ClInclude Include="LinearAnimation.h" />
     <ClInclude Include="AnimationState.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputBasedAnimation.cpp" />
     <ClCompile Include="Inputs.cpp" />
+    <ClCompile Include="LeaderboardScene.cpp" />
     <ClCompile Include="LinearAnimation.cpp" />
     <ClCompile Include="Publisher.cpp" />
     <ClCompile Include="Scene.cpp" />
