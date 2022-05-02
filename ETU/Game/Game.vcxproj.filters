@@ -88,6 +88,9 @@
     <ClInclude Include="ContentManager.h">
       <Filter>GenericFiles</Filter>
     </ClInclude>
+    <ClInclude Include="LeaderboardScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -134,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="ContentManager.cpp">
       <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaderboardScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
