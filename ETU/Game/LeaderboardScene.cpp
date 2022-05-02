@@ -33,13 +33,6 @@ bool LeaderboardScene::init()
     {
         return false;
     }
-
-    backgroundImage.setTexture(contentManager.getBackgroundTexture());
-    backgroundImage.setOrigin(backgroundImage.getLocalBounds().width * 0.5f, backgroundImage.getLocalBounds().height * 0.5f);
-    backgroundImage.setPosition(Game::GAME_WIDTH * 0.5f, Game::GAME_HEIGHT * 0.5f);
-
-    sceneNeedsToChange = false;
-
 	return true;
 }
 
