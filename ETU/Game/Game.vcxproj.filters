@@ -20,6 +20,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Scenes\ContentManager">
+      <UniqueIdentifier>{934d62c6-2b28-4d7d-a559-89de3b586693}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -82,14 +85,23 @@
     <ClInclude Include="TitleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="TitleSceneContentManager.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="ContentManager.h">
       <Filter>GenericFiles</Filter>
     </ClInclude>
     <ClInclude Include="LeaderboardScene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceneContentManager.h">
+      <Filter>Scenes\ContentManager</Filter>
+    </ClInclude>
+    <ClInclude Include="LeaderboardSceneContentManager.h">
+      <Filter>Scenes\ContentManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContentManager.h">
+      <Filter>Scenes\ContentManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,14 +144,23 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>GenericFiles</Filter>
     </ClCompile>
-    <ClCompile Include="TitleSceneContentManager.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ContentManager.cpp">
       <Filter>GenericFiles</Filter>
     </ClCompile>
     <ClCompile Include="LeaderboardScene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceneContentManager.cpp">
+      <Filter>Scenes\ContentManager</Filter>
+    </ClCompile>
+    <ClCompile Include="LeaderboardSceneContentManager.cpp">
+      <Filter>Scenes\ContentManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContentManager.cpp">
+      <Filter>Scenes\ContentManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

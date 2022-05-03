@@ -3,6 +3,7 @@
 #include "ContentManager.h"
 #include "TitleScene.h"
 #include "LeaderboardScene.h"
+#include "GameScene.h"
 #include "scenetype.h"
 
 const unsigned int Game::FRAME_RATE = 60;
@@ -147,7 +148,7 @@ Scene* Game::getNextScene(SceneType type) const
   }
   case SceneType::GAME:
   {
-      return new LeaderboardScene();
+      return new GameScene();
   }
   default:
   {

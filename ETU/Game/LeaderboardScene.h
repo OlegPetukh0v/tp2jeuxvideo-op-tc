@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 #include "ContentManager.h"
+#include "LeaderboardSceneContentManager.h"
+
 class LeaderboardScene :
     public Scene
 {
@@ -14,7 +16,9 @@ public:
     virtual bool uninit() override;
     virtual bool handleEvents(sf::RenderWindow& window) override;
 private:
+    LeaderboardSceneContentManager contentManager;
 
     sf::Sprite backgroundImage;
-};
 
+    bool sceneNeedsToChange;
+};

@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
-#include "ContentManager.h"
+#include "scenetype.h"
+#include "GameContentManager.h"
 class GameScene :
     public Scene
 {
@@ -14,6 +15,6 @@ public:
     virtual bool uninit() override;
     virtual bool handleEvents(sf::RenderWindow& window) override;
 private:
-
+    GameContentManager contentManager;
     sf::Sprite backgroundImage;
 };

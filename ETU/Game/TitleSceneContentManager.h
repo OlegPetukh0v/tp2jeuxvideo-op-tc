@@ -9,6 +9,3 @@ public:
 private:
 	sf::Texture menuImage;
 };
-
-
-
