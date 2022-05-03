@@ -97,6 +97,12 @@
     <ClInclude Include="LeaderboardSceneContentManager.h">
       <Filter>Scenes\ContentManager</Filter>
     </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContentManager.h">
+      <Filter>Scenes\ContentManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -148,6 +154,12 @@
       <Filter>Scenes\ContentManager</Filter>
     </ClCompile>
     <ClCompile Include="LeaderboardSceneContentManager.cpp">
+      <Filter>Scenes\ContentManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContentManager.cpp">
       <Filter>Scenes\ContentManager</Filter>
     </ClCompile>
   </ItemGroup>
