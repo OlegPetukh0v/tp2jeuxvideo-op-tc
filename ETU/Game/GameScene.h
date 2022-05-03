@@ -6,6 +6,7 @@ class GameScene :
     public Scene
 {
 public:
+    static const int BACKGROUND_SPEED;
 
     GameScene();
     ~GameScene();
@@ -17,4 +18,5 @@ public:
 private:
     GameContentManager contentManager;
     sf::Sprite backgroundImage;
+    sf::Sprite backgroundImage2;
 };
