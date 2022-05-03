@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "scenetype.h"
 #include "GameContentManager.h"
+#include "Player.h"
 class GameScene :
     public Scene
 {
@@ -19,4 +20,5 @@ private:
     GameContentManager contentManager;
     sf::Sprite backgroundImage;
     sf::Sprite backgroundImage2;
+    Player player;
 };

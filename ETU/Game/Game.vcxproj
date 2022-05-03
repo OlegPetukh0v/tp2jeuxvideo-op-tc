@@ -170,6 +170,7 @@
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="LeaderboardScene.h" />
     <ClInclude Include="LeaderboardSceneContentManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="SceneResult.h" />
     <ClInclude Include="LinearAnimation.h" />
     <ClInclude Include="AnimationState.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="LeaderboardScene.cpp" />
     <ClCompile Include="LeaderboardSceneContentManager.cpp" />
     <ClCompile Include="LinearAnimation.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Publisher.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="stdafx.cpp">

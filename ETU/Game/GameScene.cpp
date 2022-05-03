@@ -35,6 +35,7 @@ void GameScene::draw(sf::RenderWindow& window) const
 {
     window.draw(backgroundImage);
     window.draw(backgroundImage2);
+    player.draw(window);
 }
 
 bool GameScene::init()
@@ -44,6 +45,8 @@ bool GameScene::init()
     backgroundImage.setTexture(contentManager.getBackgroundTexture());
     backgroundImage2.setTexture(contentManager.getBackgroundTexture());
     backgroundImage2.setPosition(0, -backgroundImage2.getGlobalBounds().height);
+
+    player.init(contentManager);
 }
 
 bool GameScene::uninit()
