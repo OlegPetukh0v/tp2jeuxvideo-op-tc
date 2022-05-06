@@ -17,6 +17,9 @@ GameScene::~GameScene()
 
 SceneType GameScene::update()
 {
+    float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
+    clock.restart();
+
     backgroundImage.setPosition(backgroundImage.getPosition() + sf::Vector2f(0, BACKGROUND_SPEED));
     backgroundImage2.setPosition(backgroundImage2.getPosition() + sf::Vector2f(0, BACKGROUND_SPEED));
 
@@ -27,7 +30,7 @@ SceneType GameScene::update()
         backgroundImage2.setPosition(0, -backgroundImage.getGlobalBounds().height); // GAME::CONST ?
     }
 
-    player.update(0, inputs);
+    player.update(deltaT, inputs);
 
     return getSceneType();
 }
@@ -68,12 +71,13 @@ bool GameScene::handleEvents(sf::RenderWindow& window)
             window.close();
             retval = true;
         }
-        
-        inputs.moveFactorY = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? -1.0f : 0.0f;
-        inputs.moveFactorY = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1.0f : 0.0f;
-        inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ? -3.0f : 0.0f;
-        inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ? 3.0f : 0.0f;
-        inputs.fireBullet = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
     }
+
+    inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? -1.0f : 0.0f;
+    inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1.0f : 0.0f;
+    inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ? -3.0f : 0.0f;
+    inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ? 3.0f : 0.0f;
+    inputs.fireBullet = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+
     return retval;
 }

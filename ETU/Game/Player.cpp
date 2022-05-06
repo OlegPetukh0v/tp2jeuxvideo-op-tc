@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "Inputs.h"
+#include <iostream>
 
-const int Player::SHIP_SPEED = 5;
+const int Player::SHIP_SPEED = 320;
 
 Player::Player()
 {
@@ -38,5 +40,14 @@ bool Player::update(float deltaT)
 
 bool Player::update(float deltaT, const Inputs& inputs)
 {
-	sf::Vector2f direction;
+	std::cout << inputs.moveFactorX << inputs.moveFactorY << std::endl;
+	if (inputs.moveFactorX == 0 && inputs.moveFactorY == 0) return true;
+	sf::Vector2f direction = sf::Vector2f(inputs.moveFactorX, inputs.moveFactorY);
+	if (direction.x > 1) direction.x = 1;
+	if (direction.x < -1) direction.x = -1;
+	float angle = atan2(direction.y, direction.x);
+	direction = sf::Vector2f(cos(angle) * SHIP_SPEED, sin(angle) * SHIP_SPEED);
+	this->move(direction * deltaT);
+
+	return true;
 }

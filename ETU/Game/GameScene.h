@@ -23,4 +23,5 @@ private:
     sf::Sprite backgroundImage2;
     Player player;
     Inputs inputs;
+    sf::Clock clock;
 };
