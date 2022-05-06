@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
 
+const int Player::SHIP_SPEED = 5;
+
 Player::Player()
 {
 }
@@ -36,5 +38,5 @@ bool Player::update(float deltaT)
 
 bool Player::update(float deltaT, const Inputs& inputs)
 {
-	return false;
+	sf::Vector2f direction;
 }

@@ -3,6 +3,7 @@
 #include "scenetype.h"
 #include "GameContentManager.h"
 #include "Player.h"
+#include "Inputs.h"
 class GameScene :
     public Scene
 {
@@ -21,4 +22,5 @@ private:
     sf::Sprite backgroundImage;
     sf::Sprite backgroundImage2;
     Player player;
+    Inputs inputs;
 };
