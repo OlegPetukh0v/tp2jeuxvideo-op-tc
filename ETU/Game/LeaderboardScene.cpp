@@ -30,6 +30,8 @@ void LeaderboardScene::draw(sf::RenderWindow& window) const
 {
     window.draw(backgroundImage);
     window.draw(gameOverMessage);
+    window.draw(titleMessage); 
+    window.draw(enterNameMessage);
 }
 
 bool LeaderboardScene::init()
@@ -48,6 +50,20 @@ bool LeaderboardScene::init()
     gameOverMessage.setString(GAME_OVER);
     gameOverMessage.setOrigin(gameOverMessage.getLocalBounds().width / 2.0f, gameOverMessage.getLocalBounds().height / 2.0f);
     gameOverMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 10.0f);
+
+    titleMessage.setFont(contentManager.getMainFont());
+    titleMessage.setCharacterSize(45);
+    titleMessage.setFillColor(sf::Color::White);
+    titleMessage.setString(TITLE);
+    titleMessage.setOrigin(titleMessage.getLocalBounds().width / 2.0f, titleMessage.getLocalBounds().height / 2.0f);
+    titleMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 5.0f);
+
+    enterNameMessage.setFont(contentManager.getMainFont());
+    enterNameMessage.setCharacterSize(25);
+    enterNameMessage.setFillColor(sf::Color::White);
+    enterNameMessage.setString(ENTER_NAME);
+    enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
+    enterNameMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 1.3f);
 
     sceneNeedsToChange = false;
 	return true;
