@@ -63,7 +63,7 @@ bool Player::update(float deltaT, const Inputs& inputs)
 			float offset = CANON_OFFSET;
 			if (shootLeft) offset *= -1;
 			shootLeft = !shootLeft;
-			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
+			//Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
 	}
@@ -84,7 +84,6 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (getPosition().x + halfWidth > Game::GAME_WIDTH) setPosition(Game::GAME_WIDTH - halfWidth, getPosition().y);
 	if (getPosition().y - halfHeight < 0) setPosition(getPosition().x, halfHeight);
 	if (getPosition().y + halfHeight > Game::GAME_HEIGHT) setPosition(getPosition().x, Game::GAME_HEIGHT - halfHeight);
-
 
 	return true;
 }

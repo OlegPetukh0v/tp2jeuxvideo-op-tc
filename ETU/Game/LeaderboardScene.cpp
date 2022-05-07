@@ -51,33 +51,7 @@ bool LeaderboardScene::init()
     backgroundImage.setOrigin(backgroundImage.getLocalBounds().width * 0.5f, backgroundImage.getLocalBounds().height * 0.5f);
     backgroundImage.setPosition(Game::GAME_WIDTH * 0.5f, Game::GAME_HEIGHT * 0.5f);
 
-    gameOverMessage.setFont(contentManager.getMainFont());
-    gameOverMessage.setCharacterSize(64);
-    gameOverMessage.setFillColor(sf::Color::Red);
-    gameOverMessage.setString(GAME_OVER);
-    gameOverMessage.setOrigin(gameOverMessage.getLocalBounds().width / 2.0f, gameOverMessage.getLocalBounds().height / 2.0f);
-    gameOverMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 10.0f);
-
-    titleMessage.setFont(contentManager.getMainFont());
-    titleMessage.setCharacterSize(45);
-    titleMessage.setFillColor(sf::Color::White);
-    titleMessage.setString(TITLE);
-    titleMessage.setOrigin(titleMessage.getLocalBounds().width / 2.0f, titleMessage.getLocalBounds().height / 2.0f);
-    titleMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 5.0f);
-
-    enterNameMessage.setFont(contentManager.getMainFont());
-    enterNameMessage.setCharacterSize(25);
-    enterNameMessage.setFillColor(sf::Color::White);
-    enterNameMessage.setString(ENTER_NAME);
-    enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
-    enterNameMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 1.3f);
-
-    top5Message.setFont(contentManager.getMainFont());
-    top5Message.setCharacterSize(25);
-    top5Message.setFillColor(sf::Color::White);
-    top5Message.setString(getTop5Players());
-    top5Message.setOrigin(top5Message.getLocalBounds().width / 2.0f, top5Message.getLocalBounds().height / 2.0f);
-    top5Message.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 2.0f);
+    initMessages();
 
     sceneNeedsToChange = false;
 	return true;
@@ -86,6 +60,54 @@ bool LeaderboardScene::init()
 bool LeaderboardScene::uninit()
 {
 	return true;
+}
+
+void LeaderboardScene::initMessages()
+{
+    initGameOverMessage();
+    initTitleMessage();
+    initEnterNameMessage();
+    initTop5Message();
+}
+
+void LeaderboardScene::initGameOverMessage()
+{
+    gameOverMessage.setFont(contentManager.getMainFont());
+    gameOverMessage.setCharacterSize(64);
+    gameOverMessage.setFillColor(sf::Color::Red);
+    gameOverMessage.setString(GAME_OVER);
+    gameOverMessage.setOrigin(gameOverMessage.getLocalBounds().width / 2.0f, gameOverMessage.getLocalBounds().height / 2.0f);
+    gameOverMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 10.0f);
+}
+
+void LeaderboardScene::initTitleMessage()
+{
+    titleMessage.setFont(contentManager.getMainFont());
+    titleMessage.setCharacterSize(45);
+    titleMessage.setFillColor(sf::Color::White);
+    titleMessage.setString(TITLE);
+    titleMessage.setOrigin(titleMessage.getLocalBounds().width / 2.0f, titleMessage.getLocalBounds().height / 2.0f);
+    titleMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 5.0f);
+}
+
+void LeaderboardScene::initEnterNameMessage()
+{
+    enterNameMessage.setFont(contentManager.getMainFont());
+    enterNameMessage.setCharacterSize(25);
+    enterNameMessage.setFillColor(sf::Color::White);
+    enterNameMessage.setString(ENTER_NAME);
+    enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
+    enterNameMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 1.3f);
+}
+
+void LeaderboardScene::initTop5Message()
+{
+    top5Message.setFont(contentManager.getMainFont());
+    top5Message.setCharacterSize(25);
+    top5Message.setFillColor(sf::Color::White);
+    top5Message.setString(getTop5Players());
+    top5Message.setOrigin(top5Message.getLocalBounds().width / 2.0f, top5Message.getLocalBounds().height / 2.0f);
+    top5Message.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 2.0f);
 }
 
 bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
@@ -131,10 +153,10 @@ void LeaderboardScene::populateLeaderboardFile()
     if (!ifs)
         return;
     std::ofstream ofs("Leaderboard.txt");
-    ofs << "AAA1234521" << std::endl;
-    ofs << "AAA7143" << std::endl;
-    ofs << "AAA91634" << std::endl;
-    ofs << "AAA52133" << std::endl;
+    ofs << "JDG1234521" << std::endl;
+    ofs << "PWT7143" << std::endl;
+    ofs << "OLE91634" << std::endl;
+    ofs << "THO52133" << std::endl;
     ofs.close();
 }
 

@@ -74,7 +74,6 @@ bool Game::update()
     }
   }
   return gameMustEnd;
-
 }
 
 bool Game::popScene(bool initNextScene)
@@ -137,26 +136,24 @@ bool Game::uninit()
   return true;
 }
 
-
 Scene* Game::getNextScene(SceneType type) const
 {
   Scene* scene =nullptr;
   switch (type)
   {
-  case SceneType::LEADERBOARD:
-  {
-      return new LeaderboardScene();
-  }
-  case SceneType::GAME:
-  {
-      return new GameScene();
-  }
-  default:
-  {
-    scene = nullptr;
-    break;
-  }
+      case SceneType::LEADERBOARD:
+      {
+          return new LeaderboardScene();
+      }
+      case SceneType::GAME:
+      {
+          return new GameScene();
+      }
+      default:
+      {
+        scene = nullptr;
+        break;
+      }
   }
   return scene;
 }
-
