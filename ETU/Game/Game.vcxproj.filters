@@ -118,6 +118,9 @@
     <ClInclude Include="EnemyBullet.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="BitmaskManager.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmaskManager.cpp">
+      <Filter>GenericFiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

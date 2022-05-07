@@ -21,9 +21,12 @@ public:
 	float getRotationAngleInRadians() const;
 	void setRotationAngleRadians(const float angle);
 	virtual void rotateInRadians(const float angle);
+	const sf::Color& getDebugColor() const;
+	void setDebugColor(const sf::Color& debugColor);
 
 protected:
 	float getAngleWith(const GameObject& other) const;
 	bool active;
+	sf::Color debugColor;
 };
 

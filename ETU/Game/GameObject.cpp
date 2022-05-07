@@ -28,10 +28,19 @@ void GameObject::draw(sf::RenderWindow& window) const
 {
   if (isActive())
     window.draw(*this, sf::RenderStates(sf::BlendAlpha));
+
+    //sf::RectangleShape shape(sf::Vector2f(getGlobalBounds().width, getGlobalBounds().height));
+    //shape.setOutlineColor(getDebugColor());
+    //shape.setOutlineThickness(2);
+    //shape.setPosition(getPosition() - sf::Vector2f(getLocalBounds().width * 0.5f, getLocalBounds().height * 0.5f));
+    //shape.setFillColor(sf::Color::Transparent);
+
+    //window.draw(shape);
 }
 
 void GameObject::activate()
 {
+  setDebugColor(sf::Color::White);
   active = true;
 }
 
@@ -47,7 +56,9 @@ bool GameObject::isActive() const
 
 bool GameObject::collidesWith(const GameObject& other) const
 {
-  return isActive() && other.isActive() && getGlobalBounds().intersects(other.getGlobalBounds());
+    if (!isActive() || !other.isActive()) return false;
+    if (!getGlobalBounds().intersects(other.getGlobalBounds())) return false;
+    return true;
 }
 
 float GameObject::getRotationAngleInRadians() const
@@ -85,4 +96,15 @@ bool GameObject::update(float deltaT)
 bool GameObject::update(float deltaT, const Inputs& inputs)
 {
   return false;
+}
+
+const sf::Color& GameObject::getDebugColor() const
+{
+    return debugColor;
+}
+
+
+void GameObject::setDebugColor(const sf::Color& debugColor)
+{
+    this->debugColor = debugColor;
 }

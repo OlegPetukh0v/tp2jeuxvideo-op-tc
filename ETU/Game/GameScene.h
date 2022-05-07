@@ -22,9 +22,9 @@ public:
 private:
     GameContentManager contentManager;
     sf::Sprite backgroundImage;
-    sf::Sprite backgroundImage2;
     Player player;
     Inputs inputs;
     sf::Clock clock;
     PoolManager pooler;
+    int scrollPos;
 };

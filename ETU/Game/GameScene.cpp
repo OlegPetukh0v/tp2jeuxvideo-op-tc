@@ -22,18 +22,10 @@ SceneType GameScene::update()
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
     clock.restart();
 
-    backgroundImage.setPosition(backgroundImage.getPosition() + sf::Vector2f(0, BACKGROUND_SPEED));
-    backgroundImage2.setPosition(backgroundImage2.getPosition() + sf::Vector2f(0, BACKGROUND_SPEED));
-
-    if (backgroundImage.getPosition().y > backgroundImage.getGlobalBounds().height) {
-        backgroundImage.setPosition(0, -backgroundImage.getGlobalBounds().height); 
-    }
-    if (backgroundImage2.getPosition().y > backgroundImage.getGlobalBounds().height) {
-        backgroundImage2.setPosition(0, -backgroundImage.getGlobalBounds().height); // GAME::CONST ?
-    }
+    backgroundImage.setTextureRect(sf::IntRect(0, (int)(scrollPos+=3), Game::GAME_WIDTH, Game::GAME_HEIGHT));
 
     player.update(deltaT, inputs);
-    pooler.update(deltaT);
+    pooler.update(deltaT, player);
 
     return getSceneType();
 }
@@ -41,7 +33,6 @@ SceneType GameScene::update()
 void GameScene::draw(sf::RenderWindow& window) const
 {
     window.draw(backgroundImage);
-    window.draw(backgroundImage2);
     pooler.draw(window);
     player.draw(window);
 }
@@ -50,13 +41,12 @@ bool GameScene::init()
 {
     if (false == contentManager.loadContent())
         return false;
+    scrollPos = 0;
     backgroundImage.setTexture(contentManager.getBackgroundTexture());
-    backgroundImage2.setTexture(contentManager.getBackgroundTexture());
-    backgroundImage2.setPosition(0, -backgroundImage2.getGlobalBounds().height);
-
-    pooler.init(contentManager);
 
     player.init(contentManager);
+    pooler.init(contentManager);
+
     return true;
 }
 

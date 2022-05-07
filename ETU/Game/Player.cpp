@@ -3,6 +3,7 @@
 #include "Inputs.h"
 #include "Publisher.h"
 #include "Game.h"
+#include "BitmaskManager.h"
 #include <iostream>
 
 const int Player::SHIP_SPEED = 360;
@@ -22,6 +23,14 @@ Player::~Player()
 void Player::draw(sf::RenderWindow& window) const
 {
 	window.draw(*this);
+
+	/*sf::RectangleShape shape(sf::Vector2f(getGlobalBounds().width, getGlobalBounds().height));
+	shape.setOutlineColor(getDebugColor());
+	shape.setOutlineThickness(2);
+	shape.setPosition(getPosition() - sf::Vector2f(getGlobalBounds().width * 0.5f, getGlobalBounds().height * 0.5f));
+	shape.setFillColor(sf::Color::Transparent);
+
+	window.draw(shape);*/
 }
 
 void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
@@ -35,6 +44,7 @@ void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 
 bool Player::init(const GameContentManager& contentManager)
 {
+	activate();
 	this->contentManager = contentManager;
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(Game::GAME_WIDTH/2,Game::GAME_HEIGHT - 100));
 	return true;
