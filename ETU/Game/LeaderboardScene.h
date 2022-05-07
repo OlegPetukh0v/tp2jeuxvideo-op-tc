@@ -36,8 +36,13 @@ private:
     sf::Text gameOverMessage;
     sf::Text titleMessage;
     sf::Text enterNameMessage;
-    sf::Text leaderboardMessage;
     sf::Text top5Message;
+
+    void initMessages();
+    void initGameOverMessage();
+    void initTitleMessage();
+    void initEnterNameMessage();
+    void initTop5Message();
 
     bool sceneNeedsToChange;
 
@@ -48,4 +53,6 @@ private:
     void populateLeaderboardFile();
 
     std::string getTop5Players();
+
+    //player in top5 (bool)
 };
