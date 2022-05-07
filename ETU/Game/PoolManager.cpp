@@ -20,11 +20,23 @@ bool PoolManager::init(GameContentManager gameContentManager)
     return true;
 }
 
-bool PoolManager::update(float deltaT)
+bool PoolManager::update(float deltaT, Player& player)
 {
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
+    player.setDebugColor(sf::Color::Green);
+    for (Enemy *enemy : enemies) {
+        if (enemy->isActive()) {
+            enemy->setDebugColor(sf::Color::Yellow);
+            if (player.collidesWith(*enemy))
+            {
+                enemy->setDebugColor(sf::Color::Red);
+                player.setDebugColor(sf::Color::Red);
+            }
+        }
+    }
+
     return true;
 }
 

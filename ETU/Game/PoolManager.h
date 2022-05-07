@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "EnemyBullet.h"
 #include "Subscriber.h"
+#include "Player.h"
 #include <iostream>
 
 class PoolManager : public Subscriber
@@ -14,7 +15,7 @@ public:
 
 	bool init(GameContentManager contentManager);
 
-	bool update(float deltaT);
+	bool update(float deltaT, Player& player);
 
 	void draw(sf::RenderWindow& window) const;
 
