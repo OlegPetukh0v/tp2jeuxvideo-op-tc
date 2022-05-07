@@ -1,12 +1,11 @@
 #pragma once
 
-struct TitleSceneResult
+struct GameSceneResult
 {
-  int dummy;
+  int score;
 };
-
 
 union SceneResult
 {
-  TitleSceneResult titleSceneResult;
+	GameSceneResult gameSceneResult;
 };

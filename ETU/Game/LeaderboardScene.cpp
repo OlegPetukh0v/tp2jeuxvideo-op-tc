@@ -150,7 +150,7 @@ void LeaderboardScene::readFromFile()
 void LeaderboardScene::populateLeaderboardFile()
 {
     std::ifstream ifs("Leaderboard.txt");
-    if (!ifs)
+    if (ifs)
         return;
     std::ofstream ofs("Leaderboard.txt");
     ofs << "JDG1234521" << std::endl;
@@ -160,17 +160,18 @@ void LeaderboardScene::populateLeaderboardFile()
     ofs.close();
 }
 
-std::string LeaderboardScene::getTop5Players()
+std::string LeaderboardScene::getTop5Players() const 
 {
     std::string top5;
-    playerScores.sort();
-    playerScores.reverse();
+    std::list<PlayerScore> tempPlayerScores = playerScores;
+    tempPlayerScores.sort();
+    tempPlayerScores.reverse();
     for (int i = 0; i < 5; i++)
     {
-        if (!playerScores.empty())
+        if (!tempPlayerScores.empty())
         {
-            PlayerScore currentPlayer = playerScores.front();
-            playerScores.pop_front();
+            PlayerScore currentPlayer = tempPlayerScores.front();
+            tempPlayerScores.pop_front();
             top5 += (currentPlayer.name + std::to_string(currentPlayer.score) + "\n");
         }
     }
