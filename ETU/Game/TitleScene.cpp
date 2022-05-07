@@ -17,7 +17,7 @@ TitleScene::~TitleScene()
 SceneType TitleScene::update()
 {
     if (playGame == 0) return getSceneType();
-    else return SceneType::LEADERBOARD;
+    else return SceneType::GAME;
 }
 
 void TitleScene::draw(sf::RenderWindow& window) const
