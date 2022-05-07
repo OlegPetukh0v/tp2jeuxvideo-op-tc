@@ -24,6 +24,10 @@ public:
     {
         int score;
         char name[NAME_LENGTH];
+        bool operator <(const PlayerScore& studObj) const
+        {
+            return score < studObj.score;
+        }
     };
 private:
     LeaderboardSceneContentManager contentManager;
@@ -33,6 +37,7 @@ private:
     sf::Text titleMessage;
     sf::Text enterNameMessage;
     sf::Text leaderboardMessage;
+    sf::Text top5Message;
 
     bool sceneNeedsToChange;
 
@@ -40,5 +45,7 @@ private:
 
     void readFromFile();
 
-    void orderPlayerScores();
+    void populateLeaderboardFile();
+
+    std::string getTop5Players();
 };
