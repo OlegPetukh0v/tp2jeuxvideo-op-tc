@@ -7,10 +7,12 @@
 
 const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.25f;
+const int Player::CANON_OFFSET = 14;
 
 Player::Player()
 {
 	shootingCooldown = SHOOTING_COOLDOWN;
+	shootLeft = true;
 }
 
 Player::~Player()
@@ -34,7 +36,7 @@ void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 bool Player::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
-	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(100,100));
+	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(Game::GAME_WIDTH/2,Game::GAME_HEIGHT - 100));
 	return true;
 }
 
@@ -48,7 +50,10 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	shootingCooldown -= deltaT;
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {
-			Publisher::notifySubscribers(Event::PLAYER_SHOOT, this);
+			float offset = CANON_OFFSET;
+			if (shootLeft) offset *= -1;
+			shootLeft = !shootLeft;
+			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
 	}

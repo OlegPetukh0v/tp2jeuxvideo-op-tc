@@ -112,6 +112,12 @@
     <ClInclude Include="Bullet.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -178,6 +184,12 @@
       <Filter>GenericFiles</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "PoolManager.h"
 #include "Publisher.h"
-#include "Player.h"
 #include <iostream>
 
 PoolManager::PoolManager()
@@ -10,43 +9,50 @@ PoolManager::PoolManager()
 
 bool PoolManager::init(GameContentManager gameContentManager)
 {
+    Publisher::addSubscriber(*this, Event::PLAYER_SHOOT);
+    Publisher::addSubscriber(*this, Event::ENEMY_SHOOT);
+
     contentManager = gameContentManager;
-    initialiseObjectPool(poolBullets, 20, contentManager.getMainCharacterTexture()); // to const
+    initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
+    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
+    initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
+    spawnGameObject(getAvailableGameObject(enemies), sf::Vector2f(200, 200));
     return true;
 }
 
 bool PoolManager::update(float deltaT)
 {
-    for (Bullet* bullet : poolBullets) {
-        bullet->update(deltaT);
-    }
+    updatePool(bullets, deltaT);
+    updatePool(enemyBullets, deltaT);
+    updatePool(enemies, deltaT);
     return true;
 }
 
 void PoolManager::draw(sf::RenderWindow& window) const
 {
-    int count = 0;
-    for(Bullet * bullet : poolBullets) {
-        if (bullet->isActive()) {
-            count++;
-            bullet->draw(window);
-        }
-   }
-    if(count > 0) std::cout << count << " bullet" << std::endl;
+    drawPool(bullets, window);
+    drawPool(enemyBullets, window);
+    drawPool(enemies, window);
 }
 
 void PoolManager::notify(Event event, const void* data)
 {
     if (event == Event::PLAYER_SHOOT) {
-        Player* player = (Player*)data;
-        Bullet& bullet  = getAvailableGameObject(poolBullets);
-        spawnGameObject(bullet, player->getPosition());
+        sf::Vector2f* pos = (sf::Vector2f*)data;
+        Bullet& bullet  = getAvailableGameObject(bullets);
+        spawnGameObject(bullet, *pos);
+    }
+    else if (event == Event::ENEMY_SHOOT) {
+        sf::Vector2f* pos = (sf::Vector2f*)data;
+        EnemyBullet& bullet = getAvailableGameObject(enemyBullets);
+        spawnGameObject(bullet, *pos);
     }
 }
 
 bool PoolManager::uninit()
 {
-    std::cout << poolBullets.size() << std::endl;
-    deletePool(poolBullets);
+    deletePool(bullets);
+    deletePool(enemyBullets);
+    deletePool(enemies);
     return true;
 }

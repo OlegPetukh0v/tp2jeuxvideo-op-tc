@@ -55,7 +55,6 @@ bool GameScene::init()
     backgroundImage2.setPosition(0, -backgroundImage2.getGlobalBounds().height);
 
     pooler.init(contentManager);
-    Publisher::addSubscriber(pooler, Event::PLAYER_SHOOT);
 
     player.init(contentManager);
     return true;

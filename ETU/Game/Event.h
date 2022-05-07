@@ -3,6 +3,7 @@
 enum class Event 
 {
   NONE,
+  ENEMY_SHOOT,
   PLAYER_SHOOT,
   PLAYER_DEATH,
   HEALTH_PICKED_UP,

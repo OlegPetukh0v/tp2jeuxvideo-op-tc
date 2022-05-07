@@ -1,14 +1,13 @@
 #pragma once
 #include "stdafx.h"
-#include "GameObject.h"
+#include "Bullet.h"
 
-class Bullet : public GameObject
+class EnemyBullet : public Bullet
 {
 	static const float BULLET_SPEED;
 public:
-	Bullet();
+	EnemyBullet();
 	virtual bool update(float elapsedTime);
-	virtual void activate() override;
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
 
 private:

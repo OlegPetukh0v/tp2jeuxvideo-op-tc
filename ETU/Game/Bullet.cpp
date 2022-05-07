@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-const float Bullet::BULLET_SPEED = 300;
+const float Bullet::BULLET_SPEED = 420;
 
 Bullet::Bullet()
 {
@@ -27,12 +27,8 @@ void Bullet::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 {
 	setTexture(texture);
 	setTextureRect(sf::IntRect(264, 106, 16, 5));
+	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
 	setScale(2, 2);
 	setPosition(initialPosition);
 	setRotation(90);
-}
-
-void Bullet::initialize(const sf::Texture& texture)
-{
-	Bullet::initialize(texture, sf::Vector2f(0, 0));
 }
