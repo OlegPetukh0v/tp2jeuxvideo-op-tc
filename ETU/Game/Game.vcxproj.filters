@@ -106,6 +106,12 @@
     <ClInclude Include="Player.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="PoolManager.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -166,6 +172,12 @@
       <Filter>Scenes\ContentManager</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolManager.cpp">
+      <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
   </ItemGroup>

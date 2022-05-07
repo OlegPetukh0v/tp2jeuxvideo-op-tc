@@ -4,6 +4,8 @@
 #include "GameContentManager.h"
 #include "Player.h"
 #include "Inputs.h"
+#include "PoolManager.h"
+#include "Bullet.h"
 class GameScene :
     public Scene
 {
@@ -24,4 +26,5 @@ private:
     Player player;
     Inputs inputs;
     sf::Clock clock;
+    PoolManager pooler;
 };

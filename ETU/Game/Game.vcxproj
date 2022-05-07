@@ -159,6 +159,7 @@
     <ClInclude Include="AnimatedGameObject.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationFrame.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="ContentManager.h" />
     <ClInclude Include="CyclicAnimation.h" />
     <ClInclude Include="Event.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="LeaderboardScene.h" />
     <ClInclude Include="LeaderboardSceneContentManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PoolManager.h" />
     <ClInclude Include="SceneResult.h" />
     <ClInclude Include="LinearAnimation.h" />
     <ClInclude Include="AnimationState.h" />
@@ -187,6 +189,7 @@
     <ClCompile Include="AnimatedGameObject.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationFrame.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="ContentManager.cpp" />
     <ClCompile Include="CyclicAnimation.cpp" />
     <ClCompile Include="game.cpp" />
@@ -199,6 +202,7 @@
     <ClCompile Include="LeaderboardSceneContentManager.cpp" />
     <ClCompile Include="LinearAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PoolManager.cpp" />
     <ClCompile Include="Publisher.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="stdafx.cpp">

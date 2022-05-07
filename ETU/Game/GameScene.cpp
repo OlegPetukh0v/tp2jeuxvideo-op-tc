@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "Game.h"
+#include "PoolManager.h"
+#include "Publisher.h"
 #include <iostream>
 
 const int GameScene::BACKGROUND_SPEED = 3;
@@ -31,6 +33,7 @@ SceneType GameScene::update()
     }
 
     player.update(deltaT, inputs);
+    pooler.update(deltaT);
 
     return getSceneType();
 }
@@ -39,6 +42,7 @@ void GameScene::draw(sf::RenderWindow& window) const
 {
     window.draw(backgroundImage);
     window.draw(backgroundImage2);
+    pooler.draw(window);
     player.draw(window);
 }
 
@@ -50,11 +54,16 @@ bool GameScene::init()
     backgroundImage2.setTexture(contentManager.getBackgroundTexture());
     backgroundImage2.setPosition(0, -backgroundImage2.getGlobalBounds().height);
 
+    pooler.init(contentManager);
+    Publisher::addSubscriber(pooler, Event::PLAYER_SHOOT);
+
     player.init(contentManager);
+    return true;
 }
 
 bool GameScene::uninit()
 {
+    pooler.uninit();
     return true;
 }
 

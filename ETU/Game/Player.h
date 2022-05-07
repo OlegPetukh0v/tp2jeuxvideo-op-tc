@@ -2,11 +2,13 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include "GameContentManager.h"
+#include "Subscriber.h"
 class Player :
     public GameObject
 {
 public:
     static const int SHIP_SPEED;
+    static const float SHOOTING_COOLDOWN;
 
     Player();
     ~Player();
@@ -18,4 +20,5 @@ public:
 
 private:
     GameContentManager contentManager;
+    float shootingCooldown;
 };
