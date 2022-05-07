@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LeaderboardScene.h"
 #include "game.h"
+#include <fstream>
 
 const std::string LeaderboardScene::GAME_OVER = "GAME OVER";
 const std::string LeaderboardScene::TITLE = "LEADERBOARD";
@@ -65,6 +66,8 @@ bool LeaderboardScene::init()
     enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
     enterNameMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 1.3f);
 
+    readFromFile();
+
     sceneNeedsToChange = false;
 	return true;
 }
@@ -88,4 +91,33 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
         }
     }
     return retval;
+}
+
+void LeaderboardScene::readFromFile()
+{
+    std::ifstream ifs("LeaderBoard.txt");
+    if (!ifs)
+        return; // selon ce que doit retourner la méthode qui fait la lecture
+    std::string line;
+    while (getline(ifs, line)) 
+    {
+        PlayerScore newPlayerScore;
+        for (int i = 0; i < LeaderboardScene::NAME_LENGTH; i++)
+        {
+            newPlayerScore.name[i] = *line.substr(i, 1).c_str();
+        }
+        newPlayerScore.score = stoi(line.substr(LeaderboardScene::NAME_LENGTH));
+        playerScores.push_back(newPlayerScore);
+    }
+    ifs.close();
+}
+
+void LeaderboardScene::orderPlayerScores()
+{
+    struct {
+        bool operator()(PlayerScore playerA, PlayerScore playerB) const {
+            return playerA.score < playerB.score;
+        }
+    } customLess;
+    std::sort(playerScores.begin(), playerScores.end(), customLess);
 }
