@@ -3,10 +3,12 @@
 #include "Publisher.h"
 
 const int Enemy::SHIP_SPEED = 120;
+const int Enemy::INITIAL_HEALTH = 30;
 const float Enemy::SHOOTING_COOLDOWN = 1.75f;
 
 Enemy::Enemy()
 {
+	health = INITIAL_HEALTH;
 	shootingCooldown = SHOOTING_COOLDOWN;
 }
 
@@ -32,4 +34,12 @@ bool Enemy::update(float deltaT)
 		shootingCooldown = SHOOTING_COOLDOWN;
 	}
 	return false;
+}
+
+void Enemy::hit(int damage)
+{
+	health -= damage;
+	if (health <= 0) {
+		deactivate();
+	}
 }

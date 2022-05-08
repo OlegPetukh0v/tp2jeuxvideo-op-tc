@@ -22,7 +22,7 @@ SceneType GameScene::update()
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
     clock.restart();
 
-    backgroundImage.setTextureRect(sf::IntRect(0, (int)(scrollPos+=3), Game::GAME_WIDTH, Game::GAME_HEIGHT));
+    backgroundImage.setTextureRect(sf::IntRect(0, (int)(scrollPos-=3), Game::GAME_WIDTH, Game::GAME_HEIGHT));
 
     player.update(deltaT, inputs);
     pooler.update(deltaT, player);

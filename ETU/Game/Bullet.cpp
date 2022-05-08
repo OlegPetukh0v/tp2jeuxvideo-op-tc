@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "Bullet.h"
+#include "Publisher.h"
 
 const float Bullet::BULLET_SPEED = 420;
+const int Bullet::DAMAGE = 10;
 
 Bullet::Bullet()
 {
@@ -31,4 +33,9 @@ void Bullet::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 	setScale(2, 2);
 	setPosition(initialPosition);
 	setRotation(90);
+}
+
+int Bullet::getDamage()
+{
+	return DAMAGE;
 }

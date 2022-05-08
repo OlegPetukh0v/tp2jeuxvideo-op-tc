@@ -9,9 +9,11 @@
 const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.25f;
 const int Player::CANON_OFFSET = 14;
+const int Player::INITIAL_LIFE = 300;
 
 Player::Player()
 {
+	life = INITIAL_LIFE;
 	shootingCooldown = SHOOTING_COOLDOWN;
 	shootLeft = true;
 }
@@ -45,14 +47,10 @@ void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 bool Player::init(const GameContentManager& contentManager)
 {
 	activate();
+	Publisher::addSubscriber(*this, Event::PLAYER_HIT);
 	this->contentManager = contentManager;
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(Game::GAME_WIDTH/2,Game::GAME_HEIGHT - 100));
 	return true;
-}
-
-bool Player::update(float deltaT)
-{
-	return false;
 }
 
 bool Player::update(float deltaT, const Inputs& inputs)
@@ -86,4 +84,11 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (getPosition().y + halfHeight > Game::GAME_HEIGHT) setPosition(getPosition().x, Game::GAME_HEIGHT - halfHeight);
 
 	return true;
+}
+
+void Player::notify(Event event, const void* data) {
+	if (event == Event::PLAYER_HIT) {
+		life -= *(int*)data;
+		std::cout << life << std::endl;
+	}
 }

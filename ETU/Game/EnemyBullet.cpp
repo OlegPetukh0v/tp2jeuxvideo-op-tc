@@ -5,6 +5,7 @@
 #include "Publisher.h"
 
 const float EnemyBullet::BULLET_SPEED = 420;
+const int EnemyBullet::DAMAGE = 10;
 
 EnemyBullet::EnemyBullet()
 {
@@ -29,4 +30,13 @@ void EnemyBullet::initialize(const sf::Texture& texture, const sf::Vector2f& ini
 	setScale(2, 2);
 	setPosition(initialPosition);
 	setRotation(270);
+}
+
+bool EnemyBullet::collidesWith(const GameObject& other) const
+{
+	if (GameObject::collidesWith(other)) {
+		Publisher::notifySubscribers(Event::PLAYER_HIT, &DAMAGE);
+		return true;
+	}
+	return false;
 }
