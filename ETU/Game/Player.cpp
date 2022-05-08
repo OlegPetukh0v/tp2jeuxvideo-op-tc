@@ -10,12 +10,14 @@ const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.25f;
 const int Player::CANON_OFFSET = 14;
 const int Player::INITIAL_LIFE = 300;
+const float Player::HURT_TIME = 0.5f;
 
 Player::Player()
 {
 	life = INITIAL_LIFE;
 	shootingCooldown = SHOOTING_COOLDOWN;
 	shootLeft = true;
+	hurtTime = 0;
 }
 
 Player::~Player()
@@ -55,6 +57,7 @@ bool Player::init(const GameContentManager& contentManager)
 
 bool Player::update(float deltaT, const Inputs& inputs)
 {
+	hurtTime = std::fmax(0, hurtTime - deltaT);
 	shootingCooldown -= deltaT;
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {
@@ -83,12 +86,18 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (getPosition().y - halfHeight < 0) setPosition(getPosition().x, halfHeight);
 	if (getPosition().y + halfHeight > Game::GAME_HEIGHT) setPosition(getPosition().x, Game::GAME_HEIGHT - halfHeight);
 
+	if (hurtTime > 0) {
+		if (std::fmod(hurtTime, 0.16f) > 0.08f) setColor(sf::Color(255, 50, 50, 255));
+		else setColor(sf::Color::White);
+	}
+
 	return true;
 }
 
 void Player::notify(Event event, const void* data) {
 	if (event == Event::PLAYER_HIT) {
 		life -= *(int*)data;
+		hurtTime = HURT_TIME;
 		std::cout << life << std::endl;
 	}
 }

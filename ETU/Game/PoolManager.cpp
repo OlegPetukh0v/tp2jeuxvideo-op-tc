@@ -1,10 +1,14 @@
 #include "stdafx.h"
 #include "PoolManager.h"
 #include "Publisher.h"
+#include "Game.h"
 #include <iostream>
+
+const int PoolManager::ENEMY_SPAWN_TIME = 2;
 
 PoolManager::PoolManager()
 {
+    enemySpawnTime = ENEMY_SPAWN_TIME;
 }
 
 bool PoolManager::init(GameContentManager gameContentManager)
@@ -16,16 +20,23 @@ bool PoolManager::init(GameContentManager gameContentManager)
     initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
     initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
     initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
-    spawnGameObject(getAvailableGameObject(enemies), sf::Vector2f(200, 200));
     return true;
 }
 
 bool PoolManager::update(float deltaT, Player& player)
 {
+    enemySpawnTime -= deltaT;
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
     player.setDebugColor(sf::Color::Green);
+
+    if (enemySpawnTime <= 0) {
+        float randomTime = ((rand() % 10) / 10) - 0.5f;
+        enemySpawnTime = ENEMY_SPAWN_TIME + randomTime;
+        float x = rand() % (Game::GAME_WIDTH - 40);
+        spawnGameObject(getAvailableGameObject(enemies), sf::Vector2f(x + 20, -50));
+    }
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {

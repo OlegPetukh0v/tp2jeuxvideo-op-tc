@@ -11,6 +11,7 @@ public:
     static const float SHOOTING_COOLDOWN;
     static const int CANON_OFFSET;
     static const int INITIAL_LIFE;
+    static const float HURT_TIME;
 
     Player();
     ~Player();
@@ -25,4 +26,5 @@ private:
     float shootingCooldown;
     float life;
     bool shootLeft;
+    float hurtTime;
 };

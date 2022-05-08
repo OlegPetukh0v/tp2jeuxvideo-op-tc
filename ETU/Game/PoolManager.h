@@ -10,6 +10,7 @@
 
 class PoolManager : public Subscriber
 {
+	static const int ENEMY_SPAWN_TIME;
 public:
 	PoolManager();
 
@@ -42,6 +43,7 @@ public:
 	void deletePool(std::list<T*>& poolT);
 private:
 	GameContentManager contentManager;
+	float enemySpawnTime;
 	std::list<Bullet*> bullets;
 	std::list<EnemyBullet*> enemyBullets;
 	std::list<Enemy*> enemies;
