@@ -7,6 +7,7 @@
 const std::string LeaderboardScene::GAME_OVER = "GAME OVER";
 const std::string LeaderboardScene::TITLE = "LEADERBOARD";
 const std::string LeaderboardScene::ENTER_NAME = "PLEASE ENTER YOUR NAME";
+const int LeaderboardScene::SCORES_SHOWN = 5;
 
 LeaderboardScene::LeaderboardScene()
     : Scene(SceneType::LEADERBOARD)
@@ -24,7 +25,24 @@ SceneType LeaderboardScene::update()
     {
         retval = SceneType::NONE;
     }
+    // TODO: if change occured and player is in top 5, set name to new name
 
+    return retval;
+}
+
+bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
+{
+    bool retval = false;
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        //x sur la fenêtre
+        if (event.type == sf::Event::Closed)
+        {
+            window.close();
+            retval = true;
+        }
+    }
     return retval;
 }
 
@@ -43,9 +61,14 @@ bool LeaderboardScene::init()
     {
         return false;
     }
+    isPlayerInTop5 = false;
 
-    populateLeaderboardFile();
+    //pas fonctionnel pour l'instant
+    //populateLeaderboardFile();
+
+    writeResultToFile();
     readFromFile();
+    setTop5Players();
 
     backgroundImage.setTexture(contentManager.getBackgroundTexture());
     backgroundImage.setOrigin(backgroundImage.getLocalBounds().width * 0.5f, backgroundImage.getLocalBounds().height * 0.5f);
@@ -110,53 +133,30 @@ void LeaderboardScene::initTop5Message()
     top5Message.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 2.0f);
 }
 
-bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
-{
-    bool retval = false;
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-        //x sur la fenêtre
-        if (event.type == sf::Event::Closed)
-        {
-            window.close();
-            retval = true;
-        }
-    }
-    return retval;
-}
-
 void LeaderboardScene::readFromFile()
 {
     std::ifstream ifs("Leaderboard.txt");
     if (!ifs)
-        return; // selon ce que doit retourner la méthode qui fait la lecture
-    std::string line;
-    std::list<PlayerScore> newPlayerScores;
-    while (getline(ifs, line)) 
-    {
-        PlayerScore newPlayerScore;
-        for (int i = 0; i < LeaderboardScene::NAME_LENGTH; i++)
-        {
-            newPlayerScore.name[i] = *line.substr(i, 1).c_str();
-        }
-        newPlayerScore.score = stoi(line.substr(LeaderboardScene::NAME_LENGTH));
-        newPlayerScores.push_back(newPlayerScore);
+        return;
+    PlayerScore newPlayer;
+    while (ifs.read((char*)&newPlayer, sizeof(PlayerScore))) {
+        playerScores.push_back(newPlayer);
     }
-    playerScores = newPlayerScores;
     ifs.close();
 }
 
 void LeaderboardScene::populateLeaderboardFile()
 {
     std::ifstream ifs("Leaderboard.txt");
-    if (ifs)
+    if (!ifs)
         return;
     std::ofstream ofs("Leaderboard.txt");
-    ofs << "JDG1234521" << std::endl;
-    ofs << "PWT7143" << std::endl;
-    ofs << "OLE91634" << std::endl;
-    ofs << "THO52133" << std::endl;
+    PlayerScore newPlayer;
+    newPlayer.name[0] = (char)"O";
+    newPlayer.name[1] = (char)"L";
+    newPlayer.name[2] = (char)"E";
+    newPlayer.score = 91000;
+    ofs.write((char*)&newPlayer, sizeof(PlayerScore));
     ofs.close();
 }
 
@@ -166,7 +166,7 @@ std::string LeaderboardScene::getTop5Players() const
     std::list<PlayerScore> tempPlayerScores = playerScores;
     tempPlayerScores.sort();
     tempPlayerScores.reverse();
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < SCORES_SHOWN; i++)
     {
         if (!tempPlayerScores.empty())
         {
@@ -176,4 +176,33 @@ std::string LeaderboardScene::getTop5Players() const
         }
     }
     return top5;
+}
+
+void LeaderboardScene::setTop5Players()
+{
+    std::list<PlayerScore> tempPlayerScores = playerScores;
+    tempPlayerScores.sort();
+    tempPlayerScores.reverse();
+    for (int i = 0; i < SCORES_SHOWN; i++)
+    {
+        if (!tempPlayerScores.empty())
+        {
+            top5Scores.push_back(tempPlayerScores.front());
+            tempPlayerScores.pop_front();
+        }
+    }
+}
+
+void LeaderboardScene::writeResultToFile()
+{
+    std::ofstream ofs("Leaderboard.txt");
+    // TODO: enlever quand on recoit des vrais valeurs de la partie
+    result.gameSceneResult.score = 101;
+    PlayerScore newPlayer;
+    newPlayer.name[0] = 'A';
+    newPlayer.name[1] = 'C';
+    newPlayer.name[2] = 'E';
+    newPlayer.score = result.gameSceneResult.score;
+    ofs.write((char*)&newPlayer, sizeof(PlayerScore));
+    ofs.close();
 }

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Inputs.h"
 
-
 const float Inputs::CONTROLLER_DEAD_ZONE = 20;
 
 Inputs::Inputs()

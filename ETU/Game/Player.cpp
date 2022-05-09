@@ -64,7 +64,8 @@ bool Player::update(float deltaT, const Inputs& inputs)
 			float offset = CANON_OFFSET;
 			if (shootLeft) offset *= -1;
 			shootLeft = !shootLeft;
-			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
+			// TODO: add back when fixed
+			//Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
 	}

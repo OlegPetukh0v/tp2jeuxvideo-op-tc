@@ -124,7 +124,7 @@ bool Game::init()
   window.setFramerateLimit(FRAME_RATE);
   
   //TODO: mettre a new InitialScene() lorsque dev finit
-  return pushScene(new InitialScene());
+  return pushScene(new LeaderboardScene());
 }
 
 bool Game::uninit()
