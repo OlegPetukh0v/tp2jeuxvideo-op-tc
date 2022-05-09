@@ -13,10 +13,9 @@ const int Player::INITIAL_LIFE = 300;
 const float Player::HURT_TIME = 0.5f;
 
 Player::Player()
+	: Character(INITIAL_LIFE)
 {
-	life = INITIAL_LIFE;
 	shootingCooldown = SHOOTING_COOLDOWN;
-	shootLeft = true;
 	hurtTime = 0;
 }
 
@@ -62,9 +61,10 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {
 			float offset = CANON_OFFSET;
-			if (shootLeft) offset *= -1;
-			shootLeft = !shootLeft;
-			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
+			sf::Vector2f shootPos = sf::Vector2f(getPosition().x + offset, getPosition().y);
+			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
+			shootPos = sf::Vector2f(getPosition().x - offset, getPosition().y);
+			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
 	}
@@ -96,8 +96,10 @@ bool Player::update(float deltaT, const Inputs& inputs)
 
 void Player::notify(Event event, const void* data) {
 	if (event == Event::PLAYER_HIT) {
-		life -= *(int*)data;
-		hurtTime = HURT_TIME;
-		std::cout << life << std::endl;
+		if (hurtTime == 0) {
+			life -= *(int*)data;
+			hurtTime = HURT_TIME;
+			std::cout << life << std::endl;
+		}
 	}
 }

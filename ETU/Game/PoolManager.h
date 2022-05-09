@@ -27,7 +27,7 @@ public:
 	void initialiseObjectPool(std::list<T*>& poolT, int initialSize, const sf::Texture& texture);
 
 	template<class T>
-	T& getAvailableGameObject(std::list<T*> poolT);
+	T& getAvailableGameObject(std::list<T*>& poolT);
 
 	template<class T>
 	void spawnGameObject(T& objT, sf::Vector2f pos);
@@ -36,7 +36,7 @@ public:
 	void spawnGameObject(T& objT);
 
 	template<class T>
-	void updatePool(std::list<T*> poolT, float deltaT);
+	void updatePool(std::list<T*>& poolT, float deltaT);
 
 	template<class T>
 	void drawPool(std::list<T*> poolT, sf::RenderWindow& window) const;
@@ -50,67 +50,67 @@ private:
 	std::list<Enemy*> enemies;
 };
 
-	template<class T>
-	inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, int initialSize, const sf::Texture& texture)
-	{
-		for (unsigned short i = 0; i < initialSize; i++) {
-			T* temp = new T();
-			temp->initialize(texture, sf::Vector2f(0,0));
-			poolT.push_back(temp);
-		}
-	}
-
-	template<class T>
-	inline T& PoolManager::getAvailableGameObject(std::list<T*> poolT)
-	{
-		for (T* temp : poolT) {
-			if (!temp->isActive()) {
-				return *temp;
-			}
-		}
+template<class T>
+inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, int initialSize, const sf::Texture& texture)
+{
+	for (unsigned short i = 0; i < initialSize; i++) {
 		T* temp = new T();
-		temp->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0,0));
+		temp->initialize(texture, sf::Vector2f(0,0));
 		poolT.push_back(temp);
-		return *poolT.back(); // FIXME : Le return et le push_back() ne fonctionnent pas...
 	}
+}
 
-	template<class T>
-	inline void PoolManager::spawnGameObject(T& objT, sf::Vector2f pos)
-	{
-		objT.setPosition(pos);
-		objT.activate();
-	}
-
-	template<class T>
-	inline void PoolManager::spawnGameObject(T& objT)
-	{
-		objT.activate();
-	}
-
-	template<class T>
-	inline void PoolManager::updatePool(std::list<T*> poolT, float deltaT)
-	{
-		for (T* temp : poolT) {
-			if (temp->isActive()) {
-				temp->update(deltaT);
-			}
+template<class T>
+inline T& PoolManager::getAvailableGameObject(std::list<T*>& poolT)
+{
+	for (T* temp : poolT) {
+		if (!temp->isActive()) {
+			return *temp;
 		}
 	}
+	T* temp = new T();
+	temp->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0,0));
+	poolT.push_back(temp);
+	return *poolT.back(); // FIXME : Le push_back() ne fonctionnent pas...
+}
 
-	template<class T>
-	inline void PoolManager::drawPool(std::list<T*> poolT, sf::RenderWindow& window) const
-	{
-		for (T* temp : poolT) {
-			if (temp->isActive()) {
-				temp->draw(window);
-			}
+template<class T>
+inline void PoolManager::spawnGameObject(T& objT, sf::Vector2f pos)
+{
+	objT.setPosition(pos);
+	objT.activate();
+}
+
+template<class T>
+inline void PoolManager::spawnGameObject(T& objT)
+{
+	objT.activate();
+}
+
+template<class T>
+inline void PoolManager::updatePool(std::list<T*>& poolT, float deltaT)
+{
+	for (T* temp : poolT) {
+		if (temp->isActive()) {
+			temp->update(deltaT);
 		}
 	}
+}
 
-	template<class T>
-	inline void PoolManager::deletePool(std::list<T*>& poolT)
-	{
-		for (T* temp : poolT) {
-			delete temp;
+template<class T>
+inline void PoolManager::drawPool(std::list<T*> poolT, sf::RenderWindow& window) const
+{
+	for (T* temp : poolT) {
+		if (temp->isActive()) {
+			temp->draw(window);
 		}
 	}
+}
+
+template<class T>
+inline void PoolManager::deletePool(std::list<T*>& poolT)
+{
+	for (T* temp : poolT) {
+		delete temp;
+	}
+}

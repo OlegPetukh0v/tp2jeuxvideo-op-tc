@@ -35,6 +35,13 @@ void Bullet::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 	setRotation(90);
 }
 
+void Bullet::init(const GameContentManager& contentManager)
+{
+	activate();
+	this->contentManager = contentManager;
+	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
+}
+
 int Bullet::getDamage()
 {
 	return DAMAGE;

@@ -4,7 +4,7 @@
 #include "Game.h"
 
 const int Enemy::SHIP_SPEED = 120;
-const int Enemy::INITIAL_HEALTH = 20;
+const int Enemy::INITIAL_HEALTH = 50;
 const float Enemy::SHOOTING_COOLDOWN = 1.75f;
 const float Enemy::HURT_TIME = 0.32f;
 

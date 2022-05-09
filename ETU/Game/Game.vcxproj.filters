@@ -127,6 +127,9 @@
     <ClInclude Include="EnemyType.h">
       <Filter>PubSub</Filter>
     </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -205,6 +208,7 @@
       <Filter>GenericFiles</Filter>
     </ClCompile>
     <ClCompile Include="Spawner.cpp" />
+    <ClCompile Include="Character.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\extern\SFML\bin\openal32.dll" />

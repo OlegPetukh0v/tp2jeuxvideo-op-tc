@@ -1,10 +1,10 @@
 #pragma once
 #include "stdafx.h"
-#include "GameObject.h"
+#include "Character.h"
 #include "GameContentManager.h"
 #include "Subscriber.h"
 class Player :
-    public GameObject, public Subscriber
+    public Character, public Subscriber
 {
 public:
     static const int SHIP_SPEED;
@@ -22,9 +22,5 @@ public:
     void notify(Event event, const void* data);
 
 private:
-    GameContentManager contentManager;
     float shootingCooldown;
-    float life;
-    bool shootLeft;
-    float hurtTime;
 };
