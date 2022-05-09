@@ -71,7 +71,7 @@ inline T& PoolManager::getAvailableGameObject(std::list<T*>& poolT)
 	T* temp = new T();
 	temp->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0,0));
 	poolT.push_back(temp);
-	return *poolT.back(); // FIXME : Le push_back() ne fonctionnent pas...
+	return *poolT.back();
 }
 
 template<class T>

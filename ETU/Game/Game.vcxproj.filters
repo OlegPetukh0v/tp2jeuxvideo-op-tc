@@ -23,6 +23,9 @@
     <Filter Include="Scenes\ContentManager">
       <UniqueIdentifier>{934d62c6-2b28-4d7d-a559-89de3b586693}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Characters\Player">
+      <UniqueIdentifier>{c3f5838d-cc38-419b-a29c-35e2bc3e0e1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -103,14 +106,8 @@
     <ClInclude Include="GameContentManager.h">
       <Filter>Scenes\ContentManager</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Characters</Filter>
-    </ClInclude>
     <ClInclude Include="PoolManager.h">
       <Filter>GenericFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Characters</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Characters</Filter>
@@ -129,6 +126,15 @@
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Characters\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipAnimation.h">
+      <Filter>Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -189,14 +195,8 @@
     <ClCompile Include="GameContentManager.cpp">
       <Filter>Scenes\ContentManager</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Characters</Filter>
-    </ClCompile>
     <ClCompile Include="PoolManager.cpp">
       <Filter>GenericFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Characters</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Characters</Filter>
@@ -207,8 +207,21 @@
     <ClCompile Include="BitmaskManager.cpp">
       <Filter>GenericFiles</Filter>
     </ClCompile>
-    <ClCompile Include="Spawner.cpp" />
-    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Characters\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipAnimation.cpp">
+      <Filter>Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\extern\SFML\bin\openal32.dll" />

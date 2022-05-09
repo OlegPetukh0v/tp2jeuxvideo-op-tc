@@ -1,9 +1,9 @@
 #pragma once
 #include "stdafx.h"
-#include "GameObject.h"
+#include "AnimatedGameObject.h"
 #include "GameContentManager.h"
 class Character :
-    public GameObject
+    public AnimatedGameObject
 {
 public:
     Character(float life);

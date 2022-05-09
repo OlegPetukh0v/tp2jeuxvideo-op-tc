@@ -2,6 +2,8 @@
 #include "stdafx.h"
 #include "Character.h"
 #include "GameContentManager.h"
+#include "ShipAnimation.h"
+#include "AnimatedGameObject.h"
 #include "Subscriber.h"
 class Player :
     public Character, public Subscriber
