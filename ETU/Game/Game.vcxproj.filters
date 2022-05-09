@@ -136,6 +136,9 @@
     <ClInclude Include="ShipAnimation.h">
       <Filter>Animations</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyShipAnimation.h">
+      <Filter>Animations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -220,6 +223,9 @@
       <Filter>GenericFiles</Filter>
     </ClCompile>
     <ClCompile Include="ShipAnimation.cpp">
+      <Filter>Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShipAnimation.cpp">
       <Filter>Animations</Filter>
     </ClCompile>
   </ItemGroup>

@@ -25,21 +25,12 @@ Player::~Player()
 void Player::draw(sf::RenderWindow& window) const
 {
 	window.draw(*this);
-
-	/*sf::RectangleShape shape(sf::Vector2f(getGlobalBounds().width, getGlobalBounds().height));
-	shape.setOutlineColor(getDebugColor());
-	shape.setOutlineThickness(2);
-	shape.setPosition(getPosition() - sf::Vector2f(getGlobalBounds().width * 0.5f, getGlobalBounds().height * 0.5f));
-	shape.setFillColor(sf::Color::Transparent);
-
-	window.draw(shape);*/
 }
 
 void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
 	activate();
 	currentState = State::SHIP;
-	AnimatedGameObject::
 	addAnimation<State::SHIP, ShipAnimation>(contentManager);
 	Publisher::addSubscriber(*this, Event::PLAYER_HIT);
 	setTexture(texture);
@@ -100,9 +91,9 @@ bool Player::update(float deltaT, const Inputs& inputs)
 void Player::notify(Event event, const void* data) {
 	if (event == Event::PLAYER_HIT) {
 		if (hurtTime == 0) {
-			life -= *(int*)data;
+			health -= *(int*)data;
 			hurtTime = HURT_TIME;
-			std::cout << life << std::endl;
+			std::cout << health << std::endl;
 		}
 	}
 }

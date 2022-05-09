@@ -8,6 +8,7 @@
 ShipAnimation::ShipAnimation(sf::Sprite& initialSprite)
 	:InputBasedAnimation(initialSprite)
 {
+	nbFrameInState = 25; // TODO to const
 }
 
 bool ShipAnimation::init(const ContentManager& contentManager) {

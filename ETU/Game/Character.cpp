@@ -4,6 +4,6 @@
 Character::Character(float life)
 {
 	hurtTime = 0;
-	this->life = life;
+	this->health = life;
 }
 

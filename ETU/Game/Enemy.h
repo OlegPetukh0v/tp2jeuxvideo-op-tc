@@ -1,16 +1,15 @@
 #pragma once
 #include "stdafx.h"
-#include "GameObject.h"
+#include "Character.h"
 #include "Subscriber.h"
 #include "GameContentManager.h"
 #include <iostream>
 class Enemy :
-    public GameObject
+    public Character
 {
 public:
     static const int SHIP_SPEED;
     static const int INITIAL_HEALTH;
-    static const float SHOOTING_COOLDOWN;
     static const float HURT_TIME;
 
     Enemy();
@@ -21,8 +20,5 @@ public:
     void hit(int damage);
 
 private:
-    GameContentManager contentManager;
     float shootingCooldown;
-    float health;
-    float hurtTime;
 };

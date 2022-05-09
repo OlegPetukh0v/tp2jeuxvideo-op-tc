@@ -24,6 +24,7 @@ bool EnemyBullet::update(float elapsedTime)
 
 void EnemyBullet::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
+	deactivate();
 	setTexture(texture);
 	setTextureRect(sf::IntRect(287, 106, 16, 5));
 	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));

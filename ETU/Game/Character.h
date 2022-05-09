@@ -10,7 +10,7 @@ public:
 
 protected:
     GameContentManager contentManager;
-    float life;
+    float health;
     float hurtTime;
 };
 #pragma once
