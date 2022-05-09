@@ -10,7 +10,6 @@
 
 class PoolManager : public Subscriber
 {
-	static const int ENEMY_SPAWN_TIME;
 public:
 	PoolManager();
 
@@ -31,7 +30,10 @@ public:
 	T& getAvailableGameObject(std::list<T*> poolT);
 
 	template<class T>
-	void spawnGameObject(T& enemy, sf::Vector2f pos);
+	void spawnGameObject(T& objT, sf::Vector2f pos);
+
+	template<class T>
+	void spawnGameObject(T& objT);
 
 	template<class T>
 	void updatePool(std::list<T*> poolT, float deltaT);
@@ -43,7 +45,6 @@ public:
 	void deletePool(std::list<T*>& poolT);
 private:
 	GameContentManager contentManager;
-	float enemySpawnTime;
 	std::list<Bullet*> bullets;
 	std::list<EnemyBullet*> enemyBullets;
 	std::list<Enemy*> enemies;
@@ -76,8 +77,14 @@ private:
 	template<class T>
 	inline void PoolManager::spawnGameObject(T& objT, sf::Vector2f pos)
 	{
-		objT.activate();
 		objT.setPosition(pos);
+		objT.activate();
+	}
+
+	template<class T>
+	inline void PoolManager::spawnGameObject(T& objT)
+	{
+		objT.activate();
 	}
 
 	template<class T>

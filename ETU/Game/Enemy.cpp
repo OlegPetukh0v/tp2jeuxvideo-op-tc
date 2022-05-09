@@ -34,6 +34,8 @@ void Enemy::activate()
 	health = INITIAL_HEALTH;
 	hurtTime = 0;
 	setColor(sf::Color::White);
+	float x = rand() % (Game::GAME_WIDTH - (int)getGlobalBounds().width);
+	setPosition(x +(getGlobalBounds().width /2), -getGlobalBounds().height);
 	GameObject::activate();
 }
 

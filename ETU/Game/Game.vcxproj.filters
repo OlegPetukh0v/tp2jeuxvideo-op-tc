@@ -121,6 +121,12 @@
     <ClInclude Include="BitmaskManager.h">
       <Filter>GenericFiles</Filter>
     </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyType.h">
+      <Filter>PubSub</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -198,6 +204,7 @@
     <ClCompile Include="BitmaskManager.cpp">
       <Filter>GenericFiles</Filter>
     </ClCompile>
+    <ClCompile Include="Spawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\extern\SFML\bin\openal32.dll" />

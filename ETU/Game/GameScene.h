@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Inputs.h"
 #include "PoolManager.h"
-#include "Bullet.h"
+#include "Spawner.h"
 class GameScene :
     public Scene
 {
@@ -26,5 +26,6 @@ private:
     Inputs inputs;
     sf::Clock clock;
     PoolManager pooler;
+    Spawner spawner;
     int scrollPos;
 };
