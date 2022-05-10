@@ -8,7 +8,6 @@ class TitleScene :
 {
     static const std::string PRESS_KEY_MESSAGE;
 public:
-  // Héritées via Scene
   TitleScene();
   ~TitleScene();
   virtual SceneType update() override;
@@ -19,6 +18,7 @@ public:
 private:
   TitleSceneContentManager contentManager;
   sf::Texture menuImageTexture;
+  sf::Music* titleMusic;
   sf::Sprite menuImage;
   sf::Text pressKeyMessage;
   bool playGame;

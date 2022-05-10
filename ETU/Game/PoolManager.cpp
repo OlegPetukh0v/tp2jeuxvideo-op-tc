@@ -17,7 +17,7 @@ bool PoolManager::init(GameContentManager gameContentManager)
 
     contentManager = gameContentManager;
     initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
-    initialiseObjectPool(enemyBullets, 1, contentManager.getMainCharacterTexture());
+    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
     initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
     return true;
 }

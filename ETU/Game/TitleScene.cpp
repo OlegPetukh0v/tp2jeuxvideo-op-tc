@@ -17,7 +17,10 @@ TitleScene::~TitleScene()
 SceneType TitleScene::update()
 {
     if (playGame == 0) return getSceneType();
-    else return SceneType::GAME;
+    else {
+        titleMusic->stop();
+        return SceneType::GAME;
+    }
 }
 
 void TitleScene::draw(sf::RenderWindow& window) const
@@ -35,6 +38,10 @@ bool TitleScene::init()
   menuImage.setTexture(contentManager.getBackgroundTexture());
   menuImage.setOrigin(menuImage.getTexture()->getSize().x / 2.0f, menuImage.getTexture()->getSize().y / 2.0f);
   menuImage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 2.0f);
+
+  titleMusic = const_cast<sf::Music*>(&contentManager.getTitleMusic());
+  titleMusic->setLoop(true);
+  titleMusic->play();
 
   pressKeyMessage.setFont(contentManager.getMainFont());
   pressKeyMessage.setCharacterSize(24);

@@ -16,7 +16,7 @@ bool GameContentManager::loadContent()
     if (!miscTexture.loadFromFile("Assets\\Sprites\\Level01\\NES - The Guardian Legend - Miscellaneous.bmp"))
         return false;
     if (!enemiesTexture.loadFromFile("Assets\\Sprites\\Level01\\NES - The Guardian Legend - Bosses.bmp"))
-        return false;
+        return false;   
     if (!playerGunSoundBuffer.loadFromFile("Assets\\SoundFX\\Level01\\playerGun.wav"))
         return false;
     if (!enemyGunSoundBuffer.loadFromFile("Assets\\SoundFX\\Level01\\enemyGun.wav"))
@@ -34,6 +34,7 @@ const sf::Texture& GameContentManager::getEnemiesTexture() const
 {
     return enemiesTexture;
 }
+
 const sf::Texture& GameContentManager::getBackgroundTexture() const
 {
     return backgroundTexture;

@@ -44,6 +44,11 @@ bool GameScene::init()
         return false;
     scrollPos = 0;
     backgroundImage.setTexture(contentManager.getBackgroundTexture());
+    if (!gameMusic.openFromFile("Assets\\Music\\Level01\\Albator-La-Bataille.ogg")) {
+        return false;
+    }
+    gameMusic.setLoop(true);
+    gameMusic.play();
 
     player.init(contentManager);
     pooler.init(contentManager);
