@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "Publisher.h"
 
-const float EnemyBullet::BULLET_SPEED = 420;
+const float EnemyBullet::BULLET_SPEED = 500;
 const int EnemyBullet::DAMAGE = 10;
 
 EnemyBullet::EnemyBullet()

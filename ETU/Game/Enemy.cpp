@@ -6,6 +6,7 @@
 
 const int Enemy::SHIP_SPEED = 120;
 const int Enemy::INITIAL_HEALTH = 50;
+const int Enemy::CANON_OFFSET = 8;
 const float Enemy::HURT_TIME = 0.32f;
 
 Enemy::Enemy()
@@ -42,13 +43,21 @@ void Enemy::activate()
 	GameObject::activate();
 }
 
+void Enemy::shoot()
+{
+	sf::Vector2f offsetPos = sf::Vector2f(getPosition().x + CANON_OFFSET, getPosition().y);
+	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
+	offsetPos = sf::Vector2f(getPosition().x - CANON_OFFSET, getPosition().y);
+	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
+	shootingCooldown = 0;
+}
+
 bool Enemy::update(float deltaT)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
 	shootingCooldown += deltaT;
 	if (shootingCooldown >= EnemyShipAnimation::ANIMATION_LENGTH) {
-		Publisher::notifySubscribers(Event::ENEMY_SHOOT, &getPosition());
-		shootingCooldown = 0;
+		shoot();
 	}
 
 	this->move(sf::Vector2f(0, SHIP_SPEED * deltaT));

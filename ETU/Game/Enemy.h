@@ -10,6 +10,7 @@ class Enemy :
 public:
     static const int SHIP_SPEED;
     static const int INITIAL_HEALTH;
+    static const int CANON_OFFSET;
     static const float HURT_TIME;
 
     Enemy();
@@ -17,6 +18,7 @@ public:
     virtual bool init(const GameContentManager& contentManager);
     virtual bool update(float deltaT) override;
     virtual void activate() override;
+    virtual void shoot();
     void hit(int damage);
 
 private:
