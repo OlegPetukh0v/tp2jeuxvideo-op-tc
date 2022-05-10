@@ -121,6 +121,9 @@
     <ClInclude Include="BitmaskManager.h">
       <Filter>GenericFiles</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerScore.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -196,6 +199,9 @@
       <Filter>Characters</Filter>
     </ClCompile>
     <ClCompile Include="BitmaskManager.cpp">
+      <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerScore.cpp">
       <Filter>GenericFiles</Filter>
     </ClCompile>
   </ItemGroup>
