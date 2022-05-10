@@ -14,6 +14,7 @@ public:
 
 	bool operator <(const PlayerScore& studObj) const;
 	bool isEmpty() const;
+	bool isFullyFilled() const;
 private:
 	int score;
 	char name[NAME_LENGTH];

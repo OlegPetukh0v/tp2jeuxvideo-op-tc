@@ -53,6 +53,16 @@ bool PlayerScore::isEmpty() const
     return true;
 }
 
+bool PlayerScore::isFullyFilled() const
+{
+    for (int i = 0; i < sizeof(name); i++)
+    {
+        if (name[i] == ' ')
+            return false;
+    }
+    return true;
+}
+
 std::string PlayerScore::getName() const
 {
     std::string stringName = "";

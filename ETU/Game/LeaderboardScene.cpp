@@ -39,17 +39,10 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
         }
         else if (event.type == sf::Event::KeyPressed)
         {
-            std::cout << "code: " << event.key.code << std::endl;
             if (event.key.code == sf::Keyboard::BackSpace)
-            {
                 inputs.toDelete = true;
-                std::cout << "delete" << std::endl;
-            }
             else if (event.key.code == sf::Keyboard::Enter)
-            {
                 inputs.enter = true;
-                std::cout << "enter" << std::endl;
-            }
             else
                 inputs.newLetter = static_cast<char>(event.text.unicode + 65);
         }
@@ -64,11 +57,15 @@ SceneType LeaderboardScene::update()
     {
         retval = SceneType::NONE;
     }
-    else if (inputs.toDelete)
+    else if (inputs.toDelete && !nameconfirmed)
     {
         deleteCharacterFromPlayerName();
     }
-    else if (isPlayerInTop5 && inputs.newLetter != ' ')
+    else if (inputs.enter && !nameconfirmed)
+    {
+        setPlayerNameConfirmed();
+    }
+    else if (isPlayerInTop5 && inputs.newLetter != ' ' && !nameconfirmed)
     {
         setNewPlayerName(inputs.newLetter);
     }
@@ -320,6 +317,17 @@ void LeaderboardScene::deleteCharacterFromPlayerName()
     playerScores.front().deleteFrontLetter();
     playerName = playerScores.front().getName();
 
+    reorderList();
+}
+
+void LeaderboardScene::setPlayerNameConfirmed()
+{
+    getPlayerInFrontOfList();
+    if (playerScores.front().isFullyFilled())
+    {
+        leaderboard[0][playerPosition].setFillColor(sf::Color::White);
+        nameconfirmed = true;
+    }
     reorderList();
 }
 

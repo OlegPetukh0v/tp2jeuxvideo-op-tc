@@ -49,6 +49,7 @@ private:
     void drawLeaderboard(sf::RenderWindow& window) const;
 
     bool sceneNeedsToChange;
+    bool nameconfirmed;
 
     void readFromFile();
     void populateLeaderboardFile();
@@ -65,4 +66,6 @@ private:
     int playerPosition;
     void setNewPlayerName(char newChar);
     std::string playerName;
+    bool playerNameConfirmed;
+    void setPlayerNameConfirmed();
 };
