@@ -17,6 +17,7 @@ public:
     static const std::string EMPTY_STRING_NAME;
     static const unsigned int INITIAL_PLAYER_POSIITON_IN_LEADERBOARD;
     static const float X_POSITION_LEADERBOARD_NAME;
+    static const float X_POSITION_LEADERBOARD_SCORE;
     static const float NAME_HEIGHT;
     static const unsigned int X_POSITION_INITIAL_SCORE_HEIGHT;
 
@@ -55,6 +56,9 @@ private:
 
     std::string getTop5Players() const;
     void setTop5Players();
+    void getPlayerInFrontOfList();
+    void reorderList();
+    void deleteCharacterFromPlayerName();
 
     void addNewPlayerToList();
     bool isPlayerInTop5;

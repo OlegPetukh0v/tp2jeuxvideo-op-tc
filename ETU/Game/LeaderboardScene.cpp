@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include "PlayerScore.h"
+#include "Inputs.h"
 
 const std::string LeaderboardScene::GAME_OVER = "GAME OVER";
 const std::string LeaderboardScene::TITLE = "LEADERBOARD";
@@ -11,6 +12,7 @@ const std::string LeaderboardScene::ENTER_NAME = "PLEASE ENTER YOUR NAME";
 const std::string LeaderboardScene::EMPTY_STRING_NAME = "   ";
 const unsigned int LeaderboardScene::INITIAL_PLAYER_POSIITON_IN_LEADERBOARD = -1;
 const float LeaderboardScene::X_POSITION_LEADERBOARD_NAME = Game::GAME_WIDTH / 5.0f;
+const float LeaderboardScene::X_POSITION_LEADERBOARD_SCORE = Game::GAME_WIDTH / 1.5f;
 const float LeaderboardScene::NAME_HEIGHT = 22;
 const unsigned int LeaderboardScene::X_POSITION_INITIAL_SCORE_HEIGHT = Game::GAME_HEIGHT / 3.0f;
 
@@ -37,13 +39,19 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
         }
         else if (event.type == sf::Event::KeyPressed)
         {
-            if (event.key.code == sf::Keyboard::Space)
-                inputs.enter = true;
-            else
+            std::cout << "code: " << event.key.code << std::endl;
+            if (event.key.code == sf::Keyboard::BackSpace)
             {
-                inputs.newLetter = static_cast<char>(event.text.unicode + 65);
-                std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode + 65) << std::endl;
+                inputs.toDelete = true;
+                std::cout << "delete" << std::endl;
             }
+            else if (event.key.code == sf::Keyboard::Enter)
+            {
+                inputs.enter = true;
+                std::cout << "enter" << std::endl;
+            }
+            else
+                inputs.newLetter = static_cast<char>(event.text.unicode + 65);
         }
     }
     return retval;
@@ -56,13 +64,18 @@ SceneType LeaderboardScene::update()
     {
         retval = SceneType::NONE;
     }
-    if (isPlayerInTop5 && inputs.newLetter != ' ')
+    else if (inputs.toDelete)
+    {
+        deleteCharacterFromPlayerName();
+    }
+    else if (isPlayerInTop5 && inputs.newLetter != ' ')
     {
         setNewPlayerName(inputs.newLetter);
-        leaderboard[0][playerPosition].setString(playerName);
-        leaderboard[0][playerPosition].setOrigin(leaderboard[0][playerPosition].getLocalBounds().width / 2.0f, leaderboard[0][playerPosition].getLocalBounds().height / 2.0f);
-        inputs.newLetter = ' ';
     }
+    leaderboard[0][playerPosition].setString(playerName);
+    leaderboard[0][playerPosition].setOrigin(leaderboard[0][playerPosition].getLocalBounds().width / 2.0f, leaderboard[0][playerPosition].getLocalBounds().height / 2.0f);
+
+    inputs.reset();
     return retval;
 }
 
@@ -134,19 +147,28 @@ void LeaderboardScene::initLeaderboardMessages()
     for (int i = 0; i < playerScores.size(); i++)
     {
         sf::Text* currentName = &leaderboard[0][i];
+        sf::Text* currentScore = &leaderboard[1][i];
         currentName->setFont(contentManager.getMainFont());
+        currentScore->setFont(contentManager.getMainFont());
         currentName->setCharacterSize(25);
         if (playerPosition == i)
             currentName->setFillColor(sf::Color::Yellow);
         else
             currentName->setFillColor(sf::Color::White);
+        currentScore->setFillColor(sf::Color::White);
         currentName->setString(tempPlayerScores.front().getName());
-        currentName->setOrigin(leaderboard[0][i].getLocalBounds().width / 2.0f, leaderboard[0][i].getLocalBounds().height / 2.0f);
+        currentScore->setString(std::to_string(tempPlayerScores.front().getScore()));
+        currentName->setOrigin(currentName->getLocalBounds().width / 2.0f, currentName->getLocalBounds().height / 2.0f);
+        currentScore->setOrigin(currentScore->getLocalBounds().width / 2.0f, currentScore->getLocalBounds().height / 2.0f);
         if (i == 0)
+        {
             currentName->setPosition(X_POSITION_LEADERBOARD_NAME, Game::GAME_HEIGHT / 3.0f);
+            currentScore->setPosition(X_POSITION_LEADERBOARD_SCORE, Game::GAME_HEIGHT / 3.0f);
+        }
         else
         {
             currentName->setPosition(X_POSITION_LEADERBOARD_NAME, leaderboard[0][i - 1].getPosition().y + (NAME_HEIGHT * 2));
+            currentScore->setPosition(X_POSITION_LEADERBOARD_SCORE, leaderboard[1][i - 1].getPosition().y + (NAME_HEIGHT * 2));
         }
         tempPlayerScores.pop_front();
     }
@@ -266,19 +288,39 @@ void LeaderboardScene::addNewPlayerToList()
 
 }
 
-void LeaderboardScene::setNewPlayerName(char newChar)
+void LeaderboardScene::getPlayerInFrontOfList()
 {
     for (int i = 0; i < playerPosition; i++)
     {
         playerScores.push_back(playerScores.front());
         playerScores.pop_front();
     }
+}
 
-    std::cout << "get name: " << playerScores.front().getName() << std::endl;
-    playerScores.front().addLetterToName(newChar);
-    playerName = playerScores.front().getName();
+void LeaderboardScene::reorderList()
+{
     playerScores.sort();
     playerScores.reverse();
+}
+
+void LeaderboardScene::setNewPlayerName(char newChar)
+{
+    getPlayerInFrontOfList();
+
+    playerScores.front().addLetterToName(newChar);
+    playerName = playerScores.front().getName();
+
+    reorderList();
+}
+
+void LeaderboardScene::deleteCharacterFromPlayerName()
+{
+    getPlayerInFrontOfList();
+
+    playerScores.front().deleteFrontLetter();
+    playerName = playerScores.front().getName();
+
+    reorderList();
 }
 
 void LeaderboardScene::writeResultToFile()

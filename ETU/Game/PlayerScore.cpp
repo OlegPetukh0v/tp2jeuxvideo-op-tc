@@ -21,6 +21,18 @@ void PlayerScore::addLetterToName(char letter)
     }
 }
 
+void PlayerScore::deleteFrontLetter()
+{
+    for (int i = sizeof(name) - 1; i >= 0; i--)
+    {
+        if (name[i] != ' ')
+        {
+            name[i] = ' ';
+            return;
+        }
+    }
+}
+
 void PlayerScore::setScore(const int newScore)
 {
     this->score = newScore;
