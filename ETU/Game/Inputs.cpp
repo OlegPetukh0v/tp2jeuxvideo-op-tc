@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Inputs.h"
 
-
 const float Inputs::CONTROLLER_DEAD_ZONE = 20;
 
 Inputs::Inputs()
@@ -21,4 +20,8 @@ void Inputs::reset()
 {
 	moveFactorX=moveFactorY=0.0f;
 	fireBullet = false;
+	newLetter = ' ';
+	escape = false;
+	enter = false;
+	toDelete = false;
 }

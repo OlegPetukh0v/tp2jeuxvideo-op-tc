@@ -177,6 +177,7 @@
     <ClInclude Include="LeaderboardScene.h" />
     <ClInclude Include="LeaderboardSceneContentManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerScore.h" />
     <ClInclude Include="PoolManager.h" />
     <ClInclude Include="SceneResult.h" />
     <ClInclude Include="LinearAnimation.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="LeaderboardSceneContentManager.cpp" />
     <ClCompile Include="LinearAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerScore.cpp" />
     <ClCompile Include="PoolManager.cpp" />
     <ClCompile Include="Publisher.cpp" />
     <ClCompile Include="Scene.cpp" />
