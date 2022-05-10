@@ -2,30 +2,34 @@
 #include "Enemy.h"
 #include "Publisher.h"
 #include "Game.h"
+#include "EnemyShipAnimation.h"
 
 const int Enemy::SHIP_SPEED = 120;
 const int Enemy::INITIAL_HEALTH = 50;
-const float Enemy::SHOOTING_COOLDOWN = 1.75f;
+const int Enemy::CANON_OFFSET = 8;
 const float Enemy::HURT_TIME = 0.32f;
 
 Enemy::Enemy()
+	: Character(INITIAL_HEALTH)
 {
-	health = INITIAL_HEALTH;
-	shootingCooldown = SHOOTING_COOLDOWN;
-	hurtTime = 0;
+	shootingCooldown = EnemyShipAnimation::ANIMATION_LENGTH / 2;
 }
 
 void Enemy::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
 	setTexture(texture);
-	setTextureRect(sf::IntRect(28, 917, 65, 96));
+	AnimatedGameObject::init(contentManager);
+	currentState = State::STANDARD_ENEMY;
+	addAnimation<State::STANDARD_ENEMY, EnemyShipAnimation>(contentManager);
 	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
 	setPosition(initialPosition);
+
 }
 
 bool Enemy::init(const GameContentManager& contentManager)
 {
-    initialize(contentManager.getEnemiesTexture(), sf::Vector2f(0, 0));
+	this->contentManager = contentManager;
+    initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
     return true;
 }
 
@@ -39,13 +43,21 @@ void Enemy::activate()
 	GameObject::activate();
 }
 
+void Enemy::shoot()
+{
+	sf::Vector2f offsetPos = sf::Vector2f(getPosition().x + CANON_OFFSET, getPosition().y);
+	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
+	offsetPos = sf::Vector2f(getPosition().x - CANON_OFFSET, getPosition().y);
+	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
+	shootingCooldown = 0;
+}
+
 bool Enemy::update(float deltaT)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
-	shootingCooldown -= deltaT;
-	if (shootingCooldown <= 0) {
-		Publisher::notifySubscribers(Event::ENEMY_SHOOT, &getPosition());
-		shootingCooldown = SHOOTING_COOLDOWN;
+	shootingCooldown += deltaT;
+	if (shootingCooldown >= EnemyShipAnimation::ANIMATION_LENGTH) {
+		shoot();
 	}
 
 	this->move(sf::Vector2f(0, SHIP_SPEED * deltaT));
@@ -58,6 +70,8 @@ bool Enemy::update(float deltaT)
 		else setColor(sf::Color::White);  
 	}
 	
+	Inputs inputs;
+	AnimatedGameObject::update(deltaT, inputs);
 	return false;
 }
 

@@ -17,7 +17,7 @@ bool PoolManager::init(GameContentManager gameContentManager)
 
     contentManager = gameContentManager;
     initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
-    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
+    initialiseObjectPool(enemyBullets, 1, contentManager.getMainCharacterTexture());
     initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
     return true;
 }
@@ -27,7 +27,6 @@ bool PoolManager::update(float deltaT, Player& player)
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
-    player.setDebugColor(sf::Color::Green);
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
@@ -51,8 +50,8 @@ bool PoolManager::update(float deltaT, Player& player)
             enemy->setDebugColor(sf::Color::Yellow);
             if (player.collidesWith(*enemy))
             {
-                enemy->setDebugColor(sf::Color::Red);
-                player.setDebugColor(sf::Color::Red);
+                Publisher::notifySubscribers(Event::PLAYER_HIT, &Character::COLLIDE_DAMAGE);
+                enemy->deactivate();
             }
         }
     }

@@ -2,7 +2,7 @@
 #include "Bullet.h"
 #include "Publisher.h"
 
-const float Bullet::BULLET_SPEED = 420;
+const float Bullet::BULLET_SPEED = 500;
 const int Bullet::DAMAGE = 10;
 
 Bullet::Bullet()

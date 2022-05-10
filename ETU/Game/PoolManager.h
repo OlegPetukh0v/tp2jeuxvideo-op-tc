@@ -55,7 +55,7 @@ inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, int initialS
 {
 	for (unsigned short i = 0; i < initialSize; i++) {
 		T* temp = new T();
-		temp->initialize(texture, sf::Vector2f(0,0));
+		temp->init(contentManager);
 		poolT.push_back(temp);
 	}
 }
@@ -69,7 +69,7 @@ inline T& PoolManager::getAvailableGameObject(std::list<T*>& poolT)
 		}
 	}
 	T* temp = new T();
-	temp->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0,0));
+	temp->init(contentManager);
 	poolT.push_back(temp);
 	return *poolT.back();
 }

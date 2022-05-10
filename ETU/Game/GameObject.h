@@ -1,4 +1,5 @@
 #pragma once
+#include "AnimationState.h"
 struct Inputs;
 class ContentManager;
 class GameObject : public sf::Sprite

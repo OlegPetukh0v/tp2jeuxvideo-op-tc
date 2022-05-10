@@ -1,16 +1,16 @@
 #pragma once
 #include "stdafx.h"
-#include "GameObject.h"
+#include "Character.h"
 #include "Subscriber.h"
 #include "GameContentManager.h"
 #include <iostream>
 class Enemy :
-    public GameObject
+    public Character
 {
 public:
     static const int SHIP_SPEED;
     static const int INITIAL_HEALTH;
-    static const float SHOOTING_COOLDOWN;
+    static const int CANON_OFFSET;
     static const float HURT_TIME;
 
     Enemy();
@@ -18,11 +18,9 @@ public:
     virtual bool init(const GameContentManager& contentManager);
     virtual bool update(float deltaT) override;
     virtual void activate() override;
+    virtual void shoot();
     void hit(int damage);
 
 private:
-    GameContentManager contentManager;
     float shootingCooldown;
-    float health;
-    float hurtTime;
 };
