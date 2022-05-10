@@ -2,19 +2,18 @@
 #include "PoolManager.h"
 #include "Publisher.h"
 #include "Game.h"
+#include "EnemyType.h"
 #include <iostream>
-
-const int PoolManager::ENEMY_SPAWN_TIME = 2;
 
 PoolManager::PoolManager()
 {
-    enemySpawnTime = ENEMY_SPAWN_TIME;
 }
 
 bool PoolManager::init(GameContentManager gameContentManager)
 {
     Publisher::addSubscriber(*this, Event::PLAYER_SHOOT);
     Publisher::addSubscriber(*this, Event::ENEMY_SHOOT);
+    Publisher::addSubscriber(*this, Event::ENEMY_SPAWN);
 
     contentManager = gameContentManager;
     initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
@@ -25,18 +24,10 @@ bool PoolManager::init(GameContentManager gameContentManager)
 
 bool PoolManager::update(float deltaT, Player& player)
 {
-    enemySpawnTime -= deltaT;
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
     player.setDebugColor(sf::Color::Green);
-
-    if (enemySpawnTime <= 0) {
-        float randomTime = ((rand() % 10) / 10) - 0.5f;
-        enemySpawnTime = ENEMY_SPAWN_TIME + randomTime;
-        float x = rand() % (Game::GAME_WIDTH - 40);
-        spawnGameObject(getAvailableGameObject(enemies), sf::Vector2f(x + 20, -50));
-    }
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
@@ -87,6 +78,10 @@ void PoolManager::notify(Event event, const void* data)
         sf::Vector2f* pos = (sf::Vector2f*)data;
         EnemyBullet& bullet = getAvailableGameObject(enemyBullets);
         spawnGameObject(bullet, *pos);
+    }
+    else if (event == Event::ENEMY_SPAWN) {
+        EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
+        spawnGameObject(getAvailableGameObject(enemies));
     }
 }
 

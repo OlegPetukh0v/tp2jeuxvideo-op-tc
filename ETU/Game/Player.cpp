@@ -3,20 +3,18 @@
 #include "Inputs.h"
 #include "Publisher.h"
 #include "Game.h"
-#include "BitmaskManager.h"
 #include <iostream>
 
 const int Player::SHIP_SPEED = 360;
-const float Player::SHOOTING_COOLDOWN = 0.25f;
+const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::CANON_OFFSET = 14;
 const int Player::INITIAL_LIFE = 300;
 const float Player::HURT_TIME = 0.5f;
 
 Player::Player()
+	: Character(INITIAL_LIFE)
 {
-	life = INITIAL_LIFE;
 	shootingCooldown = SHOOTING_COOLDOWN;
-	shootLeft = true;
 	hurtTime = 0;
 }
 
@@ -39,6 +37,11 @@ void Player::draw(sf::RenderWindow& window) const
 
 void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
+	activate();
+	currentState = State::SHIP;
+	AnimatedGameObject::
+	addAnimation<State::SHIP, ShipAnimation>(contentManager);
+	Publisher::addSubscriber(*this, Event::PLAYER_HIT);
 	setTexture(texture);
 	setTextureRect(sf::IntRect(269, 47, 26, 29));
 	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
@@ -48,8 +51,6 @@ void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 
 bool Player::init(const GameContentManager& contentManager)
 {
-	activate();
-	Publisher::addSubscriber(*this, Event::PLAYER_HIT);
 	this->contentManager = contentManager;
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(Game::GAME_WIDTH/2,Game::GAME_HEIGHT - 100));
 	return true;
@@ -62,10 +63,10 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {
 			float offset = CANON_OFFSET;
-			if (shootLeft) offset *= -1;
-			shootLeft = !shootLeft;
-			// TODO: add back when fixed
-			//Publisher::notifySubscribers(Event::PLAYER_SHOOT, &sf::Vector2f(getPosition().x + offset, getPosition().y));
+			sf::Vector2f shootPos = sf::Vector2f(getPosition().x + offset, getPosition().y);
+			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
+			shootPos = sf::Vector2f(getPosition().x - offset, getPosition().y);
+			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
 	}
@@ -92,13 +93,16 @@ bool Player::update(float deltaT, const Inputs& inputs)
 		else setColor(sf::Color::White);
 	}
 
+	AnimatedGameObject::update(deltaT, inputs);
 	return true;
 }
 
 void Player::notify(Event event, const void* data) {
 	if (event == Event::PLAYER_HIT) {
-		life -= *(int*)data;
-		hurtTime = HURT_TIME;
-		std::cout << life << std::endl;
+		if (hurtTime == 0) {
+			life -= *(int*)data;
+			hurtTime = HURT_TIME;
+			std::cout << life << std::endl;
+		}
 	}
 }

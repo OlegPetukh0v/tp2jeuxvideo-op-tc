@@ -3,6 +3,7 @@
 enum class Event 
 {
   NONE,
+  ENEMY_SPAWN,
   ENEMY_SHOOT,
   ENEMY_KILLED,
   PLAYER_SHOOT,

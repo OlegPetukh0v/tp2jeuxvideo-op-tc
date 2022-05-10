@@ -26,6 +26,7 @@ SceneType GameScene::update()
 
     player.update(deltaT, inputs);
     pooler.update(deltaT, player);
+    spawner.update(deltaT);
 
     return getSceneType();
 }
