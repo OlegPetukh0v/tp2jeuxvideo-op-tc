@@ -22,6 +22,7 @@ public:
 private:
     GameContentManager contentManager;
     sf::Sprite backgroundImage;
+    sf::Music gameMusic;
     Player player;
     Inputs inputs;
     sf::Clock clock;

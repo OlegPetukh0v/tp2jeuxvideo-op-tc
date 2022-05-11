@@ -1,9 +1,15 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(float life)
+const int Character::COLLIDE_DAMAGE = 10;
+
+Character::Character(int life)
 {
 	hurtTime = 0;
-	this->life = life;
+	this->health = life;
+}
+
+int Character::getHealth() const {
+	return this->health;
 }
 

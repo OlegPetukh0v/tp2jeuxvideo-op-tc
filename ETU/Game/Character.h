@@ -6,11 +6,13 @@ class Character :
     public AnimatedGameObject
 {
 public:
-    Character(float life);
+    static const int COLLIDE_DAMAGE;
+    Character(int health);
+    int getHealth() const;
 
 protected:
     GameContentManager contentManager;
-    float life;
+    int health;
     float hurtTime;
 };
 #pragma once

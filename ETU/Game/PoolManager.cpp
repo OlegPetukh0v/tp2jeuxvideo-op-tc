@@ -27,7 +27,6 @@ bool PoolManager::update(float deltaT, Player& player)
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
-    player.setDebugColor(sf::Color::Green);
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
@@ -51,8 +50,8 @@ bool PoolManager::update(float deltaT, Player& player)
             enemy->setDebugColor(sf::Color::Yellow);
             if (player.collidesWith(*enemy))
             {
-                enemy->setDebugColor(sf::Color::Red);
-                player.setDebugColor(sf::Color::Red);
+                Publisher::notifySubscribers(Event::PLAYER_HIT, &Character::COLLIDE_DAMAGE);
+                enemy->deactivate();
             }
         }
     }
