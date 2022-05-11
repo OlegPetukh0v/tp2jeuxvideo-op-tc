@@ -6,6 +6,7 @@ public:
 
 	void setName(std::string newName);
 	void addLetterToName(char letter);
+	void deleteFrontLetter();
 	void setScore(const int newScore);
 
 	std::string getName() const;
@@ -13,6 +14,7 @@ public:
 
 	bool operator <(const PlayerScore& studObj) const;
 	bool isEmpty() const;
+	bool isFullyFilled() const;
 private:
 	int score;
 	char name[NAME_LENGTH];
