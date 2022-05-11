@@ -55,11 +55,11 @@ bool Game::update()
   if (!gameMustEnd)
   {
     SceneType nextSceneType = scenes.top()->update();
-    // Si la nouvelle scène attendue est différente de l'ancienne...
+    // Si la nouvelle scÃ¨ne attendue est diffÃ©rente de l'ancienne...
     if (nextSceneType != scenes.top()->getSceneType())
     {
       Scene* nextScene = nullptr;
-      // ... soit on veut retirer la scène courant de la pile
+      // ... soit on veut retirer la scÃ¨ne courant de la pile
       if (SceneType::NONE== nextSceneType)
       {
         popScene(false);
@@ -123,7 +123,6 @@ bool Game::init()
   window.create(sf::VideoMode(Game::GAME_WIDTH, Game::GAME_HEIGHT, 32), gameName);
   window.setFramerateLimit(FRAME_RATE);
   
-  //TODO: mettre a new InitialScene() lorsque dev finit
   return pushScene(new InitialScene());
 }
 

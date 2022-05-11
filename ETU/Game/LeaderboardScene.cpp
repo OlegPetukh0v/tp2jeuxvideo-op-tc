@@ -115,8 +115,6 @@ bool LeaderboardScene::init()
     populateLeaderboardFile();
 
     readFromFile();
-    // TODO: delete when dev finished
-    result.gameSceneResult.score = 9000;
     addNewPlayerToList();
     setTop5Players();
     
