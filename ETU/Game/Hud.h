@@ -4,9 +4,13 @@ class Hud
 {
 public:
 	static const std::string SCORE_TEXT;
-	static const std::string DEFAULT_SCORE_TEXT;
 	static const float Y_POSITION_TXT;
 	static const unsigned int CHARACTER_SIZE;
+	static const float HEART_SCALE;
+	static const float BONUS_SCALE;
+	static const unsigned int DEFAULT_SCORE;
+	static const unsigned int DEFAULT_TIME;
+	static const unsigned int DEFAULT_LIVES;
 	Hud();
 	void init(GameContentManager& contentManager);
 	void draw(sf::RenderWindow& window) const;
