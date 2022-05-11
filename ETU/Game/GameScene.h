@@ -6,6 +6,8 @@
 #include "Inputs.h"
 #include "PoolManager.h"
 #include "Spawner.h"
+#include "Hud.h"
+
 class GameScene :
     public Scene
 {
@@ -21,12 +23,16 @@ public:
     virtual bool handleEvents(sf::RenderWindow& window) override;
 private:
     GameContentManager contentManager;
-    sf::Sprite backgroundImage;
-    sf::Music gameMusic;
-    Player player;
-    Inputs inputs;
-    sf::Clock clock;
     PoolManager pooler;
     Spawner spawner;
+
+    sf::Sprite backgroundImage;
+    sf::Music gameMusic;
+    Hud hud;
+    Inputs inputs;
+
+    sf::Clock clock;
+
+    Player player;
     int scrollPos;
 };

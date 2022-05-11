@@ -36,6 +36,7 @@ void GameScene::draw(sf::RenderWindow& window) const
     window.draw(backgroundImage);
     pooler.draw(window);
     player.draw(window);
+    hud.draw(window);
 }
 
 bool GameScene::init()
@@ -52,6 +53,7 @@ bool GameScene::init()
 
     player.init(contentManager);
     pooler.init(contentManager);
+    hud.init(contentManager);
 
     return true;
 }
