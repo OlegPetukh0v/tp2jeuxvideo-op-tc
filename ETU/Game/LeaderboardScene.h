@@ -12,6 +12,7 @@ public:
     static const std::string GAME_OVER;
     static const std::string TITLE;
     static const std::string ENTER_NAME;
+    static const std::string PRESS_TO_LEAVE;
     static const int SCORES_SHOWN = 5;
     static const int NB_COLUMNS_FOR_SCORE = 2;
     static const std::string EMPTY_STRING_NAME;

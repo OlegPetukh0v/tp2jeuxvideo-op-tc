@@ -9,6 +9,7 @@
 const std::string LeaderboardScene::GAME_OVER = "GAME OVER";
 const std::string LeaderboardScene::TITLE = "LEADERBOARD";
 const std::string LeaderboardScene::ENTER_NAME = "PLEASE ENTER YOUR NAME";
+const std::string LeaderboardScene::PRESS_TO_LEAVE = "PRESS ESC TO QUIT";
 const std::string LeaderboardScene::EMPTY_STRING_NAME = "   ";
 const unsigned int LeaderboardScene::INITIAL_PLAYER_POSIITON_IN_LEADERBOARD = -1;
 const float LeaderboardScene::X_POSITION_LEADERBOARD_NAME = Game::GAME_WIDTH / 5.0f;
@@ -43,8 +44,15 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
                 inputs.toDelete = true;
             else if (event.key.code == sf::Keyboard::Enter)
                 inputs.enter = true;
-            else
+            else if (event.key.code == sf::Keyboard::Escape)
+                inputs.escape = true;
+            else if (event.text.unicode <= 25)
                 inputs.newLetter = static_cast<char>(event.text.unicode + 65);
+        }
+        if (sf::Joystick::isConnected(0))
+        {
+            if (sf::Joystick::isButtonPressed(0, 1))
+                inputs.escape = true;
         }
     }
     return retval;
@@ -53,21 +61,20 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
 SceneType LeaderboardScene::update()
 {
     SceneType retval = getSceneType();
+    if (nameconfirmed && inputs.escape)
+        sceneNeedsToChange = true;
     if (sceneNeedsToChange)
     {
         retval = SceneType::NONE;
     }
-    else if (inputs.toDelete && !nameconfirmed)
+    else if (!nameconfirmed)
     {
-        deleteCharacterFromPlayerName();
-    }
-    else if (inputs.enter && !nameconfirmed)
-    {
-        setPlayerNameConfirmed();
-    }
-    else if (isPlayerInTop5 && inputs.newLetter != ' ' && !nameconfirmed)
-    {
-        setNewPlayerName(inputs.newLetter);
+        if(inputs.toDelete)
+            deleteCharacterFromPlayerName();
+        else if (inputs.enter)
+            setPlayerNameConfirmed();
+        else if(isPlayerInTop5 && inputs.newLetter != ' ')
+            setNewPlayerName(inputs.newLetter);
     }
     leaderboard[0][playerPosition].setString(playerName);
     leaderboard[0][playerPosition].setOrigin(leaderboard[0][playerPosition].getLocalBounds().width / 2.0f, leaderboard[0][playerPosition].getLocalBounds().height / 2.0f);
@@ -105,7 +112,6 @@ bool LeaderboardScene::init()
     isPlayerInTop5 = false;
     playerPosition = INITIAL_PLAYER_POSIITON_IN_LEADERBOARD;
 
-    //pas fonctionnel pour l'instant
     populateLeaderboardFile();
 
     readFromFile();
@@ -327,6 +333,9 @@ void LeaderboardScene::setPlayerNameConfirmed()
     {
         leaderboard[0][playerPosition].setFillColor(sf::Color::White);
         nameconfirmed = true;
+        enterNameMessage.setString(PRESS_TO_LEAVE);
+        enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
+
     }
     reorderList();
 }
