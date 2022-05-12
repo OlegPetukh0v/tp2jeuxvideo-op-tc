@@ -3,6 +3,7 @@
 #include "Inputs.h"
 #include "Publisher.h"
 #include "Game.h"
+#include "Hud.h"
 #include <iostream>
 
 const int Player::SHIP_SPEED = 360;
@@ -77,7 +78,7 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (getPosition().x - halfWidth < 0) setPosition(halfWidth, getPosition().y);
 	if (getPosition().x + halfWidth > Game::GAME_WIDTH) setPosition(Game::GAME_WIDTH - halfWidth, getPosition().y);
 	if (getPosition().y - halfHeight < 0) setPosition(getPosition().x, halfHeight);
-	if (getPosition().y + halfHeight > Game::GAME_HEIGHT) setPosition(getPosition().x, Game::GAME_HEIGHT - halfHeight);
+	if (getPosition().y + halfHeight > Game::GAME_HEIGHT - Hud::HUD_HEIGHT) setPosition(getPosition().x, Game::GAME_HEIGHT - Hud::HUD_HEIGHT - halfHeight);
 
 	if (hurtTime > 0) {
 		if (std::fmod(hurtTime, 0.16f) > 0.08f) setColor(sf::Color(255, 50, 50, 255));
