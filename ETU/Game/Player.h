@@ -11,6 +11,7 @@ class Player :
 public:
     static const int SHIP_SPEED;
     static const float SHOOTING_COOLDOWN;
+    static const int SHOOTING_VOLUME;
     static const int CANON_OFFSET;
     static const int INITIAL_LIFE;
     static const float HURT_TIME;
@@ -25,4 +26,5 @@ public:
 
 private:
     float shootingCooldown;
+    sf::Sound shootingSound;
 };

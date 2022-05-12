@@ -16,14 +16,9 @@ bool PoolManager::init(GameContentManager gameContentManager)
     Publisher::addSubscriber(*this, Event::ENEMY_SPAWN);
 
     contentManager = gameContentManager;
-    initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
-<<<<<<< Updated upstream
-    initialiseObjectPool(enemyBullets, 1, contentManager.getMainCharacterTexture());
+    initialiseObjectPool(bullets, 40, contentManager.getMainCharacterTexture()); // to const
+    initialiseObjectPool(enemyBullets, 90, contentManager.getMainCharacterTexture());
     initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
-=======
-    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
-    initialiseObjectPool(enemies, 2, contentManager.getEnemiesTexture());
->>>>>>> Stashed changes
     return true;
 }
 

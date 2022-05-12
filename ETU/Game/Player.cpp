@@ -7,6 +7,7 @@
 
 const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
+const int Player::SHOOTING_VOLUME = 30;
 const int Player::CANON_OFFSET = 14;
 const int Player::INITIAL_LIFE = 300;
 const float Player::HURT_TIME = 0.5f;
@@ -44,6 +45,8 @@ bool Player::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(Game::GAME_WIDTH/2,Game::GAME_HEIGHT - 100));
+	this->shootingSound.setBuffer(this->contentManager.getPlayerGunSoundBuffer());
+	this->shootingSound.setVolume(SHOOTING_VOLUME);
 	return true;
 }
 
@@ -58,6 +61,7 @@ bool Player::update(float deltaT, const Inputs& inputs)
 			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
 			shootPos = sf::Vector2f(getPosition().x - offset, getPosition().y);
 			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
+			shootingSound.play();
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
 	}

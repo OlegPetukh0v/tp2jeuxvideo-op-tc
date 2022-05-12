@@ -10,6 +10,8 @@ class Enemy :
 public:
     static const int SHIP_SPEED;
     static const int SHIP_WIDTH;
+    static const int SHOOTING_VOLUME;
+    static const int DEATH_VOLUME;
     static const int INITIAL_HEALTH;
     static const int CANON_OFFSET;
     static const float HURT_TIME;
@@ -24,4 +26,6 @@ public:
 
 private:
     float shootingCooldown;
+    sf::Sound shootingSound; // Console error?
+    sf::Sound deathSound;    //
 };
