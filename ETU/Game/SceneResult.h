@@ -3,6 +3,7 @@
 struct GameSceneResult
 {
   int score;
+  bool hasPlayerWon;
 };
 
 union SceneResult

@@ -22,7 +22,7 @@ public:
     virtual bool init(const GameContentManager& contentManager);
     virtual bool update(float deltaT, const Inputs& inputs);
     void notify(Event event, const void* data);
-
+    bool isAlive();
 private:
     float shootingCooldown;
 };

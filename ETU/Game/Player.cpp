@@ -86,6 +86,9 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	}
 
 	AnimatedGameObject::update(deltaT, inputs);
+
+	if (!this->isAlive())
+		return false;
 	return true;
 }
 
@@ -97,4 +100,9 @@ void Player::notify(Event event, const void* data) {
 			std::cout << health << std::endl;
 		}
 	}
+}
+
+bool Player::isAlive()
+{
+	return getHealth() > 0;
 }

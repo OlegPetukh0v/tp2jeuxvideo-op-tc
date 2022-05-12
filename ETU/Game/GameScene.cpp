@@ -18,18 +18,28 @@ GameScene::~GameScene()
 
 SceneType GameScene::update()
 {
+    bool gameNeedsToEnd = false;
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
     clock.restart();
 
     backgroundImage.setTextureRect(sf::IntRect(0, (int)(scrollPos-=3), Game::GAME_WIDTH, Game::GAME_HEIGHT));
 
-    player.update(deltaT, inputs);
+    if (!player.update(deltaT, inputs))
+        gameNeedsToEnd = true;
+    
     pooler.update(deltaT, player);
     spawner.update(deltaT);
     // TODO: enlever quand on va avoir gerer le score et le cooldown du bonus
     int score = 100;
     int cooldown = 5;
     hud.update(score, player.getHealth(), cooldown);
+
+    if (gameNeedsToEnd)
+    {
+        result.gameSceneResult.hasPlayerWon = player.isAlive();
+        // TODO: assigne le score
+        return SceneType::LEADERBOARD;
+    }
 
     return getSceneType();
 }
