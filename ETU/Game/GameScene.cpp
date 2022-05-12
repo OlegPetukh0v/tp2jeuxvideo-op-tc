@@ -16,7 +16,6 @@ GameScene::~GameScene()
 {
 }
 
-
 SceneType GameScene::update()
 {
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
@@ -27,6 +26,10 @@ SceneType GameScene::update()
     player.update(deltaT, inputs);
     pooler.update(deltaT, player);
     spawner.update(deltaT);
+    // TODO: enlever quand on va avoir gerer le score et le cooldown du bonus
+    int score = 100;
+    int cooldown = 5;
+    hud.update(score, player.getHealth(), cooldown);
 
     return getSceneType();
 }

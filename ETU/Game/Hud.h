@@ -15,6 +15,7 @@ public:
 	Hud();
 	void init(GameContentManager& contentManager);
 	void draw(sf::RenderWindow& window) const;
+	void update(unsigned int score, unsigned int playerHealth, unsigned int bonusCountdown);
 	void setScore(const int newScore);
 	void setLives(const int newLives);
 
