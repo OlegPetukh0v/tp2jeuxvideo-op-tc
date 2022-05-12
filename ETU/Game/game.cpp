@@ -60,7 +60,7 @@ bool Game::update()
     {
       Scene* nextScene = nullptr;
       // ... soit on veut retirer la scène courant de la pile
-      if (SceneType::NONE== nextSceneType)
+      if (SceneType::NONE == nextSceneType)
       {
         popScene(false);
       }

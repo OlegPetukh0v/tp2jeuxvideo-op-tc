@@ -173,6 +173,7 @@
     <ClInclude Include="GameContentManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Hud.h" />
     <ClInclude Include="InputBasedAnimation.h" />
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="LeaderboardScene.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="GameContentManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Hud.cpp" />
     <ClCompile Include="InputBasedAnimation.cpp" />
     <ClCompile Include="Inputs.cpp" />
     <ClCompile Include="LeaderboardScene.cpp" />
