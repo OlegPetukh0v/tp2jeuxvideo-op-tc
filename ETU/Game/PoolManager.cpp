@@ -79,7 +79,7 @@ void PoolManager::notify(Event event, const void* data)
         spawnGameObject(bullet, *pos);
     }
     else if (event == Event::ENEMY_SPAWN) {
-        EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
+        //EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
         spawnGameObject(getAvailableGameObject(enemies));
     }
 }
