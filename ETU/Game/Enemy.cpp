@@ -5,6 +5,7 @@
 #include "EnemyShipAnimation.h"
 
 const int Enemy::SHIP_SPEED = 120;
+const int Enemy::SHIP_WIDTH = 73;
 const int Enemy::INITIAL_HEALTH = 50;
 const int Enemy::CANON_OFFSET = 8;
 const float Enemy::HURT_TIME = 0.32f;
@@ -38,8 +39,8 @@ void Enemy::activate()
 	health = INITIAL_HEALTH;
 	hurtTime = 0;
 	setColor(sf::Color::White);
-	float x = rand() % (Game::GAME_WIDTH - (int)getGlobalBounds().width);
-	setPosition(x +(getGlobalBounds().width /2), -getGlobalBounds().height);
+	float x = rand() % (Game::GAME_WIDTH - Enemy::SHIP_WIDTH);
+	setPosition(x + Enemy::SHIP_WIDTH / 2, -getLocalBounds().height);
 	GameObject::activate();
 }
 

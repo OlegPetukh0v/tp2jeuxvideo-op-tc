@@ -17,8 +17,13 @@ bool PoolManager::init(GameContentManager gameContentManager)
 
     contentManager = gameContentManager;
     initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
+<<<<<<< Updated upstream
     initialiseObjectPool(enemyBullets, 1, contentManager.getMainCharacterTexture());
     initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
+=======
+    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
+    initialiseObjectPool(enemies, 2, contentManager.getEnemiesTexture());
+>>>>>>> Stashed changes
     return true;
 }
 
@@ -79,7 +84,7 @@ void PoolManager::notify(Event event, const void* data)
         spawnGameObject(bullet, *pos);
     }
     else if (event == Event::ENEMY_SPAWN) {
-        EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
+        //EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
         spawnGameObject(getAvailableGameObject(enemies));
     }
 }
