@@ -6,6 +6,7 @@ public:
 	static const std::string SCORE_TEXT;
 	static const float Y_POSITION_TXT;
 	static const unsigned int CHARACTER_SIZE;
+	static const unsigned int HUD_HEIGHT;
 	static const float HEART_SCALE;
 	static const float BONUS_SCALE;
 	static const unsigned int DEFAULT_SCORE;

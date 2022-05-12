@@ -6,6 +6,7 @@
 const std::string Hud::SCORE_TEXT = "Score: ";
 const float Hud::Y_POSITION_TXT = Game::GAME_HEIGHT / 1.03f + 8;
 const unsigned int Hud::CHARACTER_SIZE = 24;
+const unsigned int Hud::HUD_HEIGHT = 48;
 const float Hud::HEART_SCALE = 3.3f;
 const float Hud::BONUS_SCALE = 2.3f;
 const unsigned int Hud::DEFAULT_SCORE = 0;
