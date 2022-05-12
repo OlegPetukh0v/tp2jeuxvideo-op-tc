@@ -25,5 +25,9 @@ private:
 	sf::Sprite heart;
 	sf::Sprite bonus;
 
+	void initScore(GameContentManager& contentManager);
+	void initHeart(GameContentManager& contentManager);
+	void initBonus(GameContentManager& contentManager);
+	void initLives(GameContentManager& contentManager);
+	void initTime(GameContentManager& contentManager);
 };
-// SCORE: 1000      heart life bonus time

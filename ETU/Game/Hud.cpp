@@ -23,31 +23,52 @@ void Hud::init(GameContentManager& contentManager)
 	setLives(DEFAULT_LIVES);
 	setScore(DEFAULT_SCORE);
 
-	heart.setTexture(contentManager.getMiscTexture());
-	heart.setTextureRect(sf::IntRect(229, 64, 11, 10));
-	heart.setOrigin(heart.getLocalBounds().width / 2.0f, heart.getLocalBounds().height / 2.0f);
-	heart.setPosition(Game::GAME_WIDTH / 1.6f, Y_POSITION_TXT);
-	heart.scale(sf::Vector2f(HEART_SCALE, HEART_SCALE));
+	initScore(contentManager);
+	initHeart(contentManager);
+	initBonus(contentManager);
+	initLives(contentManager);
+	initTime(contentManager);
+}
 
-	bonus.setTexture(contentManager.getMiscTexture());
-	bonus.setTextureRect(sf::IntRect(205, 104, 15, 15));
-	bonus.setOrigin(bonus.getLocalBounds().width / 2.0f, bonus.getLocalBounds().height / 2.0f);
-	bonus.setPosition(Game::GAME_WIDTH / 1.2f, Y_POSITION_TXT);
-	bonus.scale(sf::Vector2f(BONUS_SCALE, BONUS_SCALE));
-
+void Hud::initScore(GameContentManager& contentManager)
+{
 	score.setFont(contentManager.getMainFont());
 	score.setCharacterSize(CHARACTER_SIZE);
 	score.setFillColor(sf::Color::White);
 	score.setOrigin(score.getLocalBounds().width / 2.0f, score.getLocalBounds().height / 2.0f);
 	score.setPosition(Game::GAME_WIDTH / 6.0f, Y_POSITION_TXT);
+}
 
+void Hud::initHeart(GameContentManager& contentManager)
+{
+	heart.setTexture(contentManager.getMiscTexture());
+	heart.setTextureRect(sf::IntRect(229, 64, 11, 10));
+	heart.setOrigin(heart.getLocalBounds().width / 2.0f, heart.getLocalBounds().height / 2.0f);
+	heart.setPosition(Game::GAME_WIDTH / 1.6f, Y_POSITION_TXT);
+	heart.scale(sf::Vector2f(HEART_SCALE, HEART_SCALE));
+}
+
+void Hud::initBonus(GameContentManager& contentManager)
+{
+	bonus.setTexture(contentManager.getMiscTexture());
+	bonus.setTextureRect(sf::IntRect(205, 104, 15, 15));
+	bonus.setOrigin(bonus.getLocalBounds().width / 2.0f, bonus.getLocalBounds().height / 2.0f);
+	bonus.setPosition(Game::GAME_WIDTH / 1.2f, Y_POSITION_TXT);
+	bonus.scale(sf::Vector2f(BONUS_SCALE, BONUS_SCALE));
+}
+
+void Hud::initLives(GameContentManager& contentManager)
+{
 	lives.setFont(contentManager.getMainFont());
 	lives.setCharacterSize(CHARACTER_SIZE);
 	lives.setFillColor(sf::Color::White);
 	lives.setString(std::to_string(DEFAULT_LIVES));
 	lives.setOrigin(score.getLocalBounds().width / 2.0f, score.getLocalBounds().height / 2.0f);
 	lives.setPosition(Game::GAME_WIDTH / 1.25f, Y_POSITION_TXT);
+}
 
+void Hud::initTime(GameContentManager& contentManager)
+{
 	time.setFont(contentManager.getMainFont());
 	time.setCharacterSize(CHARACTER_SIZE);
 	time.setFillColor(sf::Color::White);
@@ -55,6 +76,7 @@ void Hud::init(GameContentManager& contentManager)
 	time.setOrigin(score.getLocalBounds().width / 2.0f, score.getLocalBounds().height / 2.0f);
 	time.setPosition(Game::GAME_WIDTH * 1.03f, Y_POSITION_TXT);
 }
+
 
 void Hud::draw(sf::RenderWindow& window) const
 {
