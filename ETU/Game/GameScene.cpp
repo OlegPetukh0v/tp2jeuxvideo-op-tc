@@ -38,6 +38,7 @@ SceneType GameScene::update()
     if (gameNeedsToEnd)
     {
         result.gameSceneResult.hasPlayerWon = player.isAlive();
+        result.gameSceneResult.score = player.getScore();
         gameHasEnded = true;
         // TODO: assigne le score
         return SceneType::LEADERBOARD;
