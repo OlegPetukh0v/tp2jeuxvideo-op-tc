@@ -80,7 +80,6 @@ bool Enemy::update(float deltaT)
 	return false;
 }
 
-
 void Enemy::hit(int damage)
 {
 	health -= damage;

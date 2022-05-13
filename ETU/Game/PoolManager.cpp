@@ -22,6 +22,17 @@ bool PoolManager::init(GameContentManager gameContentManager)
     return true;
 }
 
+bool PoolManager::uninit()
+{
+    Publisher::removeSubscriber(*this, Event::PLAYER_SHOOT);
+    Publisher::removeSubscriber(*this, Event::ENEMY_SHOOT);
+    Publisher::removeSubscriber(*this, Event::ENEMY_SPAWN);
+    deletePool(bullets);
+    deletePool(enemyBullets);
+    deletePool(enemies);
+    return true;
+}
+
 bool PoolManager::update(float deltaT, Player& player)
 {
     updatePool(bullets, deltaT);
@@ -82,12 +93,4 @@ void PoolManager::notify(Event event, const void* data)
         //EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
         spawnGameObject(getAvailableGameObject(enemies));
     }
-}
-
-bool PoolManager::uninit()
-{
-    deletePool(bullets);
-    deletePool(enemyBullets);
-    deletePool(enemies);
-    return true;
 }

@@ -77,6 +77,7 @@ bool GameScene::init()
 bool GameScene::uninit()
 {
     pooler.uninit();
+    player.uninit();
     return true;
 }
 
