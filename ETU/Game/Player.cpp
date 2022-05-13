@@ -9,8 +9,7 @@
 const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::CANON_OFFSET = 14;
-// TODO: remettre a 300
-const int Player::INITIAL_LIFE = 30;
+const int Player::INITIAL_LIFE = 300;
 const float Player::HURT_TIME = 0.5f;
 const unsigned int Player::SCORE_INCREASE_KILL = 1000;
 
