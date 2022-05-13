@@ -8,7 +8,7 @@
 
 const unsigned int Game::FRAME_RATE = 60;
 const unsigned int Game::GAME_WIDTH = 720;
-const unsigned int Game::GAME_HEIGHT = 1080;
+const unsigned int Game::GAME_HEIGHT = 900;
 
 Game::Game(std::string windowName)
   : gameName(windowName)

@@ -14,15 +14,19 @@ public:
     static const int CANON_OFFSET;
     static const int INITIAL_LIFE;
     static const float HURT_TIME;
+    static const unsigned int SCORE_INCREASE_KILL;
 
     Player();
     ~Player();
     virtual void draw(sf::RenderWindow& window) const;
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition);
     virtual bool init(const GameContentManager& contentManager);
+    virtual bool uninit() override;
     virtual bool update(float deltaT, const Inputs& inputs);
     void notify(Event event, const void* data);
     bool isAlive();
+    unsigned int getScore();
 private:
     float shootingCooldown;
+    unsigned int score;
 };

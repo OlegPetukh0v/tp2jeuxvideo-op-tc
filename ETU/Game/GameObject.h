@@ -18,7 +18,6 @@ public:
 	virtual bool isActive() const;
 	virtual bool collidesWith(const GameObject& other) const;
 
-
 	float getRotationAngleInRadians() const;
 	void setRotationAngleRadians(const float angle);
 	virtual void rotateInRadians(const float angle);

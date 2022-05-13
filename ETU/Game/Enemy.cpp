@@ -24,7 +24,6 @@ void Enemy::initialize(const sf::Texture& texture, const sf::Vector2f& initialPo
 	addAnimation<State::STANDARD_ENEMY, EnemyShipAnimation>(contentManager);
 	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
 	setPosition(initialPosition);
-
 }
 
 bool Enemy::init(const GameContentManager& contentManager)
@@ -32,6 +31,11 @@ bool Enemy::init(const GameContentManager& contentManager)
 	this->contentManager = contentManager;
     initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
     return true;
+}
+
+bool Enemy::uninit()
+{
+	return true;
 }
 
 void Enemy::activate()
@@ -76,11 +80,11 @@ bool Enemy::update(float deltaT)
 	return false;
 }
 
-
 void Enemy::hit(int damage)
 {
 	health -= damage;
 	if (health <= 0) {
+		Publisher::notifySubscribers(Event::ENEMY_KILLED, this);
 		deactivate();
 	}
 	else {

@@ -18,6 +18,8 @@ GameScene::~GameScene()
 
 SceneType GameScene::update()
 {
+    if (gameHasEnded)
+        return SceneType::NONE;
     bool gameNeedsToEnd = false;
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
     clock.restart();
@@ -30,13 +32,14 @@ SceneType GameScene::update()
     pooler.update(deltaT, player);
     spawner.update(deltaT);
     // TODO: enlever quand on va avoir gerer le score et le cooldown du bonus
-    int score = 100;
     int cooldown = 5;
-    hud.update(score, player.getHealth(), cooldown);
+    hud.update(player.getScore(), player.getHealth(), cooldown);
 
     if (gameNeedsToEnd)
     {
         result.gameSceneResult.hasPlayerWon = player.isAlive();
+        result.gameSceneResult.score = player.getScore();
+        gameHasEnded = true;
         // TODO: assigne le score
         return SceneType::LEADERBOARD;
     }
@@ -74,6 +77,7 @@ bool GameScene::init()
 bool GameScene::uninit()
 {
     pooler.uninit();
+    player.uninit();
     return true;
 }
 

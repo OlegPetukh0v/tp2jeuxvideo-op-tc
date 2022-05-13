@@ -61,9 +61,7 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
 SceneType LeaderboardScene::update()
 {
     SceneType retval = getSceneType();
-    if (nameconfirmed && inputs.escape)
-        sceneNeedsToChange = true;
-    if (sceneNeedsToChange)
+    if ((nameconfirmed && inputs.escape) || (!result.gameSceneResult.hasPlayerWon && inputs.escape))
     {
         retval = SceneType::NONE;
     }
@@ -115,7 +113,8 @@ bool LeaderboardScene::init()
     populateLeaderboardFile();
 
     readFromFile();
-    addNewPlayerToList();
+    if(result.gameSceneResult.hasPlayerWon)
+        addNewPlayerToList();
     setTop5Players();
     
     backgroundImage.setTexture(contentManager.getBackgroundTexture());
@@ -124,7 +123,6 @@ bool LeaderboardScene::init()
 
     initMessages();
 
-    sceneNeedsToChange = false;
 	return true;
 }
 
@@ -200,7 +198,10 @@ void LeaderboardScene::initEnterNameMessage()
     enterNameMessage.setFont(contentManager.getMainFont());
     enterNameMessage.setCharacterSize(25);
     enterNameMessage.setFillColor(sf::Color::White);
-    enterNameMessage.setString(ENTER_NAME);
+    if(result.gameSceneResult.hasPlayerWon)
+        enterNameMessage.setString(ENTER_NAME);
+    else
+        enterNameMessage.setString(PRESS_TO_LEAVE);
     enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
     enterNameMessage.setPosition(Game::GAME_WIDTH / 2.0f, Game::GAME_HEIGHT / 1.3f);
 }
@@ -300,8 +301,11 @@ void LeaderboardScene::getPlayerInFrontOfList()
 
 void LeaderboardScene::reorderList()
 {
-    playerScores.sort();
-    playerScores.reverse();
+    for (int i = 0; i < SCORES_SHOWN - playerPosition; i++)
+    {
+        playerScores.push_back(playerScores.front());
+        playerScores.pop_front();
+    }
 }
 
 void LeaderboardScene::setNewPlayerName(char newChar)
@@ -333,7 +337,6 @@ void LeaderboardScene::setPlayerNameConfirmed()
         nameconfirmed = true;
         enterNameMessage.setString(PRESS_TO_LEAVE);
         enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
-
     }
     reorderList();
 }

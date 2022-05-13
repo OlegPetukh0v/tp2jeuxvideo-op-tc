@@ -15,13 +15,13 @@ public:
 
 	bool init(GameContentManager contentManager);
 
+	bool uninit();
+
 	bool update(float deltaT, Player& player);
 
 	void draw(sf::RenderWindow& window) const;
 
 	virtual void notify(Event event, const void* data);
-
-	bool uninit();
 
 	template<class T>
 	void initialiseObjectPool(std::list<T*>& poolT, int initialSize, const sf::Texture& texture);
