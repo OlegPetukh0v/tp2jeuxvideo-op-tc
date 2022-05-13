@@ -81,6 +81,7 @@ void Enemy::hit(int damage)
 {
 	health -= damage;
 	if (health <= 0) {
+		Publisher::notifySubscribers(Event::ENEMY_KILLED, this);
 		deactivate();
 	}
 	else {

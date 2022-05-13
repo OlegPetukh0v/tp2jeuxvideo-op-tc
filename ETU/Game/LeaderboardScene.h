@@ -49,7 +49,6 @@ private:
     void initLeaderboardMessages();
     void drawLeaderboard(sf::RenderWindow& window) const;
 
-    bool sceneNeedsToChange;
     bool nameconfirmed;
 
     void readFromFile();

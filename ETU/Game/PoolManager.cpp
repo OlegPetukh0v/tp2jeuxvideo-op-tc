@@ -51,7 +51,7 @@ bool PoolManager::update(float deltaT, Player& player)
             if (player.collidesWith(*enemy))
             {
                 Publisher::notifySubscribers(Event::PLAYER_HIT, &Character::COLLIDE_DAMAGE);
-                enemy->deactivate();
+                enemy->hit(Enemy::INITIAL_HEALTH);
             }
         }
     }

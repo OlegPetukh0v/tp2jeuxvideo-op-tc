@@ -9,7 +9,8 @@
 const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::CANON_OFFSET = 14;
-const int Player::INITIAL_LIFE = 300;
+// TODO: remettre a 300
+const int Player::INITIAL_LIFE = 30;
 const float Player::HURT_TIME = 0.5f;
 const unsigned int Player::SCORE_INCREASE_KILL = 1000;
 
@@ -36,6 +37,7 @@ void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 	currentState = State::SHIP;
 	addAnimation<State::SHIP, ShipAnimation>(contentManager);
 	Publisher::addSubscriber(*this, Event::PLAYER_HIT);
+	Publisher::addSubscriber(*this, Event::ENEMY_KILLED);
 	setTexture(texture);
 	setTextureRect(sf::IntRect(269, 47, 26, 29));
 	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
