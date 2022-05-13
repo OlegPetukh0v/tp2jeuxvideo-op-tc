@@ -8,8 +8,10 @@ class EnemyBullet : public Bullet
 	static const int DAMAGE;
 public:
 	EnemyBullet();
+	virtual void activate() override;
 	virtual bool update(float elapsedTime);
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
+	virtual void init(const GameContentManager& contentManager) override;
 	bool collidesWith(const GameObject& other) const;
 
 private:

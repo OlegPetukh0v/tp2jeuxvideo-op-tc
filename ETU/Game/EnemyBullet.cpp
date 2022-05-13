@@ -11,6 +11,12 @@ EnemyBullet::EnemyBullet()
 {
 }
 
+void EnemyBullet::activate()
+{
+	this->shootSfx.play();
+	Bullet::activate();
+}
+
 bool EnemyBullet::update(float elapsedTime)
 {
 	move(sf::Vector2f(0, BULLET_SPEED * elapsedTime));
@@ -31,6 +37,14 @@ void EnemyBullet::initialize(const sf::Texture& texture, const sf::Vector2f& ini
 	setScale(2, 2);
 	setPosition(initialPosition);
 	setRotation(270);
+}
+
+void EnemyBullet::init(const GameContentManager& contentManager)
+{
+	this->contentManager = contentManager;
+	this->shootSfx.setBuffer(this->contentManager.getEnemyGunSoundBuffer());
+	this->shootSfx.setVolume(30);
+	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
 }
 
 bool EnemyBullet::collidesWith(const GameObject& other) const

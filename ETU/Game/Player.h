@@ -26,5 +26,4 @@ public:
 
 private:
     float shootingCooldown;
-    sf::Sound shootingSound;
 };
