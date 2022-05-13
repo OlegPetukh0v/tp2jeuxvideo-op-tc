@@ -16,9 +16,10 @@ TitleScene::~TitleScene()
 }
 SceneType TitleScene::update()
 {
-    if (playGame == 0) return getSceneType();
+    if (!playGame) return getSceneType();
     else {
         titleMusic->stop();
+        playGame = false;
         return SceneType::GAME;
     }
 }

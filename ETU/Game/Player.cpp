@@ -52,6 +52,13 @@ bool Player::init(const GameContentManager& contentManager)
 	return true;
 }
 
+bool Player::uninit()
+{
+	Publisher::removeSubscriber(*this, Event::PLAYER_HIT);
+	Publisher::removeSubscriber(*this, Event::ENEMY_KILLED);
+	return true;
+}
+
 bool Player::update(float deltaT, const Inputs& inputs)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);

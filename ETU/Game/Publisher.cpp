@@ -33,4 +33,3 @@ void Publisher::notifySubscribers(Event event, const void * data)
     it++;
   }
 }
-     
