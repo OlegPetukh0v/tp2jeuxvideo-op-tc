@@ -18,6 +18,8 @@ GameScene::~GameScene()
 
 SceneType GameScene::update()
 {
+    if (gameHasEnded)
+        return SceneType::NONE;
     bool gameNeedsToEnd = false;
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
     clock.restart();
@@ -37,6 +39,7 @@ SceneType GameScene::update()
     if (gameNeedsToEnd)
     {
         result.gameSceneResult.hasPlayerWon = player.isAlive();
+        gameHasEnded = true;
         // TODO: assigne le score
         return SceneType::LEADERBOARD;
     }

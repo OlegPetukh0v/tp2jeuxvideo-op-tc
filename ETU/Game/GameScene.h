@@ -35,4 +35,6 @@ private:
 
     Player player;
     int scrollPos;
+
+    bool gameHasEnded;
 };
