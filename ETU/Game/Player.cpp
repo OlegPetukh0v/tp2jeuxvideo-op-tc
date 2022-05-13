@@ -11,12 +11,14 @@ const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::CANON_OFFSET = 14;
 const int Player::INITIAL_LIFE = 300;
 const float Player::HURT_TIME = 0.5f;
+const unsigned int Player::SCORE_INCREASE_KILL = 1000;
 
 Player::Player()
 	: Character(INITIAL_LIFE)
 {
 	shootingCooldown = SHOOTING_COOLDOWN;
 	hurtTime = 0;
+	score = 0;
 }
 
 Player::~Player()
@@ -92,17 +94,29 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	return true;
 }
 
-void Player::notify(Event event, const void* data) {
-	if (event == Event::PLAYER_HIT) {
-		if (hurtTime == 0) {
+void Player::notify(Event event, const void* data) 
+{
+	if (event == Event::PLAYER_HIT) 
+	{
+		if (hurtTime == 0) 
+		{
 			health -= *(int*)data;
 			hurtTime = HURT_TIME;
 			std::cout << health << std::endl;
 		}
+	}
+	else if (event == Event::ENEMY_KILLED)
+	{
+		score += SCORE_INCREASE_KILL;
 	}
 }
 
 bool Player::isAlive()
 {
 	return getHealth() > 0;
+}
+
+unsigned int Player::getScore()
+{
+	return score;
 }

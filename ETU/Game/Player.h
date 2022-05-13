@@ -14,6 +14,7 @@ public:
     static const int CANON_OFFSET;
     static const int INITIAL_LIFE;
     static const float HURT_TIME;
+    static const unsigned int SCORE_INCREASE_KILL;
 
     Player();
     ~Player();
@@ -23,6 +24,8 @@ public:
     virtual bool update(float deltaT, const Inputs& inputs);
     void notify(Event event, const void* data);
     bool isAlive();
+    unsigned int getScore();
 private:
     float shootingCooldown;
+    unsigned int score;
 };
