@@ -5,9 +5,13 @@
 class Spawner
 {
 public:
-	static const float ENEMY_SPAWN_TIME;
-
+	static const float ENEMY_SPAWN_RATE;
+	static const int ENEMY_SPAWN_CAP;
+	
+	Spawner();
 	void update(float deltaT);
 private:
-	float enemySpawnTime;
+	int enemySpawnRate;
+	int enemySpawnCounter;
+	bool bossAvailable;
 };
