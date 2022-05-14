@@ -22,7 +22,6 @@ bool Bullet::update(float elapsedTime)
 
 void Bullet::activate() {
 	GameObject::activate();
-	shootSfx.play();
 }
 
 void Bullet::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
@@ -38,8 +37,6 @@ void Bullet::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 void Bullet::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
-	this->shootSfx.setBuffer(this->contentManager.getPlayerGunSoundBuffer());
-	this->shootSfx.setVolume(30);
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
 }
 

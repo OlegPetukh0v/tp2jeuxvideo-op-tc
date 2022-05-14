@@ -3,11 +3,11 @@
 #include "game.h"
 
 const std::string TitleScene::PRESS_KEY_MESSAGE = "PRESS ANY KEY TO START";
+const int TitleScene::MUSIC_VOLUME = 50;
 
 TitleScene::TitleScene()
   : Scene(SceneType::TITLE_SCENE)
 {
-
 }
 
 TitleScene::~TitleScene()
@@ -16,10 +16,15 @@ TitleScene::~TitleScene()
 }
 SceneType TitleScene::update()
 {
+    if (onLoad) {
+        titleMusic->play();
+        onLoad = false;
+    }
     if (!playGame) return getSceneType();
     else {
         titleMusic->stop();
         playGame = false;
+        onLoad = true;
         return SceneType::GAME;
     }
 }
@@ -35,6 +40,7 @@ bool TitleScene::init()
   if (false == contentManager.loadContent())
     return false;
   playGame = false;
+  onLoad = false;
 
   menuImage.setTexture(contentManager.getBackgroundTexture());
   menuImage.setOrigin(menuImage.getTexture()->getSize().x / 2.0f, menuImage.getTexture()->getSize().y / 2.0f);
@@ -42,6 +48,7 @@ bool TitleScene::init()
 
   titleMusic = const_cast<sf::Music*>(&contentManager.getTitleMusic());
   titleMusic->setLoop(true);
+  titleMusic->setVolume(MUSIC_VOLUME);
   titleMusic->play();
 
   pressKeyMessage.setFont(contentManager.getMainFont());

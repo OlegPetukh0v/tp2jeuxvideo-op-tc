@@ -13,7 +13,6 @@ EnemyBullet::EnemyBullet()
 
 void EnemyBullet::activate()
 {
-	this->shootSfx.play();
 	Bullet::activate();
 }
 
@@ -42,8 +41,6 @@ void EnemyBullet::initialize(const sf::Texture& texture, const sf::Vector2f& ini
 void EnemyBullet::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
-	this->shootSfx.setBuffer(this->contentManager.getEnemyGunSoundBuffer());
-	this->shootSfx.setVolume(30);
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
 }
 

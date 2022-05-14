@@ -30,4 +30,5 @@ public:
 private:
     float shootingCooldown;
     unsigned int score;
+    sf::Sound shootSound;
 };

@@ -16,6 +16,5 @@ public:
 	virtual int getDamage();
 protected:
 	GameContentManager contentManager;
-	sf::Sound shootSfx;
 };
 
