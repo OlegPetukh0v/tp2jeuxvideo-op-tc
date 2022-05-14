@@ -7,6 +7,7 @@
 #include "PoolManager.h"
 #include "Spawner.h"
 #include "Hud.h"
+#include "Boss.h"
 
 class GameScene :
     public Scene
@@ -25,6 +26,7 @@ private:
     GameContentManager contentManager;
     PoolManager pooler;
     Spawner spawner;
+    Boss boss;
 
     sf::Sprite backgroundImage;
     sf::Music gameMusic;
