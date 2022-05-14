@@ -145,6 +145,15 @@
     <ClInclude Include="Hud.h">
       <Filter>GenericFiles</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Healthbar.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="BossAnimation.h">
+      <Filter>Animations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -239,6 +248,15 @@
     </ClCompile>
     <ClCompile Include="Hud.cpp">
       <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Healthbar.cpp">
+      <Filter>GenericFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="BossAnimation.cpp">
+      <Filter>Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -31,7 +31,7 @@ SceneType GameScene::update()
     
     pooler.update(deltaT, player);
     spawner.update(deltaT);
-    // TODO: enlever quand on va avoir gerer le score et le cooldown du bonus
+    // TODO: enlever quand on va avoir le cooldown du bonus
     int cooldown = 5;
     hud.update(player.getScore(), player.getHealth(), cooldown);
 
@@ -40,7 +40,6 @@ SceneType GameScene::update()
         result.gameSceneResult.hasPlayerWon = player.isAlive();
         result.gameSceneResult.score = player.getScore();
         gameHasEnded = true;
-        // TODO: assigne le score
         return SceneType::LEADERBOARD;
     }
 
