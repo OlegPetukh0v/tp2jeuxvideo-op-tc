@@ -26,7 +26,6 @@ public:
     void hit(int damage);
 
 private:
-    float shootingCooldown;
     sf::Sound deathSound;
     sf::Sound shootSound;
 };

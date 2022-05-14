@@ -3,14 +3,15 @@
 #include "BossAnimation.h"
 #include "Game.h"
 #include "Publisher.h"
-const int Boss::BOSS_SPEED = 120;
+
+const int Boss::BOSS_SPEED = 150;
 const int Boss::INITIAL_HEALTH = 500;
 const int Boss::SPAWNING_TIME = 2;
+const float Boss::TRACK_MARGIN = 0.5f;
 
 Boss::Boss()
 	: Character(INITIAL_HEALTH)
 {
-	isMovingLeft = false;
 	shootingCooldown = 0;
 	shotsFired = 0;
 }
@@ -45,23 +46,21 @@ bool Boss::update(float deltaT)
 {
 	if (isActive()) {
 		hurtTime = (float)std::fmax(0, hurtTime - deltaT);
-		shootingCooldown += deltaT;
-		if (shootingCooldown >= BossAnimation::ANIMATION_LENGTH) {
+
+		if (1.3f < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
 			shoot();
 		}
 
 		int direction = 1;
-		if (isMovingLeft) direction = -1;
-		this->move(sf::Vector2f(BOSS_SPEED * direction * deltaT, 0));
+		if (targetPos.x - TRACK_MARGIN > getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT, 0));
+		else if (targetPos.x + TRACK_MARGIN < getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT * -1, 0));
 
 		float halfWidth = getGlobalBounds().width / 2;
 		if (getPosition().x + halfWidth > Game::GAME_WIDTH) {
 			setPosition(Game::GAME_WIDTH - halfWidth, getPosition().y);
-			isMovingLeft = true;
 		}
-		if (getPosition().x - halfWidth < 0) {
+		else if (getPosition().x - halfWidth < 0) {
 			setPosition(halfWidth, getPosition().y);
-			isMovingLeft = false;
 		}
 
 		if (hurtTime > 0) {
@@ -76,6 +75,13 @@ bool Boss::update(float deltaT)
 	return false;
 }
 
+bool Boss::update(float deltaT, sf::Vector2f targetPos)
+{
+	this->targetPos = targetPos;
+	this->update(deltaT);
+	return false;
+}
+
 void Boss::draw(sf::RenderWindow& window) const
 {
 	if (isActive()) {
@@ -86,5 +92,5 @@ void Boss::draw(sf::RenderWindow& window) const
 
 void Boss::shoot()
 {
-	// TODO
+	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &getPosition());
 }

@@ -2,13 +2,13 @@
 #include "Healthbar.h"
 #include "Game.h"
 
-//static const int HEALTH_BAR_LENGTH = 150;
-//static const int HEALTH_BAR_HEIGHT = 25;
+const int Healthbar::HEALTH_BAR_LENGTH = 150;
+const int Healthbar::HEALTH_BAR_HEIGHT = 25;
 
 bool Healthbar::init(const int maxHp)
 {
 	this->maxHp = maxHp;
-	hpBar.setSize(sf::Vector2f((float)150, (float)25));
+	hpBar.setSize(sf::Vector2f((float)HEALTH_BAR_LENGTH, (float)HEALTH_BAR_HEIGHT));
 	hpBar.setFillColor(sf::Color::Red);
 	hpBar.setPosition(0,0);
 	hpBar.setOrigin(hpBar.getLocalBounds().width * 0.5f, hpBar.getLocalBounds().height * 0.5f);
