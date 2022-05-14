@@ -8,11 +8,11 @@ public:
 	static const int HEALTH_BAR_LENGTH;
 	static const int HEALTH_BAR_HEIGHT;
 
-	virtual bool init(int maxHp);
+	virtual bool init(const int maxHp);
 	virtual void draw(sf::RenderWindow& window) const;
+	void update(const int hp);
 
 private:
-	int hp;
 	int maxHp;
 
 	sf::RectangleShape hpBar;

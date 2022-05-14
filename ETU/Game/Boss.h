@@ -8,17 +8,21 @@ public:
     static const int BOSS_SPEED;
     static const int INITIAL_HEALTH;
     static const int SPAWNING_TIME;
+    static const float TRACK_MARGIN;
 
     Boss();
+    virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
     virtual bool update(float deltaT) override;
+    virtual bool update(float deltaT, sf::Vector2f targetPos);
     virtual void draw(sf::RenderWindow& window) const override;
     virtual void shoot();
 
 private:
     float shootingCooldown;
     unsigned int shotsFired;
+    sf::Vector2f targetPos;
 
     Healthbar healthBar;
 };

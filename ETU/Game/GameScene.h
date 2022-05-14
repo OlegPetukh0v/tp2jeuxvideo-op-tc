@@ -10,7 +10,7 @@
 #include "Boss.h"
 
 class GameScene :
-    public Scene
+    public Scene, public Subscriber
 {
 public:
     static const int BACKGROUND_SPEED;
@@ -22,6 +22,7 @@ public:
     virtual bool init() override;
     virtual bool uninit() override;
     virtual bool handleEvents(sf::RenderWindow& window) override;
+    virtual void notify(Event event, const void* data);
 private:
     GameContentManager contentManager;
     PoolManager pooler;

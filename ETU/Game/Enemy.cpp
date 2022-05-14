@@ -15,7 +15,6 @@ const float Enemy::HURT_TIME = 0.32f;
 Enemy::Enemy()
 	: Character(INITIAL_HEALTH)
 {
-	shootingCooldown = EnemyShipAnimation::ANIMATION_LENGTH / 2;
 }
 
 void Enemy::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
@@ -61,13 +60,11 @@ void Enemy::shoot()
 	offsetPos = sf::Vector2f(getPosition().x - CANON_OFFSET, getPosition().y);
 	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
 	shootSound.play();
-	shootingCooldown = 0;
 }
 
 bool Enemy::update(float deltaT)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
-	shootingCooldown += deltaT;
 	if (0.98f < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
 		shoot();
 	}
