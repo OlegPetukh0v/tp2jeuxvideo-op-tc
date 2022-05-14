@@ -18,7 +18,6 @@ Boss::Boss()
 void Boss::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
 	setTexture(this->contentManager.getEnemiesTexture());
-	setTextureRect(sf::IntRect(31, 1905, 86, 125));
 	AnimatedGameObject::init(this->contentManager);
 	currentState = State::BOSS;
 	addAnimation<State::BOSS, BossAnimation>(this->contentManager);
@@ -29,7 +28,7 @@ void Boss::initialize(const sf::Texture& texture, const sf::Vector2f& initialPos
 bool Boss::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
-	initialize(this->contentManager.getEnemiesTexture(), sf::Vector2f(0, 50));
+	initialize(this->contentManager.getEnemiesTexture(), sf::Vector2f(0, 150));
 	health = INITIAL_HEALTH;
 	healthBar.init(INITIAL_HEALTH);
 	healthBar.setPosition(sf::Vector2f(getPosition().x + healthBar.getGlobalBounds().width, getPosition().y + healthBar.getGlobalBounds().height));
