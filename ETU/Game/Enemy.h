@@ -18,6 +18,7 @@ public:
     Enemy();
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
     virtual bool init(const GameContentManager& contentManager);
+    virtual bool uninit() override;
     virtual bool update(float deltaT) override;
     virtual void activate() override;
     virtual void shoot();

@@ -11,9 +11,8 @@ public:
   static void notifySubscribers(Event event, const void * data);
 
 private:
-Publisher();
-Publisher(const Publisher&);
-Publisher& operator=(const Publisher&);
+  Publisher();
+  Publisher(const Publisher&);
+  Publisher& operator=(const Publisher&);
   static std::multimap<Event, std::reference_wrapper<Subscriber> >  subscribers;
 };
-

@@ -16,9 +16,20 @@ bool PoolManager::init(GameContentManager gameContentManager)
     Publisher::addSubscriber(*this, Event::ENEMY_SPAWN);
 
     contentManager = gameContentManager;
-    initialiseObjectPool(bullets, 40, contentManager.getMainCharacterTexture()); // to const
-    initialiseObjectPool(enemyBullets, 90, contentManager.getMainCharacterTexture());
+    initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
+    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
     initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
+    return true;
+}
+
+bool PoolManager::uninit()
+{
+    Publisher::removeSubscriber(*this, Event::PLAYER_SHOOT);
+    Publisher::removeSubscriber(*this, Event::ENEMY_SHOOT);
+    Publisher::removeSubscriber(*this, Event::ENEMY_SPAWN);
+    deletePool(bullets);
+    deletePool(enemyBullets);
+    deletePool(enemies);
     return true;
 }
 
@@ -51,7 +62,7 @@ bool PoolManager::update(float deltaT, Player& player)
             if (player.collidesWith(*enemy))
             {
                 Publisher::notifySubscribers(Event::PLAYER_HIT, &Character::COLLIDE_DAMAGE);
-                enemy->deactivate();
+                enemy->hit(Enemy::INITIAL_HEALTH);
             }
         }
     }
@@ -82,12 +93,4 @@ void PoolManager::notify(Event event, const void* data)
         //EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
         spawnGameObject(getAvailableGameObject(enemies));
     }
-}
-
-bool PoolManager::uninit()
-{
-    deletePool(bullets);
-    deletePool(enemyBullets);
-    deletePool(enemies);
-    return true;
 }

@@ -30,10 +30,12 @@ bool GameContentManager::loadContent()
 
     return ContentManager::loadContent();
 }
+
 const sf::Texture& GameContentManager::getEnemiesTexture() const
 {
     return enemiesTexture;
 }
+
 const sf::Texture& GameContentManager::getBackgroundTexture() const
 {
     return backgroundTexture;
