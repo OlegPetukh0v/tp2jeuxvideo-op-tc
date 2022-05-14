@@ -10,6 +10,7 @@ const int GameScene::BACKGROUND_SPEED = 3;
 GameScene::GameScene()
     : Scene(SceneType::GAME)
 {
+    gameHasEnded = false;
 }
 
 GameScene::~GameScene()
@@ -31,6 +32,7 @@ SceneType GameScene::update()
     
     pooler.update(deltaT, player);
     spawner.update(deltaT);
+    boss.update(deltaT);
     // TODO: enlever quand on va avoir le cooldown du bonus
     int cooldown = 5;
     hud.update(player.getScore(), player.getHealth(), cooldown);
@@ -50,6 +52,7 @@ void GameScene::draw(sf::RenderWindow& window) const
 {
     window.draw(backgroundImage);
     pooler.draw(window);
+    boss.draw(window);
     player.draw(window);
     hud.draw(window);
 }
@@ -66,9 +69,12 @@ bool GameScene::init()
     gameMusic.setLoop(true);
     gameMusic.play();
 
+    Publisher::addSubscriber(*this, Event::BOSS_SPAWN);
+
     player.init(contentManager);
     pooler.init(contentManager);
     hud.init(contentManager);
+    boss.init(contentManager);
     spawner.init();
 
     return true;
@@ -79,6 +85,7 @@ bool GameScene::uninit()
     pooler.uninit();
     player.uninit();
     spawner.uninit();
+    Publisher::removeSubscriber(*this, Event::BOSS_SPAWN);
     return true;
 }
 
@@ -104,4 +111,12 @@ bool GameScene::handleEvents(sf::RenderWindow& window)
     inputs.fireBullet = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
 
     return retval;
+}
+
+void GameScene::notify(Event event, const void* data)
+{
+    if (event == Event::BOSS_SPAWN)
+    {
+        boss.activate();
+    }
 }

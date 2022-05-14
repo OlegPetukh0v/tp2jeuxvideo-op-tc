@@ -25,7 +25,7 @@ public:
 	virtual void notify(Event event, const void* data);
 
 	template<class T>
-	void initialiseObjectPool(std::list<T*>& poolT, int initialSize, const sf::Texture& texture);
+	void initialiseObjectPool(std::list<T*>& poolT, int initialSize);
 
 	template<class T>
 	T& getAvailableGameObject(std::list<T*>& poolT);
@@ -52,7 +52,7 @@ private:
 };
 
 template<class T>
-inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, int initialSize, const sf::Texture& texture)
+inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, int initialSize)
 {
 	for (unsigned short i = 0; i < initialSize; i++) {
 		T* temp = new T();

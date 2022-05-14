@@ -16,9 +16,9 @@ bool PoolManager::init(GameContentManager gameContentManager)
     Publisher::addSubscriber(*this, Event::ENEMY_SPAWN);
 
     contentManager = gameContentManager;
-    initialiseObjectPool(bullets, 20, contentManager.getMainCharacterTexture()); // to const
-    initialiseObjectPool(enemyBullets, 80, contentManager.getMainCharacterTexture());
-    initialiseObjectPool(enemies, 20, contentManager.getEnemiesTexture());
+    initialiseObjectPool(bullets, 20); // to const
+    initialiseObjectPool(enemyBullets, 80);
+    initialiseObjectPool(enemies, 20);
     return true;
 }
 

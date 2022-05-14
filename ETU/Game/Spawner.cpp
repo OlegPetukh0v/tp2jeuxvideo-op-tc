@@ -4,7 +4,7 @@
 #include <iostream>
 
 const float Spawner::ENEMY_SPAWN_RATE = 2.0f;
-const int Spawner::ENEMY_SPAWN_CAP = 4;
+const int Spawner::ENEMY_SPAWN_CAP = 1;
 
 bool Spawner::init()
 {

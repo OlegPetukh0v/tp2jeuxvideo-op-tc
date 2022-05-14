@@ -10,6 +10,7 @@ public:
     static const int SPAWNING_TIME;
 
     Boss();
+    virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
     virtual bool update(float deltaT) override;
@@ -19,6 +20,7 @@ public:
 private:
     float shootingCooldown;
     unsigned int shotsFired;
+    bool isMovingLeft;
 
     Healthbar healthBar;
 };
