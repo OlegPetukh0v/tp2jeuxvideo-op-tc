@@ -69,6 +69,7 @@ bool GameScene::init()
     player.init(contentManager);
     pooler.init(contentManager);
     hud.init(contentManager);
+    spawner.init();
 
     return true;
 }
@@ -77,6 +78,7 @@ bool GameScene::uninit()
 {
     pooler.uninit();
     player.uninit();
+    spawner.uninit();
     return true;
 }
 
