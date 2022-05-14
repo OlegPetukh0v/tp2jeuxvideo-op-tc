@@ -7,6 +7,7 @@ class TitleScene :
     public Scene
 {
     static const std::string PRESS_KEY_MESSAGE;
+    static const int MUSIC_VOLUME;
 public:
   TitleScene();
   ~TitleScene();
@@ -22,5 +23,6 @@ private:
   sf::Sprite menuImage;
   sf::Text pressKeyMessage;
   bool playGame;
+  bool onLoad;
 };
 

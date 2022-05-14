@@ -14,9 +14,7 @@ public:
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
 	virtual void init(const GameContentManager& contentManger);
 	virtual int getDamage();
-
-private:
+protected:
 	GameContentManager contentManager;
-	sf::Sound shootSfx;
 };
 

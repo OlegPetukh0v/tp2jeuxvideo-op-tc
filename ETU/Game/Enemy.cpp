@@ -6,6 +6,8 @@
 
 const int Enemy::SHIP_SPEED = 120;
 const int Enemy::SHIP_WIDTH = 73;
+const int Enemy::DEATH_VOLUME = 70;
+const int Enemy::SHOOT_VOLUME = 20;
 const int Enemy::INITIAL_HEALTH = 50;
 const int Enemy::CANON_OFFSET = 8;
 const float Enemy::HURT_TIME = 0.32f;
@@ -30,6 +32,10 @@ bool Enemy::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
     initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
+	deathSound.setBuffer(contentManager.getEnemyKilledSoundBuffer());
+	deathSound.setVolume(DEATH_VOLUME);
+	shootSound.setBuffer(contentManager.getEnemyGunSoundBuffer());
+	shootSound.setVolume(SHOOT_VOLUME);
     return true;
 }
 
@@ -54,6 +60,7 @@ void Enemy::shoot()
 	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
 	offsetPos = sf::Vector2f(getPosition().x - CANON_OFFSET, getPosition().y);
 	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &offsetPos);
+	shootSound.play();
 	shootingCooldown = 0;
 }
 
@@ -61,7 +68,7 @@ bool Enemy::update(float deltaT)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
 	shootingCooldown += deltaT;
-	if (shootingCooldown >= EnemyShipAnimation::ANIMATION_LENGTH) {
+	if (0.98f < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
 		shoot();
 	}
 
@@ -84,6 +91,7 @@ void Enemy::hit(int damage)
 {
 	health -= damage;
 	if (health <= 0) {
+		deathSound.play();
 		Publisher::notifySubscribers(Event::ENEMY_KILLED, this);
 		deactivate();
 	}
