@@ -57,6 +57,7 @@ bool Boss::update(float deltaT)
 
 	Inputs inputs;
 	AnimatedGameObject::update(deltaT, inputs);
+	healthBar.update(health);
 	return false;
 }
 
