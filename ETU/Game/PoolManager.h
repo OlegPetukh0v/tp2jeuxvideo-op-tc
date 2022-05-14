@@ -8,7 +8,8 @@
 #include "Player.h"
 #include <iostream>
 
-class PoolManager : public Subscriber
+class PoolManager 
+	: public Subscriber
 {
 public:
 	PoolManager();
