@@ -4,8 +4,8 @@
 #include "Game.h"
 #include "Publisher.h"
 
-const int Boss::BOSS_SPEED = 150;
-const int Boss::INITIAL_HEALTH = 500;
+const int Boss::BOSS_SPEED = 200;
+const int Boss::INITIAL_HEALTH = 700;
 const int Boss::SPAWNING_TIME = 2;
 const float Boss::TRACK_MARGIN = 0.5f;
 const float Boss::HURT_TIME = 0.5f;
@@ -48,7 +48,7 @@ bool Boss::update(float deltaT)
 	if (isActive()) {
 		hurtTime = (float)std::fmax(0, hurtTime - deltaT);
 
-		if (1.3f < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
+		if (1.2f < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
 			shoot();
 		}
 
