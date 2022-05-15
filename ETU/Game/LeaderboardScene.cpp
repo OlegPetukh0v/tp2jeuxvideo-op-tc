@@ -61,7 +61,7 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
 SceneType LeaderboardScene::update()
 {
     SceneType retval = getSceneType();
-    if ((nameconfirmed && inputs.escape) || (!result.gameSceneResult.hasPlayerWon && inputs.escape))
+    if ((nameconfirmed && inputs.escape) || (!result.gameSceneResult.hasPlayerWon && inputs.escape) || (!isPlayerInTop5 && inputs.escape))
     {
         retval = SceneType::NONE;
     }
@@ -198,7 +198,7 @@ void LeaderboardScene::initEnterNameMessage()
     enterNameMessage.setFont(contentManager.getMainFont());
     enterNameMessage.setCharacterSize(25);
     enterNameMessage.setFillColor(sf::Color::White);
-    if(result.gameSceneResult.hasPlayerWon)
+    if(result.gameSceneResult.hasPlayerWon && isPlayerInTop5)
         enterNameMessage.setString(ENTER_NAME);
     else
         enterNameMessage.setString(PRESS_TO_LEAVE);
