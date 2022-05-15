@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Healthbar.h"
 #include "Game.h"
-#include <iostream>
 
 const int Healthbar::HEALTH_BAR_LENGTH = 150;
 const int Healthbar::HEALTH_BAR_HEIGHT = 25;
@@ -23,7 +22,6 @@ bool Healthbar::init(const int maxHp)
 void Healthbar::update(const float hp, sf::Vector2f characterPosition, float characterSize)
 {
 	float hpPercent = hp / maxHp;
-	std::cout << "hpPercent: " << hpPercent << std::endl;
 	hpBar.setSize(sf::Vector2f(hpBarBack.getSize().x * hpPercent, hpBar.getSize().y));
 	hpBar.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
 	hpBarBack.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));

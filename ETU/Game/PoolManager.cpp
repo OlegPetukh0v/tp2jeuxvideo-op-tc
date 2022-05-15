@@ -14,11 +14,13 @@ bool PoolManager::init(GameContentManager gameContentManager)
     Publisher::addSubscriber(*this, Event::PLAYER_SHOOT);
     Publisher::addSubscriber(*this, Event::ENEMY_SHOOT);
     Publisher::addSubscriber(*this, Event::ENEMY_SPAWN);
+    Publisher::addSubscriber(*this, Event::ENEMY_KILLED);
 
     contentManager = gameContentManager;
     initialiseObjectPool(bullets, 20); // to const
     initialiseObjectPool(enemyBullets, 80);
     initialiseObjectPool(enemies, 20);
+    initialiseObjectPool(healthBonuses, 5);
     return true;
 }
 
@@ -27,9 +29,11 @@ bool PoolManager::uninit()
     Publisher::removeSubscriber(*this, Event::PLAYER_SHOOT);
     Publisher::removeSubscriber(*this, Event::ENEMY_SHOOT);
     Publisher::removeSubscriber(*this, Event::ENEMY_SPAWN);
+    Publisher::removeSubscriber(*this, Event::ENEMY_KILLED);
     deletePool(bullets);
     deletePool(enemyBullets);
     deletePool(enemies);
+    deletePool(healthBonuses);
     return true;
 }
 
@@ -38,6 +42,7 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
+    updatePool(healthBonuses, deltaT);
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
@@ -77,9 +82,10 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
 
 void PoolManager::draw(sf::RenderWindow& window) const
 {
-    drawPool(bullets, window);
     drawPool(enemyBullets, window);
     drawPool(enemies, window);
+    drawPool(bullets, window);
+    drawPool(healthBonuses, window);
 }
 
 void PoolManager::notify(Event event, const void* data)
@@ -95,7 +101,9 @@ void PoolManager::notify(Event event, const void* data)
         spawnGameObject(bullet, *pos);
     }
     else if (event == Event::ENEMY_SPAWN) {
-        //EnemyType enType = *(EnemyType*)data; // Gonna be usefull later for different enemies
         spawnGameObject(getAvailableGameObject(enemies));
+    }
+    else if (event == Event::ENEMY_KILLED) {
+        spawnGameObject(getAvailableGameObject(healthBonuses));
     }
 }
