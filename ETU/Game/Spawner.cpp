@@ -4,7 +4,8 @@
 #include <iostream>
 
 const float Spawner::ENEMY_SPAWN_RATE = 2.0f;
-const int Spawner::ENEMY_SPAWN_CAP = 6;
+// TODO: remettre a 20 quand le jeu est finit
+const int Spawner::ENEMY_SPAWN_CAP = 2;
 
 bool Spawner::init()
 {
