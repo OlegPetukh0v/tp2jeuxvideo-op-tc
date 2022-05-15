@@ -13,7 +13,7 @@ public:
     static const float SHOOTING_COOLDOWN;
     static const int SHOOTING_VOLUME;
     static const int CANON_OFFSET;
-    static const int INITIAL_LIFE;
+    static const int INITIAL_HEALTH;
     static const float HURT_TIME;
     static const unsigned int SCORE_INCREASE_KILL;
 
@@ -24,6 +24,8 @@ public:
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
     virtual bool update(float deltaT, const Inputs& inputs);
+    void hit(int damage);
+    void heal(int health);
     void notify(Event event, const void* data);
     bool isAlive();
     unsigned int getScore();

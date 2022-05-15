@@ -7,7 +7,7 @@
 #include "Subscriber.h"
 #include "Player.h"
 #include "Boss.h"
-#include <iostream>
+#include "HealthBonus.h"
 
 class PoolManager 
 	: public Subscriber
@@ -50,6 +50,7 @@ private:
 	std::list<Bullet*> bullets;
 	std::list<EnemyBullet*> enemyBullets;
 	std::list<Enemy*> enemies;
+	std::list<HealthBonus*> healthBonuses;
 };
 
 template<class T>

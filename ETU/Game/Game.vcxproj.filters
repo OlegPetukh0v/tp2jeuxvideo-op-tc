@@ -148,11 +148,14 @@
     <ClInclude Include="Boss.h">
       <Filter>Characters</Filter>
     </ClInclude>
+    <ClInclude Include="Healthbar.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
     <ClInclude Include="BossAnimation.h">
       <Filter>Animations</Filter>
     </ClInclude>
-    <ClInclude Include="Healthbar.h">
-      <Filter>Characters</Filter>
+    <ClInclude Include="HealthBonus.h">
+      <Filter>Bonus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -252,11 +255,14 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Characters</Filter>
     </ClCompile>
+    <ClCompile Include="Healthbar.cpp">
+      <Filter>GenericFiles</Filter>
+    </ClCompile>
     <ClCompile Include="BossAnimation.cpp">
       <Filter>Animations</Filter>
     </ClCompile>
-    <ClCompile Include="Healthbar.cpp">
-      <Filter>Characters</Filter>
+    <ClCompile Include="HealthBonus.cpp">
+      <Filter>Bonus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

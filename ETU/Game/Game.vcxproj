@@ -176,6 +176,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Healthbar.h" />
+    <ClInclude Include="HealthBonus.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="InputBasedAnimation.h" />
     <ClInclude Include="Inputs.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Healthbar.cpp" />
+    <ClCompile Include="HealthBonus.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="InputBasedAnimation.cpp" />
     <ClCompile Include="Inputs.cpp" />

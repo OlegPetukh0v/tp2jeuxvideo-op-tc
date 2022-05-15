@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Healthbar.h"
 #include "Game.h"
-#include <iostream>
 
 const int Healthbar::HEALTH_BAR_LENGTH = 150;
 const int Healthbar::HEALTH_BAR_HEIGHT = 25;
