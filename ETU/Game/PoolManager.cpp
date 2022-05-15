@@ -33,7 +33,7 @@ bool PoolManager::uninit()
     return true;
 }
 
-bool PoolManager::update(float deltaT, Player& player)
+bool PoolManager::update(float deltaT, Player& player, Boss& boss)
 {
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
@@ -53,6 +53,11 @@ bool PoolManager::update(float deltaT, Player& player)
                         bullet->deactivate();
                     }
                 }
+            }
+            if (bullet->collidesWith(boss))
+            {
+                boss.hit(bullet->getDamage());
+                bullet->deactivate();
             }
         }
     }

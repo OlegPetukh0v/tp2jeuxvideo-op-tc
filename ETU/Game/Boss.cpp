@@ -8,6 +8,7 @@ const int Boss::BOSS_SPEED = 150;
 const int Boss::INITIAL_HEALTH = 500;
 const int Boss::SPAWNING_TIME = 2;
 const float Boss::TRACK_MARGIN = 0.5f;
+const float Boss::HURT_TIME = 0.5f;
 
 Boss::Boss()
 	: Character(INITIAL_HEALTH)
@@ -93,4 +94,16 @@ void Boss::draw(sf::RenderWindow& window) const
 void Boss::shoot()
 {
 	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &getPosition());
+}
+
+void Boss::hit(int damage)
+{
+	health -= damage;
+	if (health <= 0) {
+		deactivate();
+		Publisher::notifySubscribers(Event::BOSS_KILLED, this);
+	}
+	else {
+		hurtTime = HURT_TIME;
+	}
 }

@@ -9,6 +9,7 @@ public:
     static const int INITIAL_HEALTH;
     static const int SPAWNING_TIME;
     static const float TRACK_MARGIN;
+    static const float HURT_TIME;
 
     Boss();
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
@@ -18,6 +19,7 @@ public:
     virtual bool update(float deltaT, sf::Vector2f targetPos);
     virtual void draw(sf::RenderWindow& window) const override;
     virtual void shoot();
+    void hit(int damage);
 
 private:
     float shootingCooldown;

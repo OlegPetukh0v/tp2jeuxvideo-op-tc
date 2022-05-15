@@ -6,6 +6,7 @@
 #include "EnemyBullet.h"
 #include "Subscriber.h"
 #include "Player.h"
+#include "Boss.h"
 #include <iostream>
 
 class PoolManager 
@@ -18,7 +19,7 @@ public:
 
 	bool uninit();
 
-	bool update(float deltaT, Player& player);
+	bool update(float deltaT, Player& player, Boss& boss);
 
 	void draw(sf::RenderWindow& window) const;
 
