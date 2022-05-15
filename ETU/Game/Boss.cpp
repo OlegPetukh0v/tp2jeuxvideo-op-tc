@@ -7,8 +7,8 @@
 const int Boss::BOSS_SPEED = 200;
 const int Boss::INITIAL_HEALTH = 700;
 const int Boss::SPAWNING_TIME = 2;
-const float Boss::TRACK_MARGIN = 0.5f;
 const float Boss::HURT_TIME = 0.5f;
+const sf::Vector2f Boss::INTIAL_POSITION = sf::Vector2f(0, 135);
 
 Boss::Boss()
 	: Character(INITIAL_HEALTH)
@@ -30,7 +30,7 @@ void Boss::initialize(const sf::Texture& texture, const sf::Vector2f& initialPos
 bool Boss::init(const GameContentManager& contentManager)
 {
 	this->contentManager = contentManager;
-	initialize(this->contentManager.getEnemiesTexture(), sf::Vector2f(0, 150));
+	initialize(this->contentManager.getEnemiesTexture(), INTIAL_POSITION);
 	health = INITIAL_HEALTH;
 	healthBar.init(INITIAL_HEALTH);
 	healthBar.setPosition(sf::Vector2f(getPosition().x + healthBar.getGlobalBounds().width, getPosition().y + healthBar.getGlobalBounds().height));
@@ -53,8 +53,16 @@ bool Boss::update(float deltaT)
 		}
 
 		int direction = 1;
-		if (targetPos.x - TRACK_MARGIN > getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT, 0));
-		else if (targetPos.x + TRACK_MARGIN < getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT * -1, 0));
+		if (targetPos.x > getPosition().x)
+		{
+			if ((targetPos.x - (BOSS_SPEED * deltaT)) > getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT, 0));
+			else this->setPosition(sf::Vector2f(targetPos.x, getPosition().y));
+		}
+		else if (targetPos.x < getPosition().x)
+		{
+			if ((targetPos.x + (BOSS_SPEED * deltaT)) < getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT * -1, 0));
+			else this->setPosition(sf::Vector2f(targetPos.x, getPosition().y));
+		}
 
 		float halfWidth = getGlobalBounds().width / 2;
 		if (getPosition().x + halfWidth > Game::GAME_WIDTH) {
