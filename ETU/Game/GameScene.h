@@ -40,4 +40,5 @@ private:
     int scrollPos;
 
     bool gameHasEnded;
+    bool gameNeedsToEnd;
 };

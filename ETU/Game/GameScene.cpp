@@ -11,6 +11,7 @@ GameScene::GameScene()
     : Scene(SceneType::GAME)
 {
     gameHasEnded = false;
+    gameNeedsToEnd = false;
 }
 
 GameScene::~GameScene()
@@ -21,7 +22,6 @@ SceneType GameScene::update()
 {
     if (gameHasEnded)
         return SceneType::NONE;
-    bool gameNeedsToEnd = false;
     float deltaT = ((float)clock.getElapsedTime().asMilliseconds()) / 1000;
     clock.restart();
 
@@ -70,6 +70,7 @@ bool GameScene::init()
     gameMusic.play();
 
     Publisher::addSubscriber(*this, Event::BOSS_SPAWN);
+    Publisher::addSubscriber(*this, Event::BOSS_KILLED);
 
     player.init(contentManager);
     pooler.init(contentManager);
@@ -86,6 +87,7 @@ bool GameScene::uninit()
     player.uninit();
     spawner.uninit();
     Publisher::removeSubscriber(*this, Event::BOSS_SPAWN);
+    Publisher::removeSubscriber(*this, Event::BOSS_KILLED);
     return true;
 }
 
@@ -118,5 +120,9 @@ void GameScene::notify(Event event, const void* data)
     if (event == Event::BOSS_SPAWN)
     {
         boss.activate();
+    }
+    else if (event == Event::BOSS_KILLED)
+    {
+        gameNeedsToEnd = true;
     }
 }

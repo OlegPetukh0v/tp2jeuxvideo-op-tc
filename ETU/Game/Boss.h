@@ -8,8 +8,8 @@ public:
     static const int BOSS_SPEED;
     static const int INITIAL_HEALTH;
     static const int SPAWNING_TIME;
-    static const float TRACK_MARGIN;
     static const float HURT_TIME;
+    static const sf::Vector2f INTIAL_POSITION;
 
     Boss();
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
