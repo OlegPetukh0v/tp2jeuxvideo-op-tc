@@ -70,7 +70,7 @@ bool Boss::update(float deltaT)
 
 		Inputs inputs;
 		AnimatedGameObject::update(deltaT, inputs);
-		healthBar.update(health);
+		healthBar.update(getHealth(), getPosition(), getLocalBounds().height);
 	}
 	return false;
 }

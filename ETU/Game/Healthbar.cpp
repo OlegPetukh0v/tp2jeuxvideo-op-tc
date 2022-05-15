@@ -14,15 +14,17 @@ bool Healthbar::init(const int maxHp)
 	hpBar.setOrigin(hpBar.getLocalBounds().width * 0.5f, hpBar.getLocalBounds().height * 0.5f);
 
 	hpBarBack = hpBar;
-	hpBarBack.setFillColor(sf::Color(25, 25, 25, 200));
+	hpBarBack.setFillColor(sf::Color::Transparent);
 
 	return true;
 }
 
-void Healthbar::update(const int hp)
+void Healthbar::update(const int hp, sf::Vector2f characterPosition, float characterSize)
 {
 	float hpPercent = hp / maxHp;
 	hpBar.setSize(sf::Vector2f(hpBarBack.getSize().x * hpPercent, hpBar.getSize().y));
+	hpBar.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
+	hpBarBack.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
 }
 
 void Healthbar::draw(sf::RenderWindow& window) const

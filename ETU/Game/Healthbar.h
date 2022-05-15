@@ -10,7 +10,7 @@ public:
 
 	virtual bool init(const int maxHp);
 	virtual void draw(sf::RenderWindow& window) const;
-	void update(const int hp);
+	void update(const int hp, sf::Vector2f characterPosition, float characterSize);
 
 private:
 	int maxHp;
