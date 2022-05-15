@@ -10,6 +10,7 @@ public:
     static const int SPAWNING_TIME;
     static const float HURT_TIME;
     static const float SPAWN_TIME;
+    static const float SHOOTING_COOLDOWN;
     static const sf::Vector2f INTIAL_POSITION;
 
     Boss();
@@ -18,6 +19,7 @@ public:
     virtual bool uninit() override;
     virtual bool update(float deltaT) override;
     virtual bool update(float deltaT, sf::Vector2f targetPos);
+    void updateSpawnTransparency(float deltaT);
     virtual void draw(sf::RenderWindow& window) const override;
     virtual void shoot();
     void hit(int damage);
