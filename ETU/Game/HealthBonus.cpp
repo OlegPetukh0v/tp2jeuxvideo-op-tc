@@ -22,10 +22,9 @@ void HealthBonus::deactivate()
 void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
     setTexture(texture);
-    //setTextureRect(sf::IntRect(270, 83, 16, 16)); // For Gun bonus
     setTextureRect(sf::IntRect(229, 64, 11, 10));
     setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
-    setScale(2, 2); // TO CONST
+    setScale(2, 2);
     setPosition(initialPosition);
 }
 

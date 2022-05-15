@@ -28,14 +28,6 @@ void GameObject::draw(sf::RenderWindow& window) const
 {
   if (isActive())
     window.draw(*this, sf::RenderStates(sf::BlendAlpha));
-
-    //sf::RectangleShape shape(sf::Vector2f(getGlobalBounds().width, getGlobalBounds().height));
-    //shape.setOutlineColor(getDebugColor());
-    //shape.setOutlineThickness(2);
-    //shape.setPosition(getPosition() - sf::Vector2f(getLocalBounds().width * 0.5f, getLocalBounds().height * 0.5f));
-    //shape.setFillColor(sf::Color::Transparent);
-
-    //window.draw(shape);
 }
 
 void GameObject::activate()
