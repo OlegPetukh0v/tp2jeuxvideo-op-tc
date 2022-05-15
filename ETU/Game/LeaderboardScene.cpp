@@ -221,7 +221,7 @@ void LeaderboardScene::readFromFile()
 void LeaderboardScene::populateLeaderboardFile()
 {
     std::ifstream ifs("Leaderboard.txt");
-    if (!ifs)
+    if (ifs)
         return;
     std::ofstream ofs("Leaderboard.txt");
     PlayerScore newPlayer;

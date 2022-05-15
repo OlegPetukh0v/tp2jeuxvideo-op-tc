@@ -9,6 +9,7 @@ public:
     static const int INITIAL_HEALTH;
     static const int SPAWNING_TIME;
     static const float HURT_TIME;
+    static const float SPAWN_TIME;
     static const sf::Vector2f INTIAL_POSITION;
 
     Boss();
@@ -23,6 +24,7 @@ public:
 
 private:
     float shootingCooldown;
+    float spawnCooldown;
     unsigned int shotsFired;
     sf::Vector2f targetPos;
 

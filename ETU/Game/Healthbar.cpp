@@ -27,7 +27,6 @@ void Healthbar::update(const float hp, sf::Vector2f characterPosition, float cha
 	hpBar.setSize(sf::Vector2f(hpBarBack.getSize().x * hpPercent, hpBar.getSize().y));
 	hpBar.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
 	hpBarBack.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
-	std::cout << "hpBarBack: " << hpBarBack.getPosition().x << ", " << hpBarBack.getPosition().y << std::endl;
 }
 
 void Healthbar::draw(sf::RenderWindow& window) const

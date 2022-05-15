@@ -3,11 +3,13 @@
 #include "BossAnimation.h"
 #include "Game.h"
 #include "Publisher.h"
+#include <iostream>
 
 const int Boss::BOSS_SPEED = 200;
 const int Boss::INITIAL_HEALTH = 700;
 const int Boss::SPAWNING_TIME = 2;
 const float Boss::HURT_TIME = 0.5f;
+const float Boss::SPAWN_TIME = 2.0f;
 const sf::Vector2f Boss::INTIAL_POSITION = sf::Vector2f(0, 135);
 
 Boss::Boss()
