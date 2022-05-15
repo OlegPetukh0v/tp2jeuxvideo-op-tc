@@ -10,12 +10,12 @@ const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::SHOOTING_VOLUME = 20;
 const int Player::CANON_OFFSET = 14;
-const int Player::INITIAL_LIFE = 300;
+const int Player::INITIAL_HEALTH = 300;
 const float Player::HURT_TIME = 0.4f;
 const unsigned int Player::SCORE_INCREASE_KILL = 1000;
 
 Player::Player()
-	: Character(INITIAL_LIFE)
+	: Character(INITIAL_HEALTH)
 {
 	shootingCooldown = SHOOTING_COOLDOWN;
 	hurtTime = 0;
@@ -106,17 +106,23 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	return true;
 }
 
+void Player::hit(int damage)
+{
+	if (hurtTime == 0)
+	{
+		health -= damage;
+		hurtTime = HURT_TIME;
+	}
+}
+
+void Player::heal(int health)
+{
+	this->health += health;
+}
+
 void Player::notify(Event event, const void* data) 
 {
-	if (event == Event::PLAYER_HIT) 
-	{
-		if (hurtTime == 0) 
-		{
-			health -= *(int*)data;
-			hurtTime = HURT_TIME;
-		}
-	}
-	else if (event == Event::ENEMY_KILLED)
+	if (event == Event::ENEMY_KILLED)
 	{
 		score += SCORE_INCREASE_KILL;
 	}

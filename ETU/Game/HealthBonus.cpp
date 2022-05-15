@@ -2,6 +2,8 @@
 #include "HealthBonus.h"
 #include "Game.h"
 
+const int HealthBonus::HEALTH = 100;
+const int HealthBonus::PICKUP_VOLUME = 50;
 const int HealthBonus::SPEED = 120;
 
 bool HealthBonus::update(float elapsedTime)
@@ -11,25 +13,25 @@ bool HealthBonus::update(float elapsedTime)
     return false;
 }
 
-void HealthBonus::activate()
+void HealthBonus::deactivate()
 {
-    float x = rand() % (int)(Game::GAME_WIDTH - getGlobalBounds().width);
-    setPosition(x + getGlobalBounds().width / 2, -getGlobalBounds().height);
-    setPosition(300, 10);
-    GameObject::activate();
+    pickupSound.play();
+    GameObject::deactivate();
 }
 
 void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
-    setTexture(contentManager.getMiscTexture());
-    setTextureRect(sf::IntRect(289, 84, 16, 16));
+    setTexture(texture);
+    //setTextureRect(sf::IntRect(270, 83, 16, 16)); // For Gun bonus
+    setTextureRect(sf::IntRect(229, 64, 11, 10));
     setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
-    setScale(2, 2);
+    setScale(2, 2); // TO CONST
     setPosition(initialPosition);
 }
 
-void HealthBonus::init(const GameContentManager& contentManger)
+void HealthBonus::init(const GameContentManager& gameContentManager)
 {
-    this->contentManager = contentManager;
-    this->initialize(this->contentManager.getMiscTexture(), sf::Vector2f(0, 0));
+    this->contentManager = gameContentManager;
+    this->initialize(this->contentManager.getMiscTexture(), sf::Vector2f(100, 0));
+    pickupSound.setBuffer(this->contentManager.getHealthSoundBuffer());
 }

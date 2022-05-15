@@ -46,7 +46,10 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
-            if(bullet->collidesWith(player)) bullet->deactivate();
+            if (bullet->collidesWith(player)) {
+                bullet->deactivate();
+                player.hit(bullet->getDamage());
+            }
         }
     }
     for (Bullet* bullet : bullets) {
@@ -66,13 +69,20 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
             }
         }
     }
-    for (Enemy *enemy : enemies) {
+    for (Enemy* enemy : enemies) {
         if (enemy->isActive()) {
-            enemy->setDebugColor(sf::Color::Yellow);
             if (player.collidesWith(*enemy))
             {
-                Publisher::notifySubscribers(Event::PLAYER_HIT, &Character::COLLIDE_DAMAGE);
+                player.hit(Character::COLLIDE_DAMAGE);
                 enemy->hit(Enemy::INITIAL_HEALTH);
+            }
+        }
+    }
+    for (HealthBonus* bonus : healthBonuses) {
+        if (bonus->isActive()) {
+            if (bonus->collidesWith(player)) {
+                bonus->deactivate();
+                player.heal(HealthBonus::HEALTH);
             }
         }
     }
@@ -104,6 +114,9 @@ void PoolManager::notify(Event event, const void* data)
         spawnGameObject(getAvailableGameObject(enemies));
     }
     else if (event == Event::ENEMY_KILLED) {
-        spawnGameObject(getAvailableGameObject(healthBonuses));
+        if (rand() % 4 == 0) {
+            Enemy* enemy = (Enemy*)data;
+            spawnGameObject(getAvailableGameObject(healthBonuses), enemy->getPosition());
+        }
     }
 }

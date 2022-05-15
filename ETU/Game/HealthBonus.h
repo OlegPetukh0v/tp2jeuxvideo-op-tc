@@ -5,14 +5,17 @@
 
 class HealthBonus : public GameObject
 {
-	static const int HEALTH;
-	static const int SPEED;
 public:
+	static const int HEALTH;
+	static const int PICKUP_VOLUME;
+	static const int SPEED;
+
 	virtual bool update(float elapsedTime);
-	virtual void activate() override;
+	virtual void deactivate() override;
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
-	virtual void init(const GameContentManager& contentManger);
+	virtual void init(const GameContentManager& gameContentManager);
 protected:
 	GameContentManager contentManager;
+	sf::Sound pickupSound;
 };
 
