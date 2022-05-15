@@ -71,6 +71,7 @@ bool GameScene::init()
 
     Publisher::addSubscriber(*this, Event::BOSS_SPAWN);
     Publisher::addSubscriber(*this, Event::BOSS_KILLED);
+    Publisher::addSubscriber(*this, Event::PLAYER_DEATH);
 
     player.init(contentManager);
     pooler.init(contentManager);
@@ -88,6 +89,7 @@ bool GameScene::uninit()
     spawner.uninit();
     Publisher::removeSubscriber(*this, Event::BOSS_SPAWN);
     Publisher::removeSubscriber(*this, Event::BOSS_KILLED);
+    Publisher::removeSubscriber(*this, Event::PLAYER_DEATH);
     return true;
 }
 
@@ -122,6 +124,10 @@ void GameScene::notify(Event event, const void* data)
         boss.activate();
     }
     else if (event == Event::BOSS_KILLED)
+    {
+        gameNeedsToEnd = true;
+    }
+    else if (event == Event::PLAYER_DEATH)
     {
         gameNeedsToEnd = true;
     }
