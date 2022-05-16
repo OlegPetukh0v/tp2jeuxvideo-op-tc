@@ -44,6 +44,11 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
     updatePool(enemies, deltaT);
     updatePool(healthBonuses, deltaT);
 
+    if (player.collidesWith(boss))
+    {
+        player.deactivate();
+        Publisher::notifySubscribers(Event::PLAYER_DEATH, &player);
+    }
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
             if (bullet->collidesWith(player)) {

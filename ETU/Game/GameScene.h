@@ -14,6 +14,8 @@ class GameScene :
 {
 public:
     static const int BACKGROUND_SPEED;
+    static const int CONTROLLER_DEAD_ZONE;
+    static const int CONTROLLER_JOYSTICK_RATIO;
 
     GameScene();
     ~GameScene();
@@ -23,6 +25,7 @@ public:
     virtual bool uninit() override;
     virtual bool handleEvents(sf::RenderWindow& window) override;
     virtual void notify(Event event, const void* data);
+    virtual float handleControllerDeadZone(float analogInput);
 private:
     GameContentManager contentManager;
     PoolManager pooler;
@@ -40,4 +43,5 @@ private:
     int scrollPos;
 
     bool gameHasEnded;
+    bool gameNeedsToEnd;
 };

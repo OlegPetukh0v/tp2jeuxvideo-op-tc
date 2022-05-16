@@ -4,13 +4,13 @@
 #include "Publisher.h"
 #include "Game.h"
 #include "Hud.h"
-#include <iostream>
 
 const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::SHOOTING_VOLUME = 20;
 const int Player::CANON_OFFSET = 14;
-const int Player::INITIAL_HEALTH = 300;
+// remettre a 300
+const int Player::INITIAL_HEALTH = 30;
 const float Player::HURT_TIME = 0.4f;
 const unsigned int Player::SCORE_INCREASE_KILL = 1000;
 
@@ -80,8 +80,12 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	if (inputs.moveFactorX != 0 || inputs.moveFactorY != 0) {
 		sf::Vector2f direction = sf::Vector2f(inputs.moveFactorX, inputs.moveFactorY);
 		if (direction.x > 1) direction.x = 1;
-		if (direction.x < -1) direction.x = -1;
-		float angle = atan2(direction.y, direction.x);
+		else if (direction.x < -1) direction.x = -1;
+		if (direction.y > 1) direction.y = 1;
+		else if (direction.y < -1) direction.y = -1;
+
+		float angle = atan2f(direction.y, direction.x);
+		
 		direction = sf::Vector2f(cos(angle) * SHIP_SPEED, sin(angle) * SHIP_SPEED);
 		this->move(direction * deltaT);
 	}

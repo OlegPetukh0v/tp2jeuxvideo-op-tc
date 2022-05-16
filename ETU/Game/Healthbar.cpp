@@ -14,7 +14,9 @@ bool Healthbar::init(const int maxHp)
 	hpBar.setOrigin(hpBar.getLocalBounds().width * 0.5f, hpBar.getLocalBounds().height * 0.5f);
 
 	hpBarBack = hpBar;
-	hpBarBack.setFillColor(sf::Color::Transparent);
+	hpBarBack.setOutlineThickness(4);
+	hpBarBack.setOutlineColor(sf::Color::White);
+	hpBarBack.setFillColor(sf::Color(25, 25, 25, 230));
 
 	return true;
 }
