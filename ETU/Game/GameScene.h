@@ -16,6 +16,7 @@ public:
     static const int BACKGROUND_SPEED;
     static const int CONTROLLER_DEAD_ZONE;
     static const int CONTROLLER_JOYSTICK_RATIO;
+    static const int POINTS_FOR_HEALTH;
 
     GameScene();
     ~GameScene();

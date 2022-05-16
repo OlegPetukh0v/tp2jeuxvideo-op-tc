@@ -121,7 +121,9 @@ bool Player::update(float deltaT, const Inputs& inputs)
 
 void Player::hit(int damage)
 {
-	if (hurtTime == 0)
+	if (hasBonus())
+		bonusTime = 0;
+	else if (hurtTime == 0)
 	{
 		health -= damage;
 		hurtTime = HURT_TIME;

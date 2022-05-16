@@ -3,8 +3,8 @@
 #include "EnemyType.h"
 #include <iostream>
 
-const float Spawner::ENEMY_SPAWN_RATE = 2.0f;
-const int Spawner::ENEMY_SPAWN_CAP = 15;
+const float Spawner::ENEMY_SPAWN_RATE = 1.5f;
+const int Spawner::ENEMY_SPAWN_CAP = 30;
 
 bool Spawner::init()
 {
