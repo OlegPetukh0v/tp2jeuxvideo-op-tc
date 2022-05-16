@@ -6,6 +6,7 @@
 const int HealthBonus::HEALTH = 100;
 const int HealthBonus::PICKUP_VOLUME = 50;
 const int HealthBonus::SPEED = 120;
+const int HealthBonus::SCALE = 2;
 
 bool HealthBonus::update(float elapsedTime)
 {
@@ -25,7 +26,7 @@ void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& ini
     setTexture(texture);
     setTextureRect(sf::IntRect(229, 64, 11, 10));
     setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
-    setScale(2, 2);
+    setScale(SCALE, SCALE); 
     setPosition(initialPosition);
 }
 

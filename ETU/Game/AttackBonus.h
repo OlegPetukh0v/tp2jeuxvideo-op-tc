@@ -6,6 +6,7 @@ class AttackBonus :
 public:
 	static const int PICKUP_VOLUME;
 	static const int SPEED;
+	static const int SCALE;
 
 	virtual bool update(float elapsedTime);
 	virtual void deactivate() override;
