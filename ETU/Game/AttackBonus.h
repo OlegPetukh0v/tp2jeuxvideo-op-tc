@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "GameContentManager.h"
 class AttackBonus :
     public GameObject
 {
