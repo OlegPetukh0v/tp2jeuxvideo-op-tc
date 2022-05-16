@@ -120,7 +120,7 @@ bool GameScene::handleEvents(sf::RenderWindow& window)
         inputs.fireBullet = sf::Joystick::isButtonPressed(0, 5);
     }
     else {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
             window.close();
             retval = true;
         }
