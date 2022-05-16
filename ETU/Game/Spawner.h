@@ -10,6 +10,7 @@ public:
 	static const float ENEMY_SPAWN_RATE;
 	static const int ENEMY_SPAWN_CAP;
 	
+	Spawner();
 	virtual bool init();
 	virtual bool uninit();
 	void update(float deltaT);

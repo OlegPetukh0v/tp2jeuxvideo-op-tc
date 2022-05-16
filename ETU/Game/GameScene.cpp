@@ -12,6 +12,7 @@ const int GameScene::CONTROLLER_JOYSTICK_RATIO = 100;
 GameScene::GameScene()
     : Scene(SceneType::GAME)
 {
+    scrollPos = 0;
     gameHasEnded = false;
     gameNeedsToEnd = false;
 }
@@ -125,8 +126,9 @@ bool GameScene::handleEvents(sf::RenderWindow& window)
             }
             inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? -1.0f : 0.0f;
             inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1.0f : 0.0f;
-            inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ? -3.0f : 0.0f;
-            inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ? 3.0f : 0.0f;
+            inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ? -1.0f : 0.0f;
+            inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ? 1.0f : 0.0f;
+
             inputs.fireBullet = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
         }
     }

@@ -93,6 +93,7 @@ bool Player::update(float deltaT, const Inputs& inputs)
 		if (direction.y > 1) direction.y = 1;
 		else if (direction.y < -1) direction.y = -1;
 
+
 		float angle = atan2f(direction.y, direction.x);
 		
 		direction = sf::Vector2f(cos(angle) * SHIP_SPEED, sin(angle) * SHIP_SPEED);

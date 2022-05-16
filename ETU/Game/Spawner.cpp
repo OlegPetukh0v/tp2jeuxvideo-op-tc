@@ -4,14 +4,18 @@
 #include <iostream>
 
 const float Spawner::ENEMY_SPAWN_RATE = 2.0f;
-const int Spawner::ENEMY_SPAWN_CAP = 15;
+const int Spawner::ENEMY_SPAWN_CAP = 1;
 
-bool Spawner::init()
+Spawner::Spawner()
 {
     enemySpawnRate = ENEMY_SPAWN_RATE;
     enemySpawnCounter = 0;
     enemyDeathCounter = 0;
     bossAvailable = true;
+}
+
+bool Spawner::init()
+{
     Publisher::addSubscriber(*this, Event::ENEMY_KILLED);
     return true;
 }
