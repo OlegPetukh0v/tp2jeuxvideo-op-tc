@@ -21,11 +21,6 @@ void Bonus::initialize(const sf::Texture& texture, const sf::Vector2f& initialPo
     setPosition(initialPosition);
 }
 
-void Bonus::init(const GameContentManager& gameContentManager)
-{
-    contentManager = gameContentManager;
-}
-
 void Bonus::onPick(Player& player)
 {
     pickupSound.play();

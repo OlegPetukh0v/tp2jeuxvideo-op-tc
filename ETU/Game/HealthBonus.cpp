@@ -6,13 +6,6 @@
 
 const int HealthBonus::HEALTH = 100;
 
-bool HealthBonus::update(float elapsedTime)
-{
-    move(0, SPEED * elapsedTime);
-    if (getPosition().y - getGlobalBounds().height / 2 > Game::GAME_HEIGHT) deactivate();
-    return false;
-}
-
 void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
     setTexture(texture);

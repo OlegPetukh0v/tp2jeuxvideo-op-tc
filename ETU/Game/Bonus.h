@@ -13,10 +13,8 @@ public:
 
 	virtual bool update(float elapsedTime);
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
-	virtual void init(const GameContentManager& gameContentManager);
 	virtual void onPick(Player& player);
 
 protected:
-	GameContentManager contentManager;
 	sf::Sound pickupSound;
 };
