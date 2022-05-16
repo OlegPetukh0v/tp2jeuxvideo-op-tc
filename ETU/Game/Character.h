@@ -9,7 +9,7 @@ public:
     static const int COLLIDE_DAMAGE;
     Character(int health);
     int getHealth() const;
-    virtual bool uninit() = 0;
+    virtual bool uninit();
 
 protected:
     GameContentManager contentManager;

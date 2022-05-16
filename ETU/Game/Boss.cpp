@@ -36,8 +36,8 @@ bool Boss::init(const GameContentManager& contentManager)
 	this->contentManager = contentManager;
 	initialize(this->contentManager.getEnemiesTexture(), INTIAL_POSITION);
 	health = INITIAL_HEALTH;
-	healthBar.init(INITIAL_HEALTH);
-	healthBar.update(getHealth(), getPosition(), getLocalBounds().height);
+	healthBar.init(INITIAL_HEALTH, this);
+	healthBar.update();
 	return true;
 }
 
@@ -86,7 +86,7 @@ bool Boss::update(float deltaT)
 				else setColor(sf::Color::White);
 			}
 
-			healthBar.update(getHealth(), getPosition(), getLocalBounds().height);
+			healthBar.update();
 		}
 		Inputs inputs;
 		AnimatedGameObject::update(deltaT, inputs);

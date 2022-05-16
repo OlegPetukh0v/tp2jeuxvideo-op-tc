@@ -5,7 +5,7 @@
 const int Healthbar::HEALTH_BAR_LENGTH = 150;
 const int Healthbar::HEALTH_BAR_HEIGHT = 25;
 
-bool Healthbar::init(const int maxHp)
+bool Healthbar::init(const int maxHp, Character* character)
 {
 	this->maxHp = maxHp;
 	hpBar.setSize(sf::Vector2f((float)HEALTH_BAR_LENGTH, (float)HEALTH_BAR_HEIGHT));
@@ -18,15 +18,17 @@ bool Healthbar::init(const int maxHp)
 	hpBarBack.setOutlineColor(sf::Color::White);
 	hpBarBack.setFillColor(sf::Color(25, 25, 25, 230));
 
+	this->character = character;
+
 	return true;
 }
 
-void Healthbar::update(const float hp, sf::Vector2f characterPosition, float characterSize)
+void Healthbar::update()
 {
-	float hpPercent = hp / maxHp;
+	float hpPercent = character->getHealth() / maxHp;
 	hpBar.setSize(sf::Vector2f(hpBarBack.getSize().x * hpPercent, hpBar.getSize().y));
-	hpBar.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
-	hpBarBack.setPosition(sf::Vector2f(characterPosition.x, characterPosition.y - (characterSize / 2 + HEALTH_BAR_HEIGHT)));
+	hpBar.setPosition(sf::Vector2f(character->getPosition().x, character->getPosition().y - (character->getLocalBounds().height / 2 + HEALTH_BAR_HEIGHT)));
+	hpBarBack.setPosition(sf::Vector2f(character->getPosition().x, character->getPosition().y - (character->getLocalBounds().height / 2 + HEALTH_BAR_HEIGHT)));
 }
 
 void Healthbar::draw(sf::RenderWindow& window) const

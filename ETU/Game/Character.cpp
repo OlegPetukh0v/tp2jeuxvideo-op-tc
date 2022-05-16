@@ -13,3 +13,7 @@ int Character::getHealth() const {
 	return this->health;
 }
 
+bool Character::uninit()
+{
+	return true;
+}

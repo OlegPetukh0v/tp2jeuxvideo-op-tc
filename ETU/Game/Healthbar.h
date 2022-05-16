@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Character.h"
 
 class Healthbar :
 	public GameObject
@@ -8,12 +9,13 @@ public:
 	static const int HEALTH_BAR_LENGTH;
 	static const int HEALTH_BAR_HEIGHT;
 
-	virtual bool init(const int maxHp);
+	virtual bool init(const int maxHp, Character* character);
 	virtual void draw(sf::RenderWindow& window) const;
-	void update(const float hp, sf::Vector2f characterPosition, float characterSize);
+	void update();
 
 private:
 	float maxHp;
+	Character* character;
 
 	sf::RectangleShape hpBar;
 	sf::RectangleShape hpBarBack;
