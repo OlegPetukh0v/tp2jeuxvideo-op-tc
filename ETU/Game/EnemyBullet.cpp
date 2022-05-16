@@ -43,12 +43,3 @@ void EnemyBullet::init(const GameContentManager& contentManager)
 	this->contentManager = contentManager;
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
 }
-
-bool EnemyBullet::collidesWith(const GameObject& other) const
-{
-	if (GameObject::collidesWith(other)) {
-		Publisher::notifySubscribers(Event::PLAYER_HIT, &DAMAGE);
-		return true;
-	}
-	return false;
-}

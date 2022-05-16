@@ -33,10 +33,7 @@ public:
 	T& getAvailableGameObject(std::list<T*>& poolT);
 
 	template<class T>
-	void spawnGameObject(T& objT, sf::Vector2f pos);
-
-	template<class T>
-	void spawnGameObject(T& objT);
+	void spawnGameObject(T& objT, sf::Vector2f pos = sf::Vector2f(0, 0));
 
 	template<class T>
 	void updatePool(std::list<T*>& poolT, float deltaT);
@@ -87,12 +84,6 @@ inline void PoolManager::spawnGameObject(T& objT, sf::Vector2f pos)
 }
 
 template<class T>
-inline void PoolManager::spawnGameObject(T& objT)
-{
-	objT.activate();
-}
-
-template<class T>
 inline void PoolManager::updatePool(std::list<T*>& poolT, float deltaT)
 {
 	for (T* temp : poolT) {
@@ -118,4 +109,5 @@ inline void PoolManager::deletePool(std::list<T*>& poolT)
 	for (T* temp : poolT) {
 		delete temp;
 	}
+	poolT.clear();
 }
