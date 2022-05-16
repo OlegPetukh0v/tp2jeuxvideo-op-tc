@@ -13,9 +13,11 @@ public:
     static const float SHOOTING_COOLDOWN;
     static const int SHOOTING_VOLUME;
     static const int CANON_OFFSET;
+    static const int BONUS_CANON_OFFSET;
     static const int INITIAL_HEALTH;
     static const float HURT_TIME;
     static const unsigned int SCORE_INCREASE_KILL;
+    static const unsigned int BONUS_TIME;
 
     Player();
     ~Player();
@@ -24,13 +26,21 @@ public:
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
     virtual bool update(float deltaT, const Inputs& inputs);
+    void notify(Event event, const void* data);
+
+    void activateBonus();
     void hit(int damage);
     void heal(int health);
-    void notify(Event event, const void* data);
+
+    bool hasBonus();
     bool isAlive();
+
     unsigned int getScore();
+    unsigned int getBonusTime();
+
 private:
     float shootingCooldown;
     unsigned int score;
     sf::Sound shootSound;
+    float bonusTime;
 };

@@ -35,9 +35,7 @@ SceneType GameScene::update()
     pooler.update(deltaT, player, boss);
     spawner.update(deltaT);
     boss.update(deltaT, player.getPosition());
-    // TODO: enlever quand on va avoir le cooldown du bonus
-    int cooldown = 5;
-    hud.update(player.getScore(), player.getHealth(), cooldown);
+    hud.update(player.getScore(), player.getHealth(), player.getBonusTime());
 
     if (gameNeedsToEnd)
     {

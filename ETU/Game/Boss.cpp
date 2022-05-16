@@ -104,7 +104,6 @@ bool Boss::update(float deltaT, sf::Vector2f targetPos)
 void Boss::updateSpawnTransparency(float deltaT)
 {
 	spawnCooldown += deltaT;
-	std::cout << "cooldown: " << spawnCooldown << std::endl;
 	if (spawnCooldown > SPAWNING_TIME)
 	{
 		setColor(sf::Color(255, 255, 255, 255));
@@ -141,7 +140,6 @@ void Boss::hit(int damage)
 	health -= damage;
 	if (health <= 0) {
 		deactivate();
-		std::cout << "Boss killed" << std::endl;
 		Publisher::notifySubscribers(Event::BOSS_KILLED, this);
 	}
 	else {
