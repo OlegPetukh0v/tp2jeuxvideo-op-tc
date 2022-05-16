@@ -5,6 +5,9 @@
 #include "EnemyType.h"
 #include <iostream>
 
+const int PoolManager::BONUS_SPAWN_CHANCE = 4;
+const int PoolManager::HEALTH_BONUS_SPAWN_CHANCE = 2;
+
 PoolManager::PoolManager()
 {
 }
@@ -123,9 +126,12 @@ void PoolManager::notify(Event event, const void* data)
         spawnGameObject(getAvailableGameObject(enemies));
     }
     else if (event == Event::ENEMY_KILLED) {
-        if (rand() % 4 == 0) {
+        if (rand() % BONUS_SPAWN_CHANCE == 0) {
             Enemy* enemy = (Enemy*)data;
-            spawnGameObject(getAvailableGameObject(healthBonuses), enemy->getPosition());
+            if (rand() % HEALTH_BONUS_SPAWN_CHANCE == 0)
+                spawnGameObject(getAvailableGameObject(healthBonuses), enemy->getPosition());            
+            else
+                spawnGameObject(getAvailableGameObject(attackBonuses), enemy->getPosition());            
         }
     }
 }

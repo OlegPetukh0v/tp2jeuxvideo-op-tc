@@ -13,6 +13,9 @@
 class PoolManager 
 	: public Subscriber
 {
+	static const int BONUS_SPAWN_CHANCE;
+	static const int HEALTH_BONUS_SPAWN_CHANCE;
+
 public:
 	PoolManager();
 
