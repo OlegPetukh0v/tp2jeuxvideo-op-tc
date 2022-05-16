@@ -8,9 +8,11 @@ const int Enemy::SHIP_SPEED = 120;
 const int Enemy::SHIP_WIDTH = 73;
 const int Enemy::DEATH_VOLUME = 70;
 const int Enemy::SHOOT_VOLUME = 20;
+const float Enemy::SHOOT_PERCENTAGE_ANIMATION = 0.94f;
 const int Enemy::INITIAL_HEALTH = 50;
 const int Enemy::CANON_OFFSET = 8;
 const float Enemy::HURT_TIME = 0.32f;
+const float Enemy::HURT_FLASH_TIME = HURT_TIME / 2;
 
 Enemy::Enemy()
 	: Character(INITIAL_HEALTH)
@@ -65,7 +67,7 @@ void Enemy::shoot()
 bool Enemy::update(float deltaT)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
-	if (0.98f < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
+	if (SHOOT_PERCENTAGE_ANIMATION < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getPercentage()) {
 		shoot();
 	}
 
@@ -75,7 +77,9 @@ bool Enemy::update(float deltaT)
 	if (getPosition().y - halfHeight > Game::GAME_HEIGHT) setPosition(getPosition().x, -halfHeight);
 
 	if (hurtTime > 0) {
-		if (std::fmod(hurtTime, 0.16f) > 0.08f) setColor(sf::Color(255, 155, 80, 120));
+		if (std::fmod(hurtTime, HURT_FLASH_TIME) > HURT_FLASH_TIME/2) { // When hurt, it makes the enemy flash white/orange every FlashTime.
+			setColor(sf::Color(255, 120, 70, 120)); // Orange-transparent
+		}
 		else setColor(sf::Color::White);  
 	}
 	
