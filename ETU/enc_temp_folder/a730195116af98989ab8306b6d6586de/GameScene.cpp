@@ -98,40 +98,39 @@ bool GameScene::uninit()
 bool GameScene::handleEvents(sf::RenderWindow& window)
 {
     bool retval = false;
-    if (!gameHasEnded) {
-        inputs.reset();
-        sf::Event event;
-        while (window.pollEvent(event))
+    inputs.reset();
+    sf::Event event;
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
         {
-            if (event.type == sf::Event::Closed)
-            {
-                window.close();
-                retval = true;
-            }
-        }
-
-        if (sf::Joystick::isConnected(0))
-        {
-            if (sf::Joystick::isButtonPressed(0, 7)) {
-                window.close();
-                retval = true;
-            }
-            inputs.moveFactorY = handleControllerDeadZone(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y)) / CONTROLLER_JOYSTICK_RATIO;
-            inputs.moveFactorX = handleControllerDeadZone(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X)) / CONTROLLER_JOYSTICK_RATIO;
-            inputs.fireBullet = sf::Joystick::isButtonPressed(0, 5);
-        }
-        else {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                window.close();
-                retval = true;
-            }
-            inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? -1.0f : 0.0f;
-            inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1.0f : 0.0f;
-            inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ? -3.0f : 0.0f;
-            inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ? 3.0f : 0.0f;
-            inputs.fireBullet = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+            window.close();
+            retval = true;
         }
     }
+
+    if (sf::Joystick::isConnected(0))
+    {
+        if (sf::Joystick::isButtonPressed(0, 7)) {
+            window.close();
+            retval = true;
+        }
+        inputs.moveFactorY = handleControllerDeadZone(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y)) / CONTROLLER_JOYSTICK_RATIO;
+        inputs.moveFactorX = handleControllerDeadZone(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X)) / CONTROLLER_JOYSTICK_RATIO;
+        inputs.fireBullet = sf::Joystick::isButtonPressed(0, 5);
+    }
+    else {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            window.close();
+            retval = true;
+        }
+        inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? -1.0f : 0.0f;
+        inputs.moveFactorY += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1.0f : 0.0f;
+        inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) ? -3.0f : 0.0f;
+        inputs.moveFactorX += sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) ? 3.0f : 0.0f;
+        inputs.fireBullet = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+    }
+
     
     return retval;
 }
