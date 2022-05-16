@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "HealthBonus.h"
 #include "Game.h"
+#include "GameContentManager.h"
 
 const int HealthBonus::HEALTH = 100;
 const int HealthBonus::PICKUP_VOLUME = 50;
@@ -30,7 +31,6 @@ void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& ini
 
 void HealthBonus::init(const GameContentManager& gameContentManager)
 {
-    this->contentManager = gameContentManager;
-    this->initialize(this->contentManager.getMiscTexture(), sf::Vector2f(100, 0));
-    pickupSound.setBuffer(this->contentManager.getHealthSoundBuffer());
+    this->initialize(gameContentManager.getMiscTexture(), sf::Vector2f(100, 0));
+    pickupSound.setBuffer(gameContentManager.getHealthSoundBuffer());
 }

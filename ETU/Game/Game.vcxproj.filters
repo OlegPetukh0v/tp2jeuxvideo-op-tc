@@ -154,6 +154,9 @@
     <ClInclude Include="HealthBonus.h">
       <Filter>Bonus</Filter>
     </ClInclude>
+    <ClInclude Include="AttackBonus.h">
+      <Filter>Bonus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -256,6 +259,9 @@
       <Filter>Animations</Filter>
     </ClCompile>
     <ClCompile Include="HealthBonus.cpp">
+      <Filter>Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackBonus.cpp">
       <Filter>Bonus</Filter>
     </ClCompile>
   </ItemGroup>

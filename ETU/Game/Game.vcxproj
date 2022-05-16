@@ -159,6 +159,8 @@
     <ClInclude Include="AnimatedGameObject.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationFrame.h" />
+    <ClInclude Include="AttackBonus.h" />
+    <ClInclude Include="BitmaskManager.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossAnimation.h" />
     <ClInclude Include="Bullet.h" />
@@ -202,6 +204,8 @@
     <ClCompile Include="AnimatedGameObject.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationFrame.cpp" />
+    <ClCompile Include="AttackBonus.cpp" />
+    <ClCompile Include="BitmaskManager.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossAnimation.cpp" />
     <ClCompile Include="Bullet.cpp" />
