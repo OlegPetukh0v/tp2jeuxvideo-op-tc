@@ -9,7 +9,7 @@ const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::SHOOTING_VOLUME = 20;
 const int Player::CANON_OFFSET = 14;
-const int Player::BONUS_CANON_OFFSET = 16;
+const int Player::BONUS_CANON_OFFSET = 32;
 const int Player::INITIAL_HEALTH = 300;
 const float Player::HURT_TIME = 0.4f;
 const unsigned int Player::SCORE_INCREASE_KILL = 1000;
@@ -66,6 +66,7 @@ bool Player::uninit()
 bool Player::update(float deltaT, const Inputs& inputs)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
+	bonusTime = std::fmax(0, bonusTime - deltaT);
 	shootingCooldown -= deltaT;
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {
@@ -73,7 +74,7 @@ bool Player::update(float deltaT, const Inputs& inputs)
 			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
 			shootPos = sf::Vector2f(getPosition().x - CANON_OFFSET, getPosition().y);
 			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
-			if (hasBonus)
+			if (hasBonus())
 			{
 				shootPos = sf::Vector2f(getPosition().x + BONUS_CANON_OFFSET, getPosition().y);
 				Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
@@ -140,6 +141,11 @@ void Player::notify(Event event, const void* data)
 	}
 }
 
+void Player::activateBonus()
+{
+	bonusTime = BONUS_TIME;
+}
+
 bool Player::isAlive()
 {
 	return getHealth() > 0;
@@ -157,7 +163,7 @@ unsigned int Player::getScore()
 	return score;
 }
 
-void Player::activateBonus()
+unsigned int Player::getBonusTime()
 {
-	bonusTime = BONUS_TIME;
+	return (int)bonusTime;
 }

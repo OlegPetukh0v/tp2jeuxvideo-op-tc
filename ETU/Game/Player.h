@@ -26,13 +26,17 @@ public:
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
     virtual bool update(float deltaT, const Inputs& inputs);
+    void notify(Event event, const void* data);
+
+    void activateBonus();
     void hit(int damage);
     void heal(int health);
-    void notify(Event event, const void* data);
-    bool isAlive();
-    unsigned int getScore();
-    void activateBonus();
+
     bool hasBonus();
+    bool isAlive();
+
+    unsigned int getScore();
+    unsigned int getBonusTime();
 
 private:
     float shootingCooldown;
