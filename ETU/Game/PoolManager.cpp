@@ -21,6 +21,7 @@ bool PoolManager::init(GameContentManager gameContentManager)
     initialiseObjectPool(enemyBullets, 80);
     initialiseObjectPool(enemies, 20);
     initialiseObjectPool(healthBonuses, 5);
+    initialiseObjectPool(attackBonuses, 5);
     return true;
 }
 
@@ -34,6 +35,7 @@ bool PoolManager::uninit()
     deletePool(enemyBullets);
     deletePool(enemies);
     deletePool(healthBonuses);
+    deletePool(attackBonuses);
     return true;
 }
 
@@ -43,6 +45,7 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
     updatePool(healthBonuses, deltaT);
+    updatePool(attackBonuses, deltaT);
 
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
@@ -96,6 +99,7 @@ void PoolManager::draw(sf::RenderWindow& window) const
     drawPool(enemies, window);
     drawPool(bullets, window);
     drawPool(healthBonuses, window);
+    drawPool(attackBonuses, window);
 }
 
 void PoolManager::notify(Event event, const void* data)

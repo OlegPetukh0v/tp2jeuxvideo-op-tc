@@ -5,6 +5,7 @@
 
 const int AttackBonus::PICKUP_VOLUME = 50;
 const int AttackBonus::SPEED = 120;
+const int AttackBonus::SCALE = 2;
 
 bool AttackBonus::update(float elapsedTime)
 {
@@ -24,7 +25,7 @@ void AttackBonus::initialize(const sf::Texture& texture, const sf::Vector2f& ini
     setTexture(texture);
     setTextureRect(sf::IntRect(204, 103, 18, 18));
     setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
-    setScale(2, 2); // TO CONST
+    setScale(SCALE, SCALE);
     setPosition(initialPosition);
 }
 

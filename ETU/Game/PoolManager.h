@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Boss.h"
 #include "HealthBonus.h"
+#include "AttackBonus.h"
 
 class PoolManager 
 	: public Subscriber
@@ -51,6 +52,7 @@ private:
 	std::list<EnemyBullet*> enemyBullets;
 	std::list<Enemy*> enemies;
 	std::list<HealthBonus*> healthBonuses;
+	std::list<AttackBonus*> attackBonuses;
 };
 
 template<class T>
