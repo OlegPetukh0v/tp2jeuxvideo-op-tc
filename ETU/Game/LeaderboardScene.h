@@ -49,7 +49,7 @@ private:
     void initLeaderboardMessages();
     void drawLeaderboard(sf::RenderWindow& window) const;
 
-    bool nameconfirmed;
+    bool nameConfirmed;
 
     void readFromFile();
     void populateLeaderboardFile();

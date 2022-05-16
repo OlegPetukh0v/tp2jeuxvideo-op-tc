@@ -52,7 +52,7 @@ bool Player::init(const GameContentManager& contentManager)
 	this->contentManager = contentManager;
 	shootSound.setBuffer(this->contentManager.getPlayerGunSoundBuffer());
 	shootSound.setVolume(SHOOTING_VOLUME);
-	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(Game::GAME_WIDTH/2,Game::GAME_HEIGHT - 100));
+	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f((float)Game::GAME_WIDTH/2,(float)Game::GAME_HEIGHT - 100));
 	return true;
 }
 
@@ -65,8 +65,8 @@ bool Player::uninit()
 
 bool Player::update(float deltaT, const Inputs& inputs)
 {
-	hurtTime = std::fmax(0, hurtTime - deltaT);
-	bonusTime = std::fmax(0, bonusTime - deltaT);
+	hurtTime = (float)std::fmax(0, hurtTime - deltaT);
+	bonusTime = (float)std::fmax(0, bonusTime - deltaT);
 	shootingCooldown -= deltaT;
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {

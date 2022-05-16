@@ -25,7 +25,7 @@ bool Healthbar::init(const int maxHp, Character* character)
 
 void Healthbar::update()
 {
-	float hpPercent = character->getHealth() / maxHp;
+	float hpPercent = (float)character->getHealth() / maxHp;
 	hpBar.setSize(sf::Vector2f(hpBarBack.getSize().x * hpPercent, hpBar.getSize().y));
 	hpBar.setPosition(sf::Vector2f(character->getPosition().x, character->getPosition().y - (character->getLocalBounds().height / 2 + HEALTH_BAR_HEIGHT)));
 	hpBarBack.setPosition(sf::Vector2f(character->getPosition().x, character->getPosition().y - (character->getLocalBounds().height / 2 + HEALTH_BAR_HEIGHT)));

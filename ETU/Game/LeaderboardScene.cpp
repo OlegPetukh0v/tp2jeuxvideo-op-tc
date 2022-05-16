@@ -15,11 +15,15 @@ const unsigned int LeaderboardScene::INITIAL_PLAYER_POSIITON_IN_LEADERBOARD = -1
 const float LeaderboardScene::X_POSITION_LEADERBOARD_NAME = Game::GAME_WIDTH / 5.0f;
 const float LeaderboardScene::X_POSITION_LEADERBOARD_SCORE = Game::GAME_WIDTH / 1.5f;
 const float LeaderboardScene::NAME_HEIGHT = 22;
-const unsigned int LeaderboardScene::X_POSITION_INITIAL_SCORE_HEIGHT = Game::GAME_HEIGHT / 3.0f;
+const unsigned int LeaderboardScene::X_POSITION_INITIAL_SCORE_HEIGHT = (unsigned int)(Game::GAME_HEIGHT / 3.0f);
 
 LeaderboardScene::LeaderboardScene()
     : Scene(SceneType::LEADERBOARD)
 {
+    isPlayerInTop5 = false;
+    nameConfirmed = false;
+    playerNameConfirmed = false;
+    playerPosition = INITIAL_PLAYER_POSIITON_IN_LEADERBOARD;
 }
 
 LeaderboardScene::~LeaderboardScene()
@@ -61,11 +65,11 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
 SceneType LeaderboardScene::update()
 {
     SceneType retval = getSceneType();
-    if ((nameconfirmed && inputs.escape) || (!result.gameSceneResult.hasPlayerWon && inputs.escape) || (!isPlayerInTop5 && inputs.escape))
+    if ((nameConfirmed && inputs.escape) || (!result.gameSceneResult.hasPlayerWon && inputs.escape) || (!isPlayerInTop5 && inputs.escape))
     {
         retval = SceneType::NONE;
     }
-    else if (!nameconfirmed)
+    else if (!nameConfirmed)
     {
         if(inputs.toDelete)
             deleteCharacterFromPlayerName();
@@ -143,7 +147,7 @@ void LeaderboardScene::initMessages()
 void LeaderboardScene::initLeaderboardMessages()
 {
     std::list<PlayerScore> tempPlayerScores = playerScores;
-    for (int i = 0; i < playerScores.size(); i++)
+    for (unsigned i = 0; i < playerScores.size(); i++)
     {
         sf::Text* currentName = &leaderboard[0][i];
         sf::Text* currentScore = &leaderboard[1][i];
@@ -334,7 +338,7 @@ void LeaderboardScene::setPlayerNameConfirmed()
     if (playerScores.front().isFullyFilled())
     {
         leaderboard[0][playerPosition].setFillColor(sf::Color::White);
-        nameconfirmed = true;
+        nameConfirmed = true;
         enterNameMessage.setString(PRESS_TO_LEAVE);
         enterNameMessage.setOrigin(enterNameMessage.getLocalBounds().width / 2.0f, enterNameMessage.getLocalBounds().height / 2.0f);
     }

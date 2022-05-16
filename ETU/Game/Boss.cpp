@@ -11,7 +11,7 @@ const int Boss::SPAWNING_TIME = 2;
 const float Boss::HURT_TIME = 0.5f;
 const float Boss::SPAWN_TIME = 2.0f;
 const float Boss::SHOOTING_COOLDOWN = 1.2f;
-const sf::Vector2f Boss::INTIAL_POSITION = sf::Vector2f(Game::GAME_WIDTH / 2, 135);
+const sf::Vector2f Boss::INTIAL_POSITION = sf::Vector2f((float)Game::GAME_WIDTH / 2, 135);
 
 Boss::Boss()
 	: Character(INITIAL_HEALTH)
@@ -27,7 +27,7 @@ void Boss::initialize(const sf::Texture& texture, const sf::Vector2f& initialPos
 	AnimatedGameObject::init(this->contentManager);
 	currentState = State::BOSS;
 	addAnimation<State::BOSS, BossAnimation>(this->contentManager);
-	setOrigin(sf::Vector2f(getLocalBounds().width * 0.5, getLocalBounds().height * 0.5));
+	setOrigin(sf::Vector2f((float)(getLocalBounds().width * 0.5), (float)(getLocalBounds().height * 0.5)));
 	setPosition(initialPosition);
 }
 

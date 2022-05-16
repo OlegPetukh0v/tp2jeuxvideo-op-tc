@@ -50,8 +50,8 @@ void Enemy::activate()
 	health = INITIAL_HEALTH;
 	hurtTime = 0;
 	setColor(sf::Color::White);
-	float x = rand() % (Game::GAME_WIDTH - Enemy::SHIP_WIDTH);
-	setPosition(x + Enemy::SHIP_WIDTH / 2, -getLocalBounds().height);
+	int x = rand() % (Game::GAME_WIDTH - Enemy::SHIP_WIDTH);
+	setPosition((int) x + Enemy::SHIP_WIDTH / 2, -getLocalBounds().height);
 	GameObject::activate();
 }
 
@@ -66,7 +66,7 @@ void Enemy::shoot()
 
 bool Enemy::update(float deltaT)
 {
-	hurtTime = std::fmax(0, hurtTime - deltaT);
+	hurtTime = (float)std::fmax(0, hurtTime - deltaT);
 	if (SHOOT_PERCENTAGE_ANIMATION < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getPercentage()) {
 		shoot();
 	}
