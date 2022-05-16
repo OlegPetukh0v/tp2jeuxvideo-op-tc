@@ -55,8 +55,8 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
     for (Bullet* bullet : enemyBullets) {
         if (bullet->isActive()) {
             if (bullet->collidesWith(player)) {
-                bullet->deactivate();
                 player.hit(bullet->getDamage());
+                bullet->deactivate();
             }
         }
     }
