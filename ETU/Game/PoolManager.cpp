@@ -89,8 +89,7 @@ bool PoolManager::update(float deltaT, Player& player, Boss& boss)
     for (HealthBonus* bonus : healthBonuses) {
         if (bonus->isActive()) {
             if (bonus->collidesWith(player)) {
-                bonus->deactivate();
-                player.heal(HealthBonus::HEALTH);
+                bonus->onPick(player);
             }
         }
     }

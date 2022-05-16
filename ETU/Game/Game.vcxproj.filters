@@ -157,6 +157,9 @@
     <ClInclude Include="AttackBonus.h">
       <Filter>Bonus</Filter>
     </ClInclude>
+    <ClInclude Include="Bonus.h">
+      <Filter>Bonus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -262,6 +265,9 @@
       <Filter>Bonus</Filter>
     </ClCompile>
     <ClCompile Include="AttackBonus.cpp">
+      <Filter>Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="Bonus.cpp">
       <Filter>Bonus</Filter>
     </ClCompile>
   </ItemGroup>
