@@ -9,9 +9,11 @@ const int Player::SHIP_SPEED = 360;
 const float Player::SHOOTING_COOLDOWN = 0.2f;
 const int Player::SHOOTING_VOLUME = 20;
 const int Player::CANON_OFFSET = 14;
+const int Player::BONUS_CANON_OFFSET = 16;
 const int Player::INITIAL_HEALTH = 300;
 const float Player::HURT_TIME = 0.4f;
 const unsigned int Player::SCORE_INCREASE_KILL = 1000;
+const unsigned int Player::BONUS_TIME = 5;
 
 Player::Player()
 	: Character(INITIAL_HEALTH)
@@ -19,6 +21,7 @@ Player::Player()
 	shootingCooldown = SHOOTING_COOLDOWN;
 	hurtTime = 0;
 	score = 0;
+	bonusTime = 0;
 }
 
 Player::~Player()
@@ -66,11 +69,17 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	shootingCooldown -= deltaT;
 	if (inputs.fireBullet) {
 		if (shootingCooldown <= 0) {
-			float offset = CANON_OFFSET;
-			sf::Vector2f shootPos = sf::Vector2f(getPosition().x + offset, getPosition().y);
+			sf::Vector2f shootPos = sf::Vector2f(getPosition().x + CANON_OFFSET, getPosition().y);
 			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
-			shootPos = sf::Vector2f(getPosition().x - offset, getPosition().y);
+			shootPos = sf::Vector2f(getPosition().x - CANON_OFFSET, getPosition().y);
 			Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
+			if (hasBonus)
+			{
+				shootPos = sf::Vector2f(getPosition().x + BONUS_CANON_OFFSET, getPosition().y);
+				Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
+				shootPos = sf::Vector2f(getPosition().x - BONUS_CANON_OFFSET, getPosition().y);
+				Publisher::notifySubscribers(Event::PLAYER_SHOOT, &shootPos);
+			}
 			shootSound.play();
 			shootingCooldown = SHOOTING_COOLDOWN;
 		}
@@ -136,7 +145,19 @@ bool Player::isAlive()
 	return getHealth() > 0;
 }
 
+bool Player::hasBonus()
+{
+	if (bonusTime > 0)
+		return true;
+	return false;
+}
+
 unsigned int Player::getScore()
 {
 	return score;
+}
+
+void Player::activateBonus()
+{
+	bonusTime = BONUS_TIME;
 }
