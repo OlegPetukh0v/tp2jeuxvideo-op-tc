@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GameObject.h"
+#include "GameContentManager.h"
 
 class HealthBonus : public GameObject
 {
@@ -14,7 +15,7 @@ public:
 	virtual void deactivate() override;
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
 	virtual void init(const GameContentManager& gameContentManager);
+
 protected:
 	sf::Sound pickupSound;
 };
-

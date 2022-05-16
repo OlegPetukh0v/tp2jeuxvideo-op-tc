@@ -32,6 +32,6 @@ void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& ini
 
 void HealthBonus::init(const GameContentManager& gameContentManager)
 {
-    this->initialize(gameContentManager.getMiscTexture(), sf::Vector2f(100, 0));
+    initialize(gameContentManager.getMiscTexture(), sf::Vector2f(100, 0));
     pickupSound.setBuffer(gameContentManager.getHealthSoundBuffer());
 }
