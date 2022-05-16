@@ -8,6 +8,7 @@
 const int GameScene::BACKGROUND_SPEED = 3;
 const int GameScene::CONTROLLER_DEAD_ZONE = 15;
 const int GameScene::CONTROLLER_JOYSTICK_RATIO = 100;
+const int GameScene::POINTS_FOR_HEALTH = 10;
 
 GameScene::GameScene()
     : Scene(SceneType::GAME)
@@ -41,7 +42,7 @@ SceneType GameScene::update()
     if (gameNeedsToEnd)
     {
         result.gameSceneResult.hasPlayerWon = player.isAlive();
-        result.gameSceneResult.score = player.getScore();
+        result.gameSceneResult.score = player.getScore() + (player.getHealth() * POINTS_FOR_HEALTH);
         gameHasEnded = true;
         return SceneType::LEADERBOARD;
     }
