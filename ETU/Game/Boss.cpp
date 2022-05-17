@@ -46,7 +46,7 @@ bool Boss::uninit()
 	return true;
 }
 
-bool Boss::update(float deltaT)
+bool Boss::update(const float deltaT)
 {
 	if (isActive()) {
 		if (SPAWNING_TIME > spawnCooldown)
@@ -94,14 +94,14 @@ bool Boss::update(float deltaT)
 	return false;
 }
 
-bool Boss::update(float deltaT, sf::Vector2f targetPos)
+bool Boss::update(const float deltaT, sf::Vector2f targetPos)
 {
 	this->targetPos = targetPos;
 	this->update(deltaT);
 	return false;
 }
 
-void Boss::updateSpawnTransparency(float deltaT)
+void Boss::updateSpawnTransparency(const float deltaT)
 {
 	spawnCooldown += deltaT;
 	if (spawnCooldown > SPAWNING_TIME)
@@ -130,12 +130,12 @@ void Boss::draw(sf::RenderWindow& window) const
 	}
 }
 
-void Boss::shoot()
+void Boss::shoot() const
 {
 	Publisher::notifySubscribers(Event::ENEMY_SHOOT, &getPosition());
 }
 
-void Boss::hit(int damage)
+void Boss::hit(const int damage)
 {
 	health -= damage;
 	if (health <= 0) {

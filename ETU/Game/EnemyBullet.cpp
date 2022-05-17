@@ -6,6 +6,7 @@
 
 const float EnemyBullet::BULLET_SPEED = 500;
 const int EnemyBullet::DAMAGE = 10;
+const int EnemyBullet::ROTATION = 270;
 
 EnemyBullet::EnemyBullet()
 {
@@ -16,7 +17,7 @@ void EnemyBullet::activate()
 	Bullet::activate();
 }
 
-bool EnemyBullet::update(float elapsedTime)
+bool EnemyBullet::update(const float elapsedTime)
 {
 	move(sf::Vector2f(0, BULLET_SPEED * elapsedTime));
 	if (getPosition().y > Game::GAME_HEIGHT) {
@@ -35,11 +36,10 @@ void EnemyBullet::initialize(const sf::Texture& texture, const sf::Vector2f& ini
 	setOrigin(sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2));
 	setScale(2, 2);
 	setPosition(initialPosition);
-	setRotation(270);
+	setRotation(ROTATION);
 }
 
 void EnemyBullet::init(const GameContentManager& contentManager)
 {
-	this->contentManager = contentManager;
 	this->initialize(contentManager.getMainCharacterTexture(), sf::Vector2f(0, 0));
 }

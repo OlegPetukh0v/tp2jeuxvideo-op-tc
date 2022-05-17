@@ -64,7 +64,7 @@ void Enemy::shoot()
 	shootSound.play();
 }
 
-bool Enemy::update(float deltaT)
+bool Enemy::update(const float deltaT)
 {
 	hurtTime = std::fmax(0, hurtTime - deltaT);
 	if (SHOOT_PERCENTAGE_ANIMATION < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getPercentage()) {
@@ -88,7 +88,7 @@ bool Enemy::update(float deltaT)
 	return false;
 }
 
-void Enemy::hit(int damage)
+void Enemy::hit(const int damage)
 {
 	health -= damage;
 	if (health <= 0) {

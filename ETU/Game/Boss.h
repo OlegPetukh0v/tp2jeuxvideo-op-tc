@@ -17,12 +17,12 @@ public:
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
-    virtual bool update(float deltaT) override;
-    virtual bool update(float deltaT, sf::Vector2f targetPos);
-    void updateSpawnTransparency(float deltaT);
+    virtual bool update(const float deltaT) override;
+    virtual bool update(const float deltaT, sf::Vector2f targetPos);
+    void updateSpawnTransparency(const float deltaT);
     virtual void draw(sf::RenderWindow& window) const override;
-    virtual void shoot();
-    void hit(int damage);
+    virtual void shoot() const;
+    void hit(const int damage);
 
 private:
     float shootingCooldown;
@@ -31,4 +31,5 @@ private:
     sf::Vector2f targetPos;
 
     Healthbar healthBar;
+
 };
