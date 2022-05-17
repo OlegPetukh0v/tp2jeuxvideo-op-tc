@@ -15,6 +15,11 @@ class PoolManager
 {
 	static const int BONUS_SPAWN_CHANCE;
 	static const int HEALTH_BONUS_SPAWN_CHANCE;
+	static const unsigned int INITIAL_NB_BULLETS;
+	static const unsigned int INITIAL_NB_ENEMY_BULLETS;
+	static const unsigned int INITIAL_NB_ENEMY;
+	static const unsigned int INITIAL_NB_HEALTH_BONUS;
+	static const unsigned int INITIAL_NB_ATTACK_BONUS;
 
 public:
 	PoolManager();
@@ -23,14 +28,14 @@ public:
 
 	bool uninit();
 
-	bool update(float deltaT, Player& player, Boss& boss);
+	bool update(const float deltaT, Player& player, Boss& boss);
 
 	void draw(sf::RenderWindow& window) const;
 
 	virtual void notify(Event event, const void* data);
 
 	template<class T>
-	void initialiseObjectPool(std::list<T*>& poolT, int initialSize);
+	void initialiseObjectPool(std::list<T*>& poolT, const int initialSize);
 
 	template<class T>
 	T& getAvailableGameObject(std::list<T*>& poolT);
@@ -39,7 +44,7 @@ public:
 	void spawnGameObject(T& objT, sf::Vector2f pos = sf::Vector2f(0, 0));
 
 	template<class T>
-	void updatePool(std::list<T*>& poolT, float deltaT);
+	void updatePool(std::list<T*>& poolT, const float deltaT);
 
 	template<class T>
 	void drawPool(std::list<T*> poolT, sf::RenderWindow& window) const;
@@ -56,7 +61,7 @@ private:
 };
 
 template<class T>
-inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, int initialSize)
+inline void PoolManager::initialiseObjectPool(std::list<T*>& poolT, const int initialSize)
 {
 	for (unsigned short i = 0; i < initialSize; i++) {
 		T* temp = new T();
@@ -87,7 +92,7 @@ inline void PoolManager::spawnGameObject(T& objT, sf::Vector2f pos)
 }
 
 template<class T>
-inline void PoolManager::updatePool(std::list<T*>& poolT, float deltaT)
+inline void PoolManager::updatePool(std::list<T*>& poolT, const float deltaT)
 {
 	for (T* temp : poolT) {
 		if (temp->isActive()) {

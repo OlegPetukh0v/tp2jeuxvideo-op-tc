@@ -7,6 +7,11 @@
 
 const int PoolManager::BONUS_SPAWN_CHANCE = 4;
 const int PoolManager::HEALTH_BONUS_SPAWN_CHANCE = 2;
+const unsigned int PoolManager::INITIAL_NB_BULLETS = 30;
+const unsigned int PoolManager::INITIAL_NB_ENEMY_BULLETS = 80;
+const unsigned int PoolManager::INITIAL_NB_ENEMY = 30;
+const unsigned int PoolManager::INITIAL_NB_HEALTH_BONUS = 5;
+const unsigned int PoolManager::INITIAL_NB_ATTACK_BONUS = 5;
 
 PoolManager::PoolManager()
 {
@@ -20,11 +25,11 @@ bool PoolManager::init(GameContentManager gameContentManager)
     Publisher::addSubscriber(*this, Event::ENEMY_KILLED);
 
     contentManager = gameContentManager;
-    initialiseObjectPool(bullets, 20); // to const
-    initialiseObjectPool(enemyBullets, 80);
-    initialiseObjectPool(enemies, 20);
-    initialiseObjectPool(healthBonuses, 5);
-    initialiseObjectPool(attackBonuses, 5);
+    initialiseObjectPool(bullets, INITIAL_NB_BULLETS);
+    initialiseObjectPool(enemyBullets, INITIAL_NB_ENEMY_BULLETS);
+    initialiseObjectPool(enemies, INITIAL_NB_ENEMY);
+    initialiseObjectPool(healthBonuses, INITIAL_NB_HEALTH_BONUS);
+    initialiseObjectPool(attackBonuses, INITIAL_NB_ATTACK_BONUS);
     return true;
 }
 
@@ -42,7 +47,7 @@ bool PoolManager::uninit()
     return true;
 }
 
-bool PoolManager::update(float deltaT, Player& player, Boss& boss)
+bool PoolManager::update(const float deltaT, Player& player, Boss& boss)
 {
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);

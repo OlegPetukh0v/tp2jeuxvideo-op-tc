@@ -4,8 +4,8 @@ class PlayerScore
 public:
 	static const int NAME_LENGTH = 3;
 
-	void setName(std::string newName);
-	void addLetterToName(char letter);
+	void setName(const std::string newName);
+	void addLetterToName(const char letter);
 	void deleteFrontLetter();
 	void setScore(const int newScore);
 
@@ -15,8 +15,9 @@ public:
 	bool operator <(const PlayerScore& studObj) const;
 	bool isEmpty() const;
 	bool isFullyFilled() const;
+
 private:
 	int score;
 	char name[NAME_LENGTH];
-};
 
+};

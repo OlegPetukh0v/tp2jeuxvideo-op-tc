@@ -81,11 +81,11 @@ bool GameObject::init(const ContentManager& contentManager)
   return true;
 }
 
-bool GameObject::update(float deltaT)
+bool GameObject::update(const float deltaT)
 {
   return false;
 }
-bool GameObject::update(float deltaT, const Inputs& inputs)
+bool GameObject::update(const float deltaT, const Inputs& inputs)
 {
   return false;
 }
@@ -94,7 +94,6 @@ const sf::Color& GameObject::getDebugColor() const
 {
     return debugColor;
 }
-
 
 void GameObject::setDebugColor(const sf::Color& debugColor)
 {

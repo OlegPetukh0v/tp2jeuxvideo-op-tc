@@ -55,9 +55,6 @@
     <ClInclude Include="LinearAnimation.h">
       <Filter>Animations</Filter>
     </ClInclude>
-    <ClInclude Include="ActorType.h">
-      <Filter>GenericFiles</Filter>
-    </ClInclude>
     <ClInclude Include="Publisher.h">
       <Filter>PubSub</Filter>
     </ClInclude>

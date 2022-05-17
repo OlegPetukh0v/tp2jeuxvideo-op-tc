@@ -11,148 +11,148 @@ const unsigned int Game::GAME_WIDTH = 720;
 const unsigned int Game::GAME_HEIGHT = 900;
 
 Game::Game(std::string windowName)
-  : gameName(windowName)
+	: gameName(windowName)
 {
 }
 
 void Game::run()
 {
-  if (!init())
-  {
-    return;
-  }
+	if (!init())
+	{
+		return;
+	}
 
-  while (window.isOpen())
-  {
-    bool windowIsClosed = handleEvents();
-    if (windowIsClosed || true == update())
-    {
-      // On termine "normalement" l'application
-      break;
-    }
-    else
-    {
-      window.clear();
-      draw(window);
-      window.display();
-    }
-  }
+	while (window.isOpen())
+	{
+		bool windowIsClosed = handleEvents();
+		if (windowIsClosed || true == update())
+		{
+			// On termine "normalement" l'application
+			break;
+		}
+		else
+		{
+			window.clear();
+			draw(window);
+			window.display();
+		}
+	}
 
-  uninit();
+	uninit();
 }
 
 bool Game::handleEvents()
 {
-  bool retval = true;
-  if (!scenes.empty())
-    retval = scenes.top()->handleEvents(window);
-  return retval;
+	bool retval = true;
+	if (!scenes.empty())
+		retval = scenes.top()->handleEvents(window);
+	return retval;
 }
 
 bool Game::update()
 {
-  bool gameMustEnd = scenes.empty();
-  if (!gameMustEnd)
-  {
-    SceneType nextSceneType = scenes.top()->update();
-    // Si la nouvelle scène attendue est différente de l'ancienne...
-    if (nextSceneType != scenes.top()->getSceneType())
-    {
-      Scene* nextScene = nullptr;
-      // ... soit on veut retirer la scène courant de la pile
-      if (SceneType::NONE == nextSceneType)
-      {
-        popScene(false);
-      }
-      else
-      {
-        // ... soit on veut en ajouter une nouvelle
-        nextScene = getNextScene(nextSceneType);
-      }
-      if (nextScene != nullptr)
-        pushScene(nextScene);
-    }
-  }
-  return gameMustEnd;
+	bool gameMustEnd = scenes.empty();
+	if (!gameMustEnd)
+	{
+		SceneType nextSceneType = scenes.top()->update();
+		// Si la nouvelle scène attendue est différente de l'ancienne...
+		if (nextSceneType != scenes.top()->getSceneType())
+		{
+			Scene* nextScene = nullptr;
+			// ... soit on veut retirer la scène courant de la pile
+			if (SceneType::NONE == nextSceneType)
+			{
+				popScene(false);
+			}
+			else
+			{
+				// ... soit on veut en ajouter une nouvelle
+				nextScene = getNextScene(nextSceneType);
+			}
+			if (nextScene != nullptr)
+				pushScene(nextScene);
+		}
+	}
+	return gameMustEnd;
 }
 
-bool Game::popScene(bool initNextScene)
+bool Game::popScene(const bool initNextScene)
 {
-  if (!scenes.empty())
-  {
-    Scene* top = scenes.top();
-    top->uninit();
-    delete top;
-    scenes.pop();
+	if (!scenes.empty())
+	{
+		Scene* top = scenes.top();
+		top->uninit();
+		delete top;
+		scenes.pop();
 
-    if (!scenes.empty())
-    {
-      if (initNextScene)
-        scenes.top()->init();
-      else
-        scenes.top()->unPause();
-    }
-  }
+		if (!scenes.empty())
+		{
+			if (initNextScene)
+				scenes.top()->init();
+			else
+				scenes.top()->unPause();
+		}
+	}
 
-  return scenes.empty();
+	return scenes.empty();
 }
 
 bool Game::pushScene(Scene* newScene)
 {
-     bool retval = newScene->init();
-  if (retval)
-  {
-    if (!scenes.empty())
-      scenes.top()->pause();
-    scenes.push(newScene);
-  }
+	bool retval = newScene->init();
+	if (retval)
+	{
+		if (!scenes.empty())
+			scenes.top()->pause();
+		scenes.push(newScene);
+	}
 
-  return retval;
+	return retval;
 }
 
 void Game::draw(sf::RenderWindow& window)  const
 {
-  if (!scenes.empty())
-  {
-    scenes.top()->draw(window);
-  }
+	if (!scenes.empty())
+	{
+		scenes.top()->draw(window);
+	}
 }
 
 bool Game::init()
 {
-  window.create(sf::VideoMode(Game::GAME_WIDTH, Game::GAME_HEIGHT, 32), gameName);
-  window.setFramerateLimit(FRAME_RATE);
-  
-  return pushScene(new InitialScene());
+	window.create(sf::VideoMode(Game::GAME_WIDTH, Game::GAME_HEIGHT, 32), gameName);
+	window.setFramerateLimit(FRAME_RATE);
+
+	return pushScene(new InitialScene());
 }
 
 bool Game::uninit()
 {
-  while (!scenes.empty())
-  {
-    popScene(false);
-  }
-  return true;
+	while (!scenes.empty())
+	{
+		popScene(false);
+	}
+	return true;
 }
 
-Scene* Game::getNextScene(SceneType type) const
+Scene* Game::getNextScene(const SceneType type) const
 {
-  Scene* scene =nullptr;
-  switch (type)
-  {
-      case SceneType::LEADERBOARD:
-      {
-          return new LeaderboardScene();
-      }
-      case SceneType::GAME:
-      {
-          return new GameScene();
-      }
-      default:
-      {
-        scene = nullptr;
-        break;
-      }
-  }
-  return scene;
+	Scene* scene = nullptr;
+	switch (type)
+	{
+	case SceneType::LEADERBOARD:
+	{
+		return new LeaderboardScene();
+	}
+	case SceneType::GAME:
+	{
+		return new GameScene();
+	}
+	default:
+	{
+		scene = nullptr;
+		break;
+	}
+	}
+	return scene;
 }

@@ -6,6 +6,8 @@ public:
 	virtual bool loadContent();
 
 	const sf::Font& getMainFont() const;
+
 private:
 	sf::Font mainFont;
+
 };

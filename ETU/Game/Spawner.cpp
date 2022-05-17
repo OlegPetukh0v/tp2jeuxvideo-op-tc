@@ -26,9 +26,8 @@ bool Spawner::uninit()
     return true;
 }
 
-void Spawner::update(float deltaT)
+void Spawner::update(const float deltaT)
 {
-
     if (enemySpawnCounter < ENEMY_SPAWN_CAP) {
         enemySpawnRate -= deltaT;
         if (enemySpawnRate <= 0) {
@@ -43,10 +42,9 @@ void Spawner::update(float deltaT)
         Publisher::notifySubscribers(Event::BOSS_SPAWN, NULL);
         bossAvailable = false;
     }
-    
 }
 
-void Spawner::notify(Event event, const void* data)
+void Spawner::notify(const Event event, const void* data)
 {
     if (event == Event::ENEMY_KILLED)
     {

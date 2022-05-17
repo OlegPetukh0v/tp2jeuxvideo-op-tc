@@ -78,7 +78,7 @@ void Hud::initTime(GameContentManager& contentManager)
 	time.setPosition(Game::GAME_WIDTH * 1.03f, Y_POSITION_TXT);
 }
 
-void Hud::update(unsigned int score, unsigned int playerHealth, unsigned int bonusCountdown)
+void Hud::update(const unsigned int score, const unsigned int playerHealth, const unsigned int bonusCountdown)
 {
 	setScore(score);
 	setLives(playerHealth);
