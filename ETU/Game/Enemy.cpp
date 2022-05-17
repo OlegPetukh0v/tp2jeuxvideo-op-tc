@@ -51,7 +51,7 @@ void Enemy::activate()
 	hurtTime = 0;
 	setColor(sf::Color::White);
 	int x = rand() % (Game::GAME_WIDTH - Enemy::SHIP_WIDTH);
-	setPosition((int) x + Enemy::SHIP_WIDTH / 2, -getLocalBounds().height);
+	setPosition(x + Enemy::SHIP_WIDTH / 2, -getLocalBounds().height);
 	GameObject::activate();
 }
 
