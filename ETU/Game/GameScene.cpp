@@ -117,7 +117,7 @@ bool GameScene::handleEvents(sf::RenderWindow& window)
 			}
 			inputs.moveFactorY = handleControllerDeadZone(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Y)) / CONTROLLER_JOYSTICK_RATIO;
 			inputs.moveFactorX = handleControllerDeadZone(sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::X)) / CONTROLLER_JOYSTICK_RATIO;
-			inputs.fireBullet = sf::Joystick::isButtonPressed(0, 5);
+			inputs.fireBullet = sf::Joystick::isButtonPressed(0, 0);
 		}
 		else {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
