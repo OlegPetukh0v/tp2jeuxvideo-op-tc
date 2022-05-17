@@ -8,7 +8,7 @@ const int Bonus::PICKUP_VOLUME = 50;
 const int Bonus::SPEED = 120;
 const int Bonus::SCALE = 2;
 
-bool Bonus::update(float elapsedTime)
+bool Bonus::update(const float elapsedTime)
 {
     move(0, SPEED * elapsedTime);
     if (getPosition().y - getGlobalBounds().height / 2 > Game::GAME_HEIGHT) deactivate();
@@ -21,7 +21,7 @@ void Bonus::initialize(const sf::Texture& texture, const sf::Vector2f& initialPo
     setPosition(initialPosition);
 }
 
-void Bonus::onPick(Player& player)
+void Bonus::onPick()
 {
     pickupSound.play();
     GameObject::deactivate();

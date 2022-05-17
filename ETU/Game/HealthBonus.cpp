@@ -23,5 +23,5 @@ void HealthBonus::init(const GameContentManager& gameContentManager)
 void HealthBonus::onPick(Player& player)
 {
     player.heal(HEALTH);
-    Bonus::onPick(player);
+    Bonus::onPick();
 }

@@ -21,5 +21,5 @@ void AttackBonus::init(const GameContentManager& gameContentManager)
 void AttackBonus::onPick(Player& player)
 {
     player.activateBonus();
-    Bonus::onPick(player);
+    Bonus::onPick();
 }
