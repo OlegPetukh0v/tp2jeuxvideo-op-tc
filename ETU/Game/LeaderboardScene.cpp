@@ -146,7 +146,7 @@ void LeaderboardScene::initMessages()
 void LeaderboardScene::initLeaderboardMessages()
 {
 	std::list<PlayerScore> tempPlayerScores = playerScores;
-	for (int i = 0; i < playerScores.size(); i++)
+	for (unsigned int i = 0; i < playerScores.size(); i++)
 	{
 		sf::Text* currentName = &leaderboard[0][i];
 		sf::Text* currentScore = &leaderboard[1][i];

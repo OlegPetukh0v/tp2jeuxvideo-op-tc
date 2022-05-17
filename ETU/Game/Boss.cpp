@@ -108,7 +108,6 @@ void Boss::updateSpawnTransparency(const float deltaT)
 	if (spawnCooldown <= SPAWNING_TIME)
 	{
 		move(0, BOSS_SPEED_VERTICAL * deltaT);
-		setColor(sf::Color(255, 255, 255, 255*(spawnCooldown / SPAWNING_TIME)));
 	}
 }
 

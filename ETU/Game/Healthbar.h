@@ -15,7 +15,7 @@ public:
 
 private:
 	int maxHp;
-	Character* character;
+	Character* character = nullptr;
 
 	sf::RectangleShape hpBar;
 	sf::RectangleShape hpBarBack;
