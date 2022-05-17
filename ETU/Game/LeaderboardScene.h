@@ -29,6 +29,7 @@ public:
     virtual bool init() override;
     virtual bool uninit() override;
     virtual bool handleEvents(sf::RenderWindow& window) override;
+
 private:
     LeaderboardSceneContentManager contentManager;
     Inputs inputs;
@@ -68,4 +69,5 @@ private:
     std::string playerName;
     bool playerNameConfirmed;
     void setPlayerNameConfirmed();
+
 };
