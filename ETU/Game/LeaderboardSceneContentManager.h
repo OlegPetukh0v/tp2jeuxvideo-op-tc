@@ -1,7 +1,7 @@
 #pragma once
 #include "ContentManager.h"
 class LeaderboardSceneContentManager :
-    public ContentManager
+	public ContentManager
 {
 public:
 	LeaderboardSceneContentManager();
