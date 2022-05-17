@@ -38,7 +38,6 @@ void Player::initialize(const sf::Texture& texture, const sf::Vector2f& initialP
 	activate();
 	currentState = State::SHIP;
 	addAnimation<State::SHIP, ShipAnimation>(contentManager);
-	Publisher::addSubscriber(*this, Event::PLAYER_HIT);
 	Publisher::addSubscriber(*this, Event::ENEMY_KILLED);
 	setTexture(texture);
 	setTextureRect(sf::IntRect(269, 47, 26, 29));
@@ -58,7 +57,6 @@ bool Player::init(const GameContentManager& contentManager)
 
 bool Player::uninit()
 {
-	Publisher::removeSubscriber(*this, Event::PLAYER_HIT);
 	Publisher::removeSubscriber(*this, Event::ENEMY_KILLED);
 	return true;
 }
