@@ -3,15 +3,16 @@
 #include "BossAnimation.h"
 #include "Game.h"
 #include "Publisher.h"
-#include <iostream>
 
-const int Boss::BOSS_SPEED = 200;
+const int Boss::BOSS_SPEED_HORIZONTAL = 200;
+const int Boss::BOSS_SPEED_VERTICAL = 150;
 const int Boss::INITIAL_HEALTH = 700;
 const int Boss::SPAWNING_TIME = 2;
-const float Boss::HURT_TIME = 0.5f;
 const float Boss::SPAWN_TIME = 2.0f;
-const float Boss::SHOOTING_COOLDOWN = 1.2f;
-const sf::Vector2f Boss::INTIAL_POSITION = sf::Vector2f((float)Game::GAME_WIDTH / 2, 135);
+const float Boss::SHOOTING_COOLDOWN = 0.7f;
+const sf::Vector2f Boss::INTIAL_POSITION = sf::Vector2f((float)Game::GAME_WIDTH / 2, -130);
+const float Boss::HURT_TIME = 0.32f;
+const float Boss::HURT_FLASH_TIME = HURT_TIME / 2;
 
 Boss::Boss()
 	: Character(INITIAL_HEALTH)
@@ -51,25 +52,25 @@ bool Boss::update(float deltaT)
 	if (isActive()) {
 		if (SPAWNING_TIME > spawnCooldown)
 		{
-			updateSpawnTransparency(deltaT);
+			updateSpawnTransition(deltaT);
 		}
 		else
 		{
 			hurtTime = (float)std::fmax(0, hurtTime - deltaT);
 
-			if (SHOOTING_COOLDOWN < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getTimeInCurrentState()) {
+			if (SHOOTING_COOLDOWN < AnimatedGameObject::animations[AnimatedGameObject::currentState]->getPercentage()) {
 				shoot();
 			}
 
 			int direction = 1;
 			if (targetPos.x > getPosition().x)
 			{
-				if ((targetPos.x - (BOSS_SPEED * deltaT)) > getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT, 0));
+				if ((targetPos.x - (BOSS_SPEED_HORIZONTAL * deltaT)) > getPosition().x) this->move(sf::Vector2f(BOSS_SPEED_HORIZONTAL * deltaT, 0));
 				else this->setPosition(sf::Vector2f(targetPos.x, getPosition().y));
 			}
 			else if (targetPos.x < getPosition().x)
 			{
-				if ((targetPos.x + (BOSS_SPEED * deltaT)) < getPosition().x) this->move(sf::Vector2f(BOSS_SPEED * deltaT * -1, 0));
+				if ((targetPos.x + (BOSS_SPEED_HORIZONTAL * deltaT)) < getPosition().x) this->move(sf::Vector2f(BOSS_SPEED_HORIZONTAL * deltaT * -1, 0));
 				else this->setPosition(sf::Vector2f(targetPos.x, getPosition().y));
 			}
 
@@ -82,7 +83,7 @@ bool Boss::update(float deltaT)
 			}
 
 			if (hurtTime > 0) {
-				if (std::fmod(hurtTime, 0.16f) > 0.08f) setColor(sf::Color(255, 155, 80, 120));
+				if (std::fmod(hurtTime, HURT_FLASH_TIME) > HURT_FLASH_TIME/2) setColor(sf::Color(255, 140, 70, 120));
 				else setColor(sf::Color::White);
 			}
 
@@ -101,24 +102,13 @@ bool Boss::update(float deltaT, sf::Vector2f targetPos)
 	return false;
 }
 
-void Boss::updateSpawnTransparency(float deltaT)
+void Boss::updateSpawnTransition(float deltaT)
 {
 	spawnCooldown += deltaT;
-	if (spawnCooldown > SPAWNING_TIME)
+	if (spawnCooldown <= SPAWNING_TIME)
 	{
-		setColor(sf::Color(255, 255, 255, 255));
-	}
-	else if (spawnCooldown > SPAWNING_TIME * 0.75f)
-	{
-		setColor(sf::Color(255, 255, 255, 180));
-	}
-	else if (spawnCooldown > SPAWNING_TIME * 0.5f)
-	{
-		setColor(sf::Color(255, 255, 255, 100));
-	}
-	else
-	{
-		setColor(sf::Color(255, 255, 255, 40));
+		move(0, BOSS_SPEED_VERTICAL * deltaT);
+		setColor(sf::Color(255, 255, 255, 255*(spawnCooldown / SPAWNING_TIME)));
 	}
 }
 

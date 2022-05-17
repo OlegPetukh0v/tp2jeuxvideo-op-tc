@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Spawner.h"
 #include "EnemyType.h"
-#include <iostream>
 
 const float Spawner::ENEMY_SPAWN_RATE = 1.5f;
 const int Spawner::ENEMY_SPAWN_CAP = 30;

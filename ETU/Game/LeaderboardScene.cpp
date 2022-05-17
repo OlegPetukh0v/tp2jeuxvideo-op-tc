@@ -2,7 +2,6 @@
 #include "LeaderboardScene.h"
 #include "game.h"
 #include <fstream>
-#include <iostream>
 #include "PlayerScore.h"
 #include "Inputs.h"
 
@@ -36,7 +35,7 @@ bool LeaderboardScene::handleEvents(sf::RenderWindow& window)
     sf::Event event;
     while (window.pollEvent(event))
     {
-        //x sur la fenêtre
+        //x sur la fenï¿½tre
         if (event.type == sf::Event::Closed)
         {
             window.close();

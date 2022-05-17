@@ -2,7 +2,7 @@
 #include "BossAnimation.h"
 #include "GameContentManager.h"
 
-const float BossAnimation::ANIMATION_LENGTH = 3;
+const float BossAnimation::ANIMATION_LENGTH = 1.5;
 
 BossAnimation::BossAnimation(sf::Sprite& initialSprite)
 	:CyclicAnimation(initialSprite, ANIMATION_LENGTH, true)

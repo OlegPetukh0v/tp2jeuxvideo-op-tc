@@ -3,7 +3,6 @@
 #include "Game.h"
 #include "PoolManager.h"
 #include "Publisher.h"
-#include <iostream>
 
 const int GameScene::BACKGROUND_SPEED = 3;
 const int GameScene::CONTROLLER_DEAD_ZONE = 15;
