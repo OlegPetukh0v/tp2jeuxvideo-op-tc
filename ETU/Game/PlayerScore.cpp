@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PlayerScore.h"
 
-void PlayerScore::setName(std::string newName)
+void PlayerScore::setName(const std::string newName)
 {
     for (int i = 0; i < sizeof(name); i++)
     {
@@ -9,7 +9,7 @@ void PlayerScore::setName(std::string newName)
     }
 }
 
-void PlayerScore::addLetterToName(char letter)
+void PlayerScore::addLetterToName(const char letter)
 {
     for (int i = 0; i < sizeof(name); i++)
     {

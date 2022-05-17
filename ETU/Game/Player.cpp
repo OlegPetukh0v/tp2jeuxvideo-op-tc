@@ -61,7 +61,7 @@ bool Player::uninit()
 	return true;
 }
 
-bool Player::update(float deltaT, const Inputs& inputs)
+bool Player::update(const float deltaT, const Inputs& inputs)
 {
 	hurtTime = (float)std::fmax(0, hurtTime - deltaT);
 	bonusTime = (float)std::fmax(0, bonusTime - deltaT);
@@ -118,7 +118,7 @@ bool Player::update(float deltaT, const Inputs& inputs)
 	return true;
 }
 
-void Player::hit(int damage)
+void Player::hit(const int damage)
 {
 	if (hasBonus())
 		bonusTime = 0;
@@ -129,12 +129,12 @@ void Player::hit(int damage)
 	}
 }
 
-void Player::heal(int health)
+void Player::heal(const int health)
 {
 	this->health += health;
 }
 
-void Player::notify(Event event, const void* data) 
+void Player::notify(const Event event, const void* data)
 {
 	if (event == Event::ENEMY_KILLED)
 	{
@@ -147,24 +147,24 @@ void Player::activateBonus()
 	bonusTime = BONUS_TIME;
 }
 
-bool Player::isAlive()
+bool Player::isAlive() const
 {
 	return getHealth() > 0;
 }
 
-bool Player::hasBonus()
+bool Player::hasBonus() const
 {
 	if (bonusTime > 0)
 		return true;
 	return false;
 }
 
-unsigned int Player::getScore()
+unsigned int Player::getScore() const
 {
 	return score;
 }
 
-unsigned int Player::getBonusTime()
+unsigned int Player::getBonusTime() const
 {
 	return (int)bonusTime;
 }

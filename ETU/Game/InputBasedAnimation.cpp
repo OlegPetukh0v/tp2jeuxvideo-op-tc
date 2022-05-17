@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "InputBasedAnimation.h"
 
-
-
 InputBasedAnimation::InputBasedAnimation(sf::Sprite& s)
   : Animation(s, 0)
   , nextFrame(0)
@@ -10,7 +8,7 @@ InputBasedAnimation::InputBasedAnimation(sf::Sprite& s)
 
 }
 
-void InputBasedAnimation::update(float deltaT, const Inputs& inputs)
+void InputBasedAnimation::update(const float deltaT, const Inputs& inputs)
 {
   adjustNextFrame(inputs);
   Animation::update(deltaT, inputs);

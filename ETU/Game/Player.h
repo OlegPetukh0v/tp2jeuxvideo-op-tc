@@ -25,22 +25,23 @@ public:
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition);
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
-    virtual bool update(float deltaT, const Inputs& inputs);
-    void notify(Event event, const void* data);
+    virtual bool update(const float deltaT, const Inputs& inputs);
+    void notify(const Event event, const void* data);
 
     void activateBonus();
-    void hit(int damage);
-    void heal(int health);
+    void hit(const int damage);
+    void heal(const int health);
 
-    bool hasBonus();
-    bool isAlive();
+    bool hasBonus() const;
+    bool isAlive() const;
 
-    unsigned int getScore();
-    unsigned int getBonusTime();
+    unsigned int getScore() const;
+    unsigned int getBonusTime() const;
 
 private:
     float shootingCooldown;
     unsigned int score;
     sf::Sound shootSound;
     float bonusTime;
+
 };

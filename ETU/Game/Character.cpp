@@ -3,17 +3,18 @@
 
 const int Character::COLLIDE_DAMAGE = 10;
 
-Character::Character(int life)
+Character::Character(const int life)
 {
 	hurtTime = 0;
 	this->health = life;
 }
 
-int Character::getHealth() const {
+int Character::getHealth() const 
+{
 	return this->health;
 }
 
-bool Character::uninit()
+bool Character::uninit() 
 {
 	return true;
 }

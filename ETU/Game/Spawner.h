@@ -13,11 +13,13 @@ public:
 	Spawner();
 	virtual bool init();
 	virtual bool uninit();
-	void update(float deltaT);
-	virtual void notify(Event event, const void* data);
+	void update(const float deltaT);
+	virtual void notify(const Event event, const void* data);
+
 private:
 	float enemySpawnRate;
 	int enemySpawnCounter;
 	int enemyDeathCounter;
 	bool bossAvailable;
+
 };

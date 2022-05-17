@@ -1,15 +1,14 @@
 #include "stdafx.h"
 #include "CyclicAnimation.h"
 
-
-CyclicAnimation::CyclicAnimation(sf::Sprite& s, float length, bool repeated)
+CyclicAnimation::CyclicAnimation(sf::Sprite& s, const float length, const bool repeated)
   : Animation(s, length)
   , timeOrientation(1.0f)
 {
   this->repeated = repeated;
 }
 
-void CyclicAnimation::update(float deltaT, const Inputs& inputs)
+void CyclicAnimation::update(const float deltaT, const Inputs& inputs)
 {
   timeInCurrentState = std::min(lengthInSeconds * 0.5f, timeInCurrentState + deltaT * timeOrientation);
   if (timeInCurrentState == lengthInSeconds * 0.5f)

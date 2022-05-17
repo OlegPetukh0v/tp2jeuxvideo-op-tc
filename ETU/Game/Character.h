@@ -7,7 +7,8 @@ class Character :
 {
 public:
     static const int COLLIDE_DAMAGE;
-    Character(int health);
+
+    Character(const int health);
     int getHealth() const;
     virtual bool uninit();
 
@@ -15,5 +16,5 @@ protected:
     GameContentManager contentManager;
     int health;
     float hurtTime;
+
 };
-#pragma once

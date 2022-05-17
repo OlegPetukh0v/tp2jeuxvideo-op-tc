@@ -55,9 +55,6 @@
     <ClInclude Include="LinearAnimation.h">
       <Filter>Animations</Filter>
     </ClInclude>
-    <ClInclude Include="ActorType.h">
-      <Filter>GenericFiles</Filter>
-    </ClInclude>
     <ClInclude Include="Publisher.h">
       <Filter>PubSub</Filter>
     </ClInclude>
@@ -120,9 +117,6 @@
     </ClInclude>
     <ClInclude Include="Spawner.h">
       <Filter>GenericFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyType.h">
-      <Filter>PubSub</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
       <Filter>Characters</Filter>

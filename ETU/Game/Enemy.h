@@ -22,10 +22,10 @@ public:
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;
     virtual bool init(const GameContentManager& contentManager);
     virtual bool uninit() override;
-    virtual bool update(float deltaT) override;
+    virtual bool update(const float deltaT) override;
     virtual void activate() override;
     virtual void shoot();
-    void hit(int damage);
+    void hit(const int damage);
 
 private:
     sf::Sound deathSound;

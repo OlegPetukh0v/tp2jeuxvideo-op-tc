@@ -1,5 +1,6 @@
 #pragma once
 #include "AnimationState.h"
+
 struct Inputs;
 class ContentManager;
 class GameObject : public sf::Sprite
@@ -11,8 +12,8 @@ public:
 	virtual void draw(sf::RenderWindow& window) const;
 	virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition);
 	virtual bool init(const ContentManager& manager);
-	virtual bool update(float deltaT);
-	virtual bool update(float deltaT, const Inputs& inputs);
+	virtual bool update(const float deltaT);
+	virtual bool update(const float deltaT, const Inputs& inputs);
 	virtual void activate();
 	virtual void deactivate();
 	virtual bool isActive() const;
@@ -29,4 +30,3 @@ protected:
 	bool active;
 	sf::Color debugColor;
 };
-
