@@ -14,7 +14,7 @@ public:
 	void update();
 
 private:
-	float maxHp;
+	int maxHp;
 	Character* character;
 
 	sf::RectangleShape hpBar;

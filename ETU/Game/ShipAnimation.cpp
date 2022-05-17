@@ -4,12 +4,12 @@
 #include "ContentManager.h"
 #include "GameContentManager.h"
 
-const unsigned int ShipAnimation::INITIAL_FRAMES_IN_STATE = 25;
+const int ShipAnimation::CENTER_ANIMATION = 25;
 
 ShipAnimation::ShipAnimation(sf::Sprite& initialSprite)
 	:InputBasedAnimation(initialSprite)
 {
-	nbFrameInState = INITIAL_FRAMES_IN_STATE;
+	nbFrameInState = CENTER_ANIMATION;
 }
 
 bool ShipAnimation::init(const ContentManager& contentManager) {

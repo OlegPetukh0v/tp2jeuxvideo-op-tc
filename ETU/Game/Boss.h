@@ -5,13 +5,15 @@ class Boss :
     public Character
 {
 public:
-    static const int BOSS_SPEED;
+    static const int BOSS_SPEED_HORIZONTAL;
+    static const int BOSS_SPEED_VERTICAL;
     static const int INITIAL_HEALTH;
     static const int SPAWNING_TIME;
-    static const float HURT_TIME;
     static const float SPAWN_TIME;
     static const float SHOOTING_COOLDOWN;
     static const sf::Vector2f INTIAL_POSITION;
+    static const float HURT_TIME;
+    static const float HURT_FLASH_TIME;
 
     Boss();
     virtual void initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition) override;

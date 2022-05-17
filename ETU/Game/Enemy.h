@@ -3,7 +3,7 @@
 #include "Character.h"
 #include "Subscriber.h"
 #include "GameContentManager.h"
-#include <iostream>
+
 class Enemy :
     public Character
 {

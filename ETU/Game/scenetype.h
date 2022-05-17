@@ -1,6 +1,6 @@
 #pragma once
 
-enum SceneType
+enum class SceneType
 {
   NONE,
   TITLE_SCENE,
