@@ -2,7 +2,7 @@
 #include "LinearAnimation.h"
 
 
-LinearAnimation::LinearAnimation(sf::Sprite& s, float length, bool repeated)
+LinearAnimation::LinearAnimation(sf::Sprite& s, const float length, const bool repeated)
   : Animation(s, length)
 {
   this->repeated = repeated;

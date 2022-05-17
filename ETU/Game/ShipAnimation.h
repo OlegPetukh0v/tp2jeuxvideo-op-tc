@@ -5,6 +5,7 @@
 
 class ShipAnimation : public InputBasedAnimation
 {
+	static const unsigned int INITIAL_FRAMES_IN_STATE;
 public:
 	ShipAnimation(sf::Sprite& initialSprite);
 	bool init(const ContentManager& contentManager);

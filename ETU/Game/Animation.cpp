@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Animation.h"
 
-Animation::Animation(sf::Sprite& s , float length)
+Animation::Animation(sf::Sprite& s, const float length)
   : sprite(s)
   , lengthInSeconds(length)
   , timeInCurrentState(0)
@@ -19,7 +19,7 @@ bool Animation::isOver() const
   return getTimeInCurrentState() >= lengthInSeconds;
 }
 
-void Animation::update(float deltaT, const Inputs& inputs)
+void Animation::update(const float deltaT, const Inputs& inputs)
 {
   sprite.setTexture(frames[getNextFrame()].getTexture());
   sprite.setTextureRect(frames[getNextFrame()].getRectangle());
