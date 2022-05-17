@@ -169,7 +169,6 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="EnemyShipAnimation.h" />
-    <ClInclude Include="EnemyType.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameContentManager.h" />

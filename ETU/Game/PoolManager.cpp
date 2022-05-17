@@ -2,7 +2,6 @@
 #include "PoolManager.h"
 #include "Publisher.h"
 #include "Game.h"
-#include "EnemyType.h"
 #include <iostream>
 
 const int PoolManager::BONUS_SPAWN_CHANCE = 4;
