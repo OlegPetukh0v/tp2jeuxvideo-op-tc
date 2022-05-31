@@ -9,6 +9,7 @@ class Spawner
 public:
 	static const float ENEMY_SPAWN_RATE;
 	static const int ENEMY_SPAWN_CAP;
+	static const int MELEE_ENEMY_SPAWN_CHANCE;
 	
 	Spawner();
 	virtual bool init();

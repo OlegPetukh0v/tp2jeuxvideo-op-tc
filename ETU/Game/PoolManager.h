@@ -9,6 +9,7 @@
 #include "Boss.h"
 #include "HealthBonus.h"
 #include "AttackBonus.h"
+#include "MeleeEnemy.h"
 
 class PoolManager 
 	: public Subscriber
@@ -52,10 +53,12 @@ public:
 	template<class T>
 	void deletePool(std::list<T*>& poolT);
 private:
+	MeleeEnemy meleeEnemy;
 	GameContentManager contentManager;
 	std::list<Bullet*> bullets;
 	std::list<EnemyBullet*> enemyBullets;
 	std::list<Enemy*> enemies;
+	std::list<MeleeEnemy*> meleeEnemies;
 	std::list<HealthBonus*> healthBonuses;
 	std::list<AttackBonus*> attackBonuses;
 };

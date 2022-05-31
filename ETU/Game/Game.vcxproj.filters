@@ -154,6 +154,12 @@
     <ClInclude Include="Bonus.h">
       <Filter>Bonus</Filter>
     </ClInclude>
+    <ClInclude Include="MonsterIdleAnimation.h">
+      <Filter>GenericFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="MeleeEnemy.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Publisher.cpp">
@@ -263,6 +269,10 @@
     </ClCompile>
     <ClCompile Include="Bonus.cpp">
       <Filter>Bonus</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterIdleAnimation.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp">
+      <Filter>Characters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

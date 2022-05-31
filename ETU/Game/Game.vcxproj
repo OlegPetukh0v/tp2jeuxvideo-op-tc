@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -181,6 +181,8 @@
     <ClInclude Include="Inputs.h" />
     <ClInclude Include="LeaderboardScene.h" />
     <ClInclude Include="LeaderboardSceneContentManager.h" />
+    <ClInclude Include="MeleeEnemy.h" />
+    <ClInclude Include="MonsterIdleAnimation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerScore.h" />
     <ClInclude Include="PoolManager.h" />
@@ -225,6 +227,8 @@
     <ClCompile Include="LeaderboardScene.cpp" />
     <ClCompile Include="LeaderboardSceneContentManager.cpp" />
     <ClCompile Include="LinearAnimation.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp" />
+    <ClCompile Include="MonsterIdleAnimation.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerScore.cpp" />
     <ClCompile Include="PoolManager.cpp" />

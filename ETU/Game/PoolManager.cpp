@@ -21,12 +21,14 @@ bool PoolManager::init(GameContentManager gameContentManager)
     Publisher::addSubscriber(*this, Event::PLAYER_SHOOT);
     Publisher::addSubscriber(*this, Event::ENEMY_SHOOT);
     Publisher::addSubscriber(*this, Event::ENEMY_SPAWN);
+    Publisher::addSubscriber(*this, Event::MELEE_ENEMY_SPAWN);
     Publisher::addSubscriber(*this, Event::ENEMY_KILLED);
 
     contentManager = gameContentManager;
     initialiseObjectPool(bullets, INITIAL_NB_BULLETS);
     initialiseObjectPool(enemyBullets, INITIAL_NB_ENEMY_BULLETS);
     initialiseObjectPool(enemies, INITIAL_NB_ENEMY);
+    initialiseObjectPool(meleeEnemies, INITIAL_NB_ENEMY);
     initialiseObjectPool(healthBonuses, INITIAL_NB_HEALTH_BONUS);
     initialiseObjectPool(attackBonuses, INITIAL_NB_ATTACK_BONUS);
     return true;
@@ -37,10 +39,12 @@ bool PoolManager::uninit()
     Publisher::removeSubscriber(*this, Event::PLAYER_SHOOT);
     Publisher::removeSubscriber(*this, Event::ENEMY_SHOOT);
     Publisher::removeSubscriber(*this, Event::ENEMY_SPAWN);
+    Publisher::removeSubscriber(*this, Event::MELEE_ENEMY_SPAWN);
     Publisher::removeSubscriber(*this, Event::ENEMY_KILLED);
     deletePool(bullets);
     deletePool(enemyBullets);
     deletePool(enemies);
+    deletePool(meleeEnemies);
     deletePool(healthBonuses);
     deletePool(attackBonuses);
     return true;
@@ -51,6 +55,7 @@ bool PoolManager::update(const float deltaT, Player& player, Boss& boss)
     updatePool(bullets, deltaT);
     updatePool(enemyBullets, deltaT);
     updatePool(enemies, deltaT);
+    updatePool(meleeEnemies, deltaT);
     updatePool(healthBonuses, deltaT);
     updatePool(attackBonuses, deltaT);
 
@@ -77,6 +82,14 @@ bool PoolManager::update(const float deltaT, Player& player, Boss& boss)
                     }
                 }
             }
+            for (MeleeEnemy* enemy : meleeEnemies) {
+                if (enemy->isActive()) {
+                    if (bullet->collidesWith(*enemy)) {
+                        enemy->hit(bullet->getDamage());
+                        bullet->deactivate();
+                    }
+                }
+            }
             if (bullet->collidesWith(boss))
             {
                 boss.hit(bullet->getDamage());
@@ -90,6 +103,14 @@ bool PoolManager::update(const float deltaT, Player& player, Boss& boss)
             {
                 player.hit(Character::COLLIDE_DAMAGE);
                 enemy->hit(Enemy::INITIAL_HEALTH);
+            }
+        }
+    }
+    for (MeleeEnemy* enemy : meleeEnemies) {
+        if (enemy->isActive()) {
+            if (player.collidesWith(*enemy))
+            {
+                player.hit(Character::COLLIDE_DAMAGE);
             }
         }
     }
@@ -116,6 +137,7 @@ void PoolManager::draw(sf::RenderWindow& window) const
     drawPool(enemyBullets, window);
     drawPool(enemies, window);
     drawPool(bullets, window);
+    drawPool(meleeEnemies, window);
     drawPool(healthBonuses, window);
     drawPool(attackBonuses, window);
 }
@@ -134,6 +156,9 @@ void PoolManager::notify(Event event, const void* data)
     }
     else if (event == Event::ENEMY_SPAWN) {
         spawnGameObject(getAvailableGameObject(enemies));
+    }
+    else if (event == Event::MELEE_ENEMY_SPAWN) {
+        spawnGameObject(getAvailableGameObject(meleeEnemies));
     }
     else if (event == Event::ENEMY_KILLED) {
         if (rand() % BONUS_SPAWN_CHANCE == 0) {
