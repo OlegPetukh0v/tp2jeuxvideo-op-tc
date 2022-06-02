@@ -4,7 +4,7 @@
 #include "GameContentManager.h"
 #include "Player.h"
 
-const int HealthBonus::HEALTH = 100;
+const int HealthBonus::HEALTH = 50;
 
 void HealthBonus::initialize(const sf::Texture& texture, const sf::Vector2f& initialPosition)
 {
